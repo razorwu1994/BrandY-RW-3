@@ -25,7 +25,7 @@ body {
   
   .square {
     background: #fff;
-    border: 1px solid #999;
+    border: 1px solid lightskyblue;
     border-radius: 15px;
     float: left;
     display: block;
