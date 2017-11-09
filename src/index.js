@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {Button} from 'react-bootstrap';
 import './index.css';
-import {randCoordinates} from './constants.js'
+import {randCoordinates,highWayCoordinates} from './constants.js'
 const BLOCKED_CELL = 0
 const REG_UNBLOCKED_CELL = 1
 const HARD_TRAVERSE_CELL = 2
@@ -36,11 +36,16 @@ const row = 120,col=160
             info:"",            
         };
     }
-    renderSquare(r,c,handleClick,cellType) {
-      const colorGroup={0:'lightcoral',1:'white',2:'lightgrey'}
+    renderSquare(r,c,handleClick,cellType) { 
+      if(cellType==='a'||cellType==='b'){
+        console.log(r+","+c,highWayCoordinates)
+      }
+      const colorGroup={0:'lightcoral',1:'white',2:'lightgrey','a':'white','b':'lightgrey'}
       return ( 
           <Button key={r+","+c} value={r+","+c} className="square" cursor="pointer" onClick={handleClick}
           style={{background:colorGroup[cellType]}}>
+          {cellType==='a'&&<span class="separator"></span>}
+          {cellType==='b'&&<span class="separator"></span>}
           </Button>
       );
     }
@@ -54,16 +59,21 @@ const row = 120,col=160
         let r,c
         var board =[]
         var rows =[]
-        let cellType = REG_UNBLOCKED_CELL
+        let cellType = REG_UNBLOCKED_CELL     
         for(r=0;r<row;r++){
             for(c=0;c<col;c++){
               let counter=0
+              if(highWayCoordinates.indexOf(c+","+r)!==-1)
+                cellType = REG_UNBLOCKED_HWY_CELL
               while (counter<8){
                 // console.log(r,point[0],c,point[1])
                   if(r>=randCoordinates[counter][0]-31&&r<=randCoordinates[counter][0]+31&&
                     c>=randCoordinates[counter][1]-31&&c<=randCoordinates[counter][1]+31){
-                    if(Math.random()>=0.5)
-                      cellType = HARD_TRAVERSE_CELL
+                    if(Math.random()>=0.5){
+                      cellType = HARD_TRAVERSE_CELL                      
+                      if(highWayCoordinates.indexOf(c+","+r)!==-1)
+                        cellType = HARD_TRAVERSE_HWY_CELL                                            
+                    }
                     break
                     }
                     counter++
