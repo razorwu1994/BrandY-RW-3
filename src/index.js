@@ -2,32 +2,16 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {Button} from 'react-bootstrap';
 import './index.css';
-import {randCoordinates,highWayCoordinates,gen_four_hwy} from './constants.js'
+import {randCoordinates,highWayCoordinates,blkedCoordinates,gen_four_hwy,sfCells} from './constants.js'
 const BLOCKED_CELL = 0
 const REG_UNBLOCKED_CELL = 1
 const HARD_TRAVERSE_CELL = 2
 const REG_UNBLOCKED_HWY_CELL = 'a'
 const HARD_TRAVERSE_HWY_CELL = 'b'
+const START_CELL = 's'
+const FINAL_CELL = 'f'
 const row = 120,col=160
 gen_four_hwy();
-// var randCoordinates =[]
-// var getRandomInt = function (min, max) {
-//   min = Math.ceil(min);
-//   max = Math.floor(max);
-//   return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
-// }
-// var gen_hard_cells=()=>{
-//     let counter=0;
-//     while(counter<8){
-//         randCoordinates.push([""])
-//         let xCor = getRandomInt(0,row)
-//         let yCor = getRandomInt(0,col)
-//         randCoordinates[counter][0]=xCor
-//         randCoordinates[counter][1]=yCor
-//         counter++
-//     }
-// }
-// gen_hard_cells();
 
   class Board extends React.PureComponent  {
     constructor() {
@@ -38,12 +22,15 @@ gen_four_hwy();
         };
     }
     renderSquare(r,c,handleClick,cellType) { 
-      const colorGroup={0:'lightcoral',1:'white',2:'lightgrey','a':'white','b':'lightgrey'}
+      const colorGroup={0:'lightcoral',1:'white',2:'lightgrey','a':'white','b':'lightgrey','s':'lightgreen','f':'lightgreen'}
+      const labelGroup={s:'S',f:'G'}
       return ( 
           <Button key={r+","+c} value={r+","+c} className="square" cursor="pointer" onClick={handleClick}
           style={{background:colorGroup[cellType]}}>
           {cellType==='a'&&<span class="separator"></span>}
           {cellType==='b'&&<span class="separator"></span>}
+          {cellType==='s'&&<span style={{width:'100%',color:'black',fontSize:'15px'}}>S</span>}
+          {cellType==='f'&&<span style={{width:'100%',color:'black',fontSize:'15px'}}>G</span>}
           </Button>
       );
     }
@@ -76,6 +63,9 @@ gen_four_hwy();
                     }
                     counter++
               }
+              if(blkedCoordinates.indexOf(r+","+c)!==-1)cellType=BLOCKED_CELL 
+              if(sfCells.indexOf(r+","+c)===0)cellType=START_CELL
+              if(sfCells.indexOf(r+","+c)===1)cellType=FINAL_CELL   
              rows.push(this.renderSquare(r,c,this.handleClick,cellType))
              cellType = REG_UNBLOCKED_CELL
             }

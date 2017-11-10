@@ -1,6 +1,8 @@
 const row = 120,col=160
 export var randCoordinates =[]
 export var highWayCoordinates =[]
+export var blkedCoordinates =[]
+export var sfCells=Array(2).fill("")
 var getRandomInt = function (min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
@@ -20,8 +22,8 @@ var gen_hard_cells=()=>{
 
 var determine_direction=(direction,dirArray)=>{
     const dirConfig =[[2,3,4],[1,3,4],[1,2,4],[1,2,3]]
-    if(dirArray.length==3)return 0
-    if(dirArray.length==2){
+    if(dirArray.length===3)return 0
+    if(dirArray.length===2){
       let diff = dirConfig[direction].filter(x => dirArray.indexOf(x) < 0 );
       return diff[0]
     }else{
@@ -60,8 +62,7 @@ var gen_hwy_cells=()=>{
     var prevLength = highWayCoordinates.length
     var collisionFlag=false
     var currentCell=startingCell
-    highWayCoordinates.push(parseInt(currentCell[1])+","+parseInt(currentCell[0]))
-    var prevDirection = nextDirection
+    highWayCoordinates.push(parseInt(currentCell[1],10)+","+parseInt(currentCell[0],10))
     var direction=[]
     var counter=0;
     do{
@@ -72,9 +73,9 @@ var gen_hwy_cells=()=>{
         switch (nextDirection){
             case 1://prev Down
                     for(let i=0;i<20;i++){
-                        if(highWayCoordinates.indexOf((parseInt(currentCell[1])+parseInt(i+1))+","+(parseInt(currentCell[0])))
+                        if(highWayCoordinates.indexOf((parseInt(currentCell[1],10)+parseInt(i+1,10))+","+(parseInt(currentCell[0],10)))
                         !==-1){
-                            // console.log("Down collision at ",(parseInt(currentCell[1])+parseInt(i+1))+","+(parseInt(currentCell[0])))
+                            // console.log("Down collision at ",(parseInt(currentCell[1],10)+parseInt(i+1,10))+","+(parseInt(currentCell[0],10)))
                             direction.push(nextDirection)
                             nextDirection=determine_direction(nextDirection-1,direction)
                             collisionFlag=true
@@ -85,11 +86,11 @@ var gen_hwy_cells=()=>{
                       collisionFlag=false
                       break;
                     }
-                    if(parseInt(currentCell[1])+20>= row-1){
-                        if (row-1-parseInt(currentCell[1])+highWayCoordinates.length-prevLength>=100){
-                            // console.log("near bound",row-1-parseInt(currentCell[1])+highWayCoordinates.length-prevLength)
-                        for(let i=0;i<row-1-parseInt(currentCell[1]);i++){
-                            highWayCoordinates.push((parseInt(currentCell[1])+parseInt(i+1))+","+(parseInt(currentCell[0])))
+                    if(parseInt(currentCell[1],10)+20>= row-1){
+                        if (row-1-parseInt(currentCell[1],10)+highWayCoordinates.length-prevLength>=100){
+                            // console.log("near bound",row-1-parseInt(currentCell[1],10)+highWayCoordinates.length-prevLength)
+                        for(let i=0;i<row-1-parseInt(currentCell[1],10);i++){
+                            highWayCoordinates.push((parseInt(currentCell[1],10)+parseInt(i+1,10))+","+(parseInt(currentCell[0],10)))
                             }
                             // //console.log("Down hit bound",highWayCoordinates[highWayCoordinates.length-1])
                             return true;
@@ -99,25 +100,23 @@ var gen_hwy_cells=()=>{
                         break;
                     }
                     for(let i=0;i<20;i++){
-                        highWayCoordinates.push((parseInt(currentCell[1])+parseInt(i+1))+","+(parseInt(currentCell[0])))
+                        highWayCoordinates.push((parseInt(currentCell[1],10)+parseInt(i+1,10))+","+(parseInt(currentCell[0],10)))
                     }
-                    currentCell[1]=parseInt(currentCell[1])+20
+                    currentCell[1]=parseInt(currentCell[1],10)+20
                     if(rand<=0.2)//20% go Right
                     {
-                        prevDirection = nextDirection
                         nextDirection = 2
                     }
                     else if(rand<=0.4){//20% go Left
-                        prevDirection = nextDirection
                         nextDirection = 3
                     }
                     direction=[]
                     break;
             case 2://Right
                     for(let i=0;i<20;i++){
-                        if(highWayCoordinates.indexOf(parseInt(currentCell[1])+","+(parseInt(currentCell[0])+parseInt(i+1)))
+                        if(highWayCoordinates.indexOf(parseInt(currentCell[1],10)+","+(parseInt(currentCell[0],10)+parseInt(i+1,10)))
                         !==-1){
-                            //console.log("Right collision at ",parseInt(currentCell[1])+","+(parseInt(currentCell[0])+parseInt(i+1)))
+                            //console.log("Right collision at ",parseInt(currentCell[1],10)+","+(parseInt(currentCell[0],10)+parseInt(i+1,10)))
                             direction.push(nextDirection)
                             nextDirection=determine_direction(nextDirection-1,direction)
                             collisionFlag=true
@@ -128,12 +127,12 @@ var gen_hwy_cells=()=>{
                       collisionFlag=false
                       break;
                     }
-                    if(parseInt(currentCell[0])+20>= col-1){
+                    if(parseInt(currentCell[0],10)+20>= col-1){
 
-                        if (col-1-parseInt(currentCell[0])+highWayCoordinates.length-prevLength>=100){
-                            //console.log("near bound",col-1-parseInt(currentCell[0])+highWayCoordinates.length-prevLength)
-                        for(let i=0;i<col-1-parseInt(currentCell[0]);i++){
-                            highWayCoordinates.push(parseInt(currentCell[1])+","+(parseInt(currentCell[0])+parseInt(i+1)))
+                        if (col-1-parseInt(currentCell[0],10)+highWayCoordinates.length-prevLength>=100){
+                            //console.log("near bound",col-1-parseInt(currentCell[0],10)+highWayCoordinates.length-prevLength)
+                        for(let i=0;i<col-1-parseInt(currentCell[0],10);i++){
+                            highWayCoordinates.push(parseInt(currentCell[1],10)+","+(parseInt(currentCell[0],10)+parseInt(i+1,10)))
                             }
                             //console.log("Right hit bound",highWayCoordinates[highWayCoordinates.length-1])
                             return true;
@@ -143,25 +142,23 @@ var gen_hwy_cells=()=>{
                         break;
                     }
                     for(let i=0;i<20;i++){
-                        highWayCoordinates.push(parseInt(currentCell[1])+","+(parseInt(currentCell[0])+parseInt(i+1)))
+                        highWayCoordinates.push(parseInt(currentCell[1],10)+","+(parseInt(currentCell[0],10)+parseInt(i+1,10)))
                     }
-                    currentCell[0]=parseInt(currentCell[0])+20
+                    currentCell[0]=parseInt(currentCell[0],10)+20
                     if(rand<=0.2)//20% go Down
                     {
-                        prevDirection = nextDirection
                         nextDirection = 1
                     }
                     else if(rand<=0.4){//20% go Up
-                        prevDirection = nextDirection
                         nextDirection = 4
                     }
                     direction=[]
                     break;
             case 3://Left
                     for(let i=0;i<20;i++){
-                        if(highWayCoordinates.indexOf(parseInt(currentCell[1])+","+(parseInt(currentCell[0])-parseInt(i+1)))
+                        if(highWayCoordinates.indexOf(parseInt(currentCell[1],10)+","+(parseInt(currentCell[0],10)-parseInt(i+1,10)))
                         !==-1){
-                            //console.log("Left collision at ",parseInt(currentCell[1])+","+(parseInt(currentCell[0])-parseInt(i+1)))
+                            //console.log("Left collision at ",parseInt(currentCell[1],10)+","+(parseInt(currentCell[0],10)-parseInt(i+1,10)))
                             direction.push(nextDirection)
                             nextDirection=determine_direction(nextDirection-1,direction)
                             collisionFlag=true
@@ -172,11 +169,11 @@ var gen_hwy_cells=()=>{
                       collisionFlag=false
                       break;
                     }
-                    if(parseInt(currentCell[0])-20<=0){
-                        if (parseInt(currentCell[0])+highWayCoordinates.length-prevLength>=100){
-                            //console.log("near bound",parseInt(currentCell[0])+highWayCoordinates.length-prevLength)
-                        for(let i=0;i<parseInt(currentCell[0]);i++){
-                            highWayCoordinates.push(parseInt(currentCell[1])+","+(parseInt(currentCell[0])-parseInt(i+1)))
+                    if(parseInt(currentCell[0],10)-20<=0){
+                        if (parseInt(currentCell[0],10)+highWayCoordinates.length-prevLength>=100){
+                            //console.log("near bound",parseInt(currentCell[0],10)+highWayCoordinates.length-prevLength)
+                        for(let i=0;i<parseInt(currentCell[0],10);i++){
+                            highWayCoordinates.push(parseInt(currentCell[1],10)+","+(parseInt(currentCell[0],10)-parseInt(i+1,10)))
                             }
                             //console.log("Left hit bound",highWayCoordinates[highWayCoordinates.length-1])
                             return true ;
@@ -186,25 +183,23 @@ var gen_hwy_cells=()=>{
                         break;
                     }
                     for(let i=0;i<20;i++){
-                        highWayCoordinates.push(parseInt(currentCell[1])+","+(parseInt(currentCell[0])-parseInt(i+1)))
+                        highWayCoordinates.push(parseInt(currentCell[1],10)+","+(parseInt(currentCell[0],10)-parseInt(i+1,10)))
                     }
-                    currentCell[0]=parseInt(currentCell[0])-20
+                    currentCell[0]=parseInt(currentCell[0],10)-20
                     if(rand<=0.2)//20% go Down
                     {
-                        prevDirection = nextDirection
                         nextDirection = 1
                     }
                     else if(rand<=0.4){//20% go Up
-                        prevDirection = nextDirection
                         nextDirection = 4
                     }
                     direction=[]
                     break;
             case 4: //Up
                     for(let i=0;i<20;i++){
-                        if(highWayCoordinates.indexOf((parseInt(currentCell[1])-parseInt(i+1))+","+(parseInt(currentCell[0])))
+                        if(highWayCoordinates.indexOf((parseInt(currentCell[1],10)-parseInt(i+1,10))+","+(parseInt(currentCell[0],10)))
                         !==-1){
-                            //console.log("Up collision at ",(parseInt(currentCell[1])-parseInt(i+1))+","+(parseInt(currentCell[0])))
+                            //console.log("Up collision at ",(parseInt(currentCell[1],10)-parseInt(i+1,10))+","+(parseInt(currentCell[0],10)))
                             direction.push(nextDirection)
                             nextDirection=determine_direction(nextDirection-1,direction)
                             collisionFlag=true
@@ -215,11 +210,11 @@ var gen_hwy_cells=()=>{
                       collisionFlag=false
                       break;
                     }
-                    if(parseInt(currentCell[1])-20<=0){
-                        if (parseInt(currentCell[1])+highWayCoordinates.length-prevLength>=100){
-                            //console.log("near bound",parseInt(currentCell[1])+highWayCoordinates.length-prevLength)
-                        for(let i=0;i<parseInt(currentCell[1]);i++){
-                            highWayCoordinates.push((parseInt(currentCell[1])-parseInt(i+1))+","+parseInt(currentCell[0]))
+                    if(parseInt(currentCell[1],10)-20<=0){
+                        if (parseInt(currentCell[1],10)+highWayCoordinates.length-prevLength>=100){
+                            //console.log("near bound",parseInt(currentCell[1],10)+highWayCoordinates.length-prevLength)
+                        for(let i=0;i<parseInt(currentCell[1],10);i++){
+                            highWayCoordinates.push((parseInt(currentCell[1],10)-parseInt(i+1,10))+","+parseInt(currentCell[0],10))
                             }
                             //console.log("Up hit bound",highWayCoordinates[highWayCoordinates.length-1])
                             return true;
@@ -229,16 +224,14 @@ var gen_hwy_cells=()=>{
                         break;
                     }
                     for(let i=0;i<20;i++){
-                        highWayCoordinates.push((parseInt(currentCell[1])-parseInt(i+1))+","+(parseInt(currentCell[0])))
+                        highWayCoordinates.push((parseInt(currentCell[1],10)-parseInt(i+1,10))+","+(parseInt(currentCell[0],10)))
                     }
-                    currentCell[1]=parseInt(currentCell[1])-20
+                    currentCell[1]=parseInt(currentCell[1],10)-20
                     if(rand<=0.2)//20% go Right
                     {
-                        prevDirection = nextDirection
                         nextDirection = 2
                     }
                     else if(rand<=0.4){//20% go Left
-                        prevDirection = nextDirection
                         nextDirection = 3
                     }
                     direction=[]
@@ -250,16 +243,89 @@ var gen_hwy_cells=()=>{
 
         }
 
-    }while(parseInt(currentCell[0])!==0&&parseInt(currentCell[1])!==0&&parseInt(currentCell[0])!==col-1&&parseInt(currentCell[1])!==row-1)
+    }while(parseInt(currentCell[0],10)!==0&&parseInt(currentCell[1],10)!==0&&parseInt(currentCell[0],10)!==col-1&&parseInt(currentCell[1],10)!==row-1)
     if(startingCell === currentCell) {
       highWayCoordinates=highWayCoordinates.slice(0,prevLength)
       return false//need redo whole process
     }
     return true
 }
+
+var gen_blocked_cells=()=>{
+    let totalBLKCells = row*col/5
+    for(let i =0;i<totalBLKCells;i++){
+        let xCor = getRandomInt(0,col)
+        let yCor = getRandomInt(0,row)
+        let point = yCor+","+xCor
+        if(highWayCoordinates.indexOf(point)===-1)
+            if(blkedCoordinates.indexOf(point)===-1)
+                blkedCoordinates.push(point)
+            else
+                i--
+        else i--
+    }
+}
+var gen_start_final_cells=()=>{
+    var flag
+    for(let i=0;i<2;i++){
+        flag=true
+        if(Math.random()<0.5){//top or bottom 20 rows
+            if(Math.random()<0.5){//top 20 rows
+                while(flag){
+                let xCor = getRandomInt(0,col)
+                let yCor = getRandomInt(0,20)
+                var point = yCor+","+xCor
+                if(blkedCoordinates.indexOf(point)===-1)
+                    flag=false;
+                }
+                sfCells[i] = point             
+            }else{//bottom 20 rows
+                while(flag){
+                let xCor = getRandomInt(0,col)
+                let yCor = getRandomInt(row-20,row)
+                var point = yCor+","+xCor
+                if(blkedCoordinates.indexOf(point)===-1)
+                    flag=false;
+                }
+                sfCells[i] = point               
+            }
+        }else{//left or right 20 columns
+            if(Math.random()<0.5){//left 20 cols
+                while(flag){
+                let xCor = getRandomInt(0,20)
+                let yCor = getRandomInt(0,row)
+                var point = yCor+","+xCor
+                if(blkedCoordinates.indexOf(point)===-1)
+                    flag=false;
+                }
+                sfCells[i] = point                 
+            }else{//right 20 cols
+                while(flag){
+                let xCor = getRandomInt(col-20,col)
+                let yCor = getRandomInt(0,row)
+                var point = yCor+","+xCor
+                if(blkedCoordinates.indexOf(point)===-1)
+                    flag=false;
+                }
+                sfCells[i] = point                                 
+            }
+        }
+
+        if(i==1){
+        let sx = sfCells[0].split(",")[0],
+        sy = sfCells[0].split(",")[1],
+        fx = sfCells[1].split(",")[0],
+        fy = sfCells[1].split(",")[1]
+        if(Math.abs(sx-fx)+Math.abs(sy-fy)<100){
+            i=0//reselect the goal   
+            }         
+        }
+        
+    }
+
+}
 export var gen_four_hwy=()=>{
     let flag = true,c=0
-
     while(flag){
       flag=false
       for(let i=0;i<4;i++){
@@ -272,6 +338,11 @@ export var gen_four_hwy=()=>{
           };
       }
     }
-
+    gen_blocked_cells()
+    gen_start_final_cells()
+    console.log(sfCells)     
 }
+
+
+
 gen_hard_cells();
