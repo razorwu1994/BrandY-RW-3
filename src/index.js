@@ -55,25 +55,27 @@ gen_four_hwy();
       }
       console.log(partStr1)
       var partStr2=""
-      var pathConfig =Array(row).fill(Array(col).fill(1))
+      var pathConfig =[]
       let r,c
       for(r=0;r<row;r++){
+          pathConfig.push([])
           for(c=0;c<col;c++){
-            if(hardTraverseCoordinates.indexOf(r+","+c)!=-1)//hard 2
+            if(blkedCoordinates.indexOf(r+","+c)!=-1)//blocked 0
+                  pathConfig[r].push(0)
+            else if(hardTraverseCoordinates.indexOf(r+","+c)!=-1)//hard 2
             {
-                      pathConfig[r][c]=2
-                if(hardHwyCoordinates.indexOf(r+","+c)!=-1)//hard 2
-                      pathConfig[r][c]='b'
+                if(hardHwyCoordinates.indexOf(r+","+c)!=-1)//hard hwy 2
+                      pathConfig[r].push('b')
+                else  pathConfig[r].push(2)                
             }
             else if(unblockedHwyCoordinates.indexOf(r+","+c)!=-1)//hard 2
             {
-                  pathConfig[r][c]='a'                  
+                  pathConfig[r].push('a')                  
             }
-            else if(blkedCoordinates.indexOf(r+","+c)!=-1)//blocked 0
-                  pathConfig[r][c]=0
-          }
+            else  pathConfig[r].push(1)
+          } 
       }        
-      console.log(hardTraverseCoordinates,hardHwyCoordinates,unblockedHwyCoordinates,blkedCoordinates)
+      console.log(JSON.stringify(pathConfig))
       // console.log(highWayCoordinates)
       // console.log(blkedCoordinates)
       //console.log(hardTraverseCoordinates.length)
