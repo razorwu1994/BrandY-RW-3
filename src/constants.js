@@ -278,7 +278,7 @@ var gen_start_final_cells=()=>{
                 if(blkedCoordinates.indexOf(point)===-1)
                     flag=false;
                 }
-                sfCells[i] = point             
+                sfCells[i] = point
             }else{//bottom 20 rows
                 while(flag){
                 let xCor = getRandomInt(0,col)
@@ -287,7 +287,7 @@ var gen_start_final_cells=()=>{
                 if(blkedCoordinates.indexOf(point)===-1)
                     flag=false;
                 }
-                sfCells[i] = point               
+                sfCells[i] = point
             }
         }else{//left or right 20 columns
             if(Math.random()<0.5){//left 20 cols
@@ -298,7 +298,7 @@ var gen_start_final_cells=()=>{
                 if(blkedCoordinates.indexOf(point)===-1)
                     flag=false;
                 }
-                sfCells[i] = point                 
+                sfCells[i] = point
             }else{//right 20 cols
                 while(flag){
                 let xCor = getRandomInt(col-20,col)
@@ -307,7 +307,7 @@ var gen_start_final_cells=()=>{
                 if(blkedCoordinates.indexOf(point)===-1)
                     flag=false;
                 }
-                sfCells[i] = point                                 
+                sfCells[i] = point
             }
         }
 
@@ -317,14 +317,64 @@ var gen_start_final_cells=()=>{
         fx = sfCells[1].split(",")[0],
         fy = sfCells[1].split(",")[1]
         if(Math.abs(sx-fx)+Math.abs(sy-fy)<100){
-            i=0//reselect the goal   
-            }         
+            i=0//reselect the goal
+            }
         }
-        
+
     }
 
 }
 
+
+export var pathConfig =[]
+
+var gen_path_config=()=>{
+
+  var hardTraverseCoordinates=[]
+  var hardHwyCoordinates=[]
+  var unblockedHwyCoordinates=[]
+  let r,c
+  for(r=0;r<row;r++){
+      for(c=0;c<col;c++){
+            let counter=0
+            if(highWayCoordinates.indexOf(r+","+c)!==-1){
+              unblockedHwyCoordinates.push(r+","+c)
+            }
+            while (counter<8){
+              // console.log(r,point[0],c,point[1])
+                if(r>=randCoordinates[counter][0]-31&&r<=randCoordinates[counter][0]+31&&
+                  c>=randCoordinates[counter][1]-31&&c<=randCoordinates[counter][1]+31){
+                  if(Math.random()<0.5){
+                    hardTraverseCoordinates.push(r+","+c)
+                    if(highWayCoordinates.indexOf(r+","+c)!==-1){
+                        hardHwyCoordinates.push(r+","+c)
+                      }
+                    }
+                    break
+                  }
+                  counter++
+            }
+          }
+    }
+    for(r=0;r<row;r++){
+        pathConfig.push([])
+      for(c=0;c<col;c++){
+          if(blkedCoordinates.indexOf(r+","+c)!=-1)//blocked 0
+                pathConfig[r].push(0)
+          else if(hardTraverseCoordinates.indexOf(r+","+c)!=-1)//hard 2
+          {
+              if(hardHwyCoordinates.indexOf(r+","+c)!=-1)//hard hwy 2
+                    pathConfig[r].push('b')
+              else  pathConfig[r].push(2)
+          }
+          else if(unblockedHwyCoordinates.indexOf(r+","+c)!=-1)//hard 2
+          {
+                pathConfig[r].push('a')
+          }
+          else  pathConfig[r].push(1)
+        }
+    }
+}
 
 export var gen_four_hwy=()=>{
     let flag = true,c=0
@@ -342,10 +392,10 @@ export var gen_four_hwy=()=>{
     }
     gen_blocked_cells()
     gen_start_final_cells()
-    console.log(sfCells)     
+    gen_path_config()
+    console.log(sfCells)
 }
 
 
 
 gen_hard_cells();
-
