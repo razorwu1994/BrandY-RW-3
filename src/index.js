@@ -28,8 +28,8 @@ gen_four_hwy();
           style={{background:colorGroup[cellType]}}>
           {cellType==='a'&&<span class="separator"></span>}
           {cellType==='b'&&<span class="separator"></span>}
-          {sfCells[0]===r+","+c&&<span style={{width:'100%',color:'black',fontSize:'15px'}}>S</span>}
-          {sfCells[1]===r+","+c&&<span style={{width:'100%',color:'black',fontSize:'15px'}}>G</span>}
+          {this.props.inputToggle===false&&sfCells[0]===r+","+c&&<span style={{width:'80%',color:'blue',fontSize:'5px'}}>S</span>}
+          {this.props.inputToggle===false&&sfCells[1]===r+","+c&&<span style={{width:'80%',color:'blue',fontSize:'5px'}}>G</span>}
           </Button>
       );
     }
