@@ -26,13 +26,16 @@ var fileConfig = []
     renderSquare(r,c,handleClick,cellType) {
       const colorGroup={'-1':'blue',0:'lightcoral',1:'white',2:'lightgrey','a':'white','b':'lightgrey'}
       const labelGroup={s:'S',f:'G'}
+      var storedval = r+","+c
       return (
-          <Button key={r+","+c} value={r+","+c+",gvalue-"+1} className="square" cursor="pointer" onClick={handleClick}
+          <Button key={storedval} value={storedval+",gvalue-"+1} className="square" cursor="pointer" onClick={handleClick} 
           style={{background:colorGroup[cellType]}}>
-          {cellType==='a'&&<span class="separator"></span>}
-          {cellType==='b'&&<span class="separator"></span>}
-          {this.props.inputToggle===false&&sfCells[0]===r+","+c&&<span style={{width:'100%',color:'blue',fontSize:'1.5vmin'}}>S</span>}
-          {this.props.inputToggle===false&&sfCells[1]===r+","+c&&<span style={{width:'100%',color:'blue',fontSize:'1.5vmin'}}>G</span>}
+          {cellType==='a'&&<span value={storedval+",gvalue-"+1} class="separator"></span>}
+          {cellType==='b'&&<span value={storedval+",gvalue-"+1} class="separator"></span>}
+          {this.props.inputToggle===false&&sfCells[0]===r+","+c&&
+            <span value={storedval+",gvalue-"+1} style={{color:'blue',fontSize:'1.0vmin'}}>S</span>}
+          {this.props.inputToggle===false&&sfCells[1]===r+","+c&&
+            <span value={storedval+",gvalue-"+1} style={{color:'blue',fontSize:'1.0vmin'}}>G</span>}
           </Button>
       );
     }
@@ -43,8 +46,10 @@ var fileConfig = []
     }
 
     handleClick= (e)=>{
-        let location = e.target.value,
-            updateInfo = "The clicked cell is "+location
+        var location = e.target.value
+        console.log(e.target)
+        
+        var updateInfo = "The clicked cell is "+location
         console.log(updateInfo)
     }
 
