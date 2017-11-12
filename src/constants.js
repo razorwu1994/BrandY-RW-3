@@ -376,7 +376,7 @@ var gen_path_config=()=>{
     }
 }
 
-export var gen_four_hwy=()=>{
+export var gen_everything=()=>{
     let flag = true,c=0
     while(flag){
       flag=false
