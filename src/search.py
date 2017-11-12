@@ -5,7 +5,7 @@ class Cell:
     Represents a cell in the 160x120 grid
 
     Attr:
-        terrain_type: 0 for unblocked, 1 for unblocked, 2 for hard-to-traverse
+        terrain_type: 0 for blocked, 1 for unblocked, 2 for hard-to-traverse
         has_highway: 0 if it has no highway, 1 if it does
         f: function value
         g: distance from start
@@ -29,15 +29,14 @@ class Cell:
         Prints out the card with the format: <value> of <suit>
         Jokers are just printed out as 'joker'
         """
-        cardName = self._cardNames[self.value]
+        t_type = str(self.terrain_type)
 
-        # Card is Joker, then just output "Joker"
-        if self.value == 0:
-            combinedName = cardName
-        else:
-            combinedName = cardName + " of " + self.suit
-
-        return combinedName
+        if self.terrain_type == 1 && self.has_highway == True:
+            t_type = 'a'
+        elif self.terrain_type == 2 && self.has_highway == True:
+            t_type = 'b'
+            
+        return "({0}, {2}, {3}, {4))".format(t_type, self.f, self.g, self.h)
 
 def read_from_file(file_name):
     """
@@ -47,6 +46,10 @@ def read_from_file(file_name):
     # Split by lines
     lines = [line.rstrip('\n') for line in open(filename)]
 
+    # Test, for printing out lines
+    for line in range(len(lines)):
+        print "{}\n".format(line)
+        
     # First line provides coordinates of the starting cell
     start = lines[0].split(',')
 
@@ -54,7 +57,10 @@ def read_from_file(file_name):
     goal = lines[1].split(',')
     
     # Next eight lines provide the coordinates of the centers of hard to traverse regions
-
+    htt_centers = []
+    for i in range(8):
+        htt_centers.append(lines[2 + i].split(','))
+        
     """
     Remaining 120 lines represent the map where
         '0' = blocked cell
@@ -63,9 +69,24 @@ def read_from_file(file_name):
         'a' = regular unblocked cell with highway
         'b' = hard-to-traverse cell with highway
     """
-    data = []
-    for line in range(len(lines)):
-        print "{}\n".format(line)
+
+    grid = [] # For storing data on each cell in the 160x120 grid
+
+    for i in range(10, len(lines)):
+        row = []
+        for [c in c in lines[i + 10]]:
+            tempCell = None
+            if c=='0' || c=='1' || c=='2':
+                tempCell = Cell(int(c), False)
+            elif c == 'a':
+                tempCell = Cell(1, True)
+            elif c == 'b':
+                tempCell = Cell(2, True)
+
+            row.append(tempCell)
+        grid.append(row)
+
+    return (start, goal, grid)
 
 def uniform_cost_search(start, goal, grid):
     """
