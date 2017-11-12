@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {Button,ToggleButtonGroup,ToggleButton} from 'react-bootstrap';
+import {Button} from 'react-bootstrap';
 import './index.css';
-import {randCoordinates,gen_everything,sfCells,pathConfig} from './constants.js'
+import {randCoordinates,gen_everything,sfCells,pathConfig,gen_start_final_cells} from './constants.js'
 import FileReaderInput from 'react-file-reader-input';
 import ReactFileReader from 'react-file-reader'
 
@@ -20,6 +20,7 @@ var fileConfig = []
         super(props);
         this.state = {
             dataMatrix:Array(120).fill(Array(160).fill(0)),
+            genSFtoggle:false,            
         };
     }
     renderSquare(r,c,handleClick,cellType) {
@@ -30,10 +31,15 @@ var fileConfig = []
           style={{background:colorGroup[cellType]}}>
           {cellType==='a'&&<span class="separator"></span>}
           {cellType==='b'&&<span class="separator"></span>}
-          {this.props.inputToggle===false&&sfCells[0]===r+","+c&&<span style={{width:'80%',color:'blue',fontSize:'5px'}}>S</span>}
-          {this.props.inputToggle===false&&sfCells[1]===r+","+c&&<span style={{width:'80%',color:'blue',fontSize:'5px'}}>G</span>}
+          {this.props.inputToggle===false&&sfCells[0]===r+","+c&&<span style={{width:'100%',color:'blue',fontSize:'1.5vmin'}}>S</span>}
+          {this.props.inputToggle===false&&sfCells[1]===r+","+c&&<span style={{width:'100%',color:'blue',fontSize:'1.5vmin'}}>G</span>}
           </Button>
       );
+    }
+
+    genNewSF=()=>{
+      this.setState({genSFtoggle:!this.state.genSFtoggle})
+      gen_start_final_cells()      
     }
 
     handleClick= (e)=>{
@@ -129,6 +135,7 @@ var fileConfig = []
         this.outputFile()
         return (
         <div style={{overflowX:'visible',overflowY:'visible',width:'200%',height:'150%'}}>
+        <Button onClick={this.genNewSF}>gen new start and goal</Button>
         {board}
         </div>
       );
@@ -167,22 +174,27 @@ var fileConfig = []
 
     closeOutput=()=>{
       this.setState({outputToggle:false})
-    }
+    }  
+
+
     render() {
       return (
         <div>
-        <Button>Uniform Cost</Button>
-        <Button onClick={(e)=>this.setState({outputToggle:!this.state.outputToggle})}>File Output</Button>
-        <div style={{width:'90px'}}>
-        <ReactFileReader handleFiles={this.handleChange} fileTypes={'.txt'} >
-            <Button cursor="pointer" style={{width:"100%"}}>Upload</Button>
-        </ReactFileReader>
+        <div style={{display:'flex'}}>
+          <Button>Uniform Cost</Button>
+          <Button onClick={(e)=>this.setState({outputToggle:!this.state.outputToggle})}>File Output</Button>
+          <div style={{width:'90px'}}>
+          <ReactFileReader handleFiles={this.handleChange} fileTypes={'.txt'} >
+              <Button cursor="pointer" style={{width:"100%"}}>Upload</Button>
+          </ReactFileReader>
+          </div>
         </div>
         <Board
         closeOutput={this.closeOutput}
         fileConfig={this.state.config}
         inputToggle={this.state.inputToggle}
-        outputToggle={this.state.outputToggle}/>
+        outputToggle={this.state.outputToggle}
+        />
         </div>
 
       );
