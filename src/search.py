@@ -1,3 +1,4 @@
+import sys
 import heapq
 
 class Cell:
@@ -22,20 +23,22 @@ class Cell:
         self.has_highway = has_highway
         f = 0
         g = 0
-        h = 0    
+        h = 0
+
+    def convert_to_char():
+        if self.terrain_type == 1 and self.has_highway == True:
+            return 'a'
+        elif self.terrain_type == 2 and self.has_highway == True:
+            return 'b'
+        else:
+            return str(self.terrain_type)
     
     def __str__(self):
         """
         Prints out the card with the format: <value> of <suit>
         Jokers are just printed out as 'joker'
         """
-        t_type = str(self.terrain_type)
-
-        if self.terrain_type == 1 && self.has_highway == True:
-            t_type = 'a'
-        elif self.terrain_type == 2 && self.has_highway == True:
-            t_type = 'b'
-            
+        t_type = self.convert_to_char()
         return "({0}, {2}, {3}, {4))".format(t_type, self.f, self.g, self.h)
 
 def read_from_file(file_name):
@@ -44,22 +47,23 @@ def read_from_file(file_name):
     File follows format given in Assignment 3 Instructions.
     """
     # Split by lines
-    lines = [line.rstrip('\n') for line in open(filename)]
-
-    # Test, for printing out lines
-    for line in range(len(lines)):
-        print "{}\n".format(line)
+    lines = [line.rstrip('\n') for line in open(file_name)]
         
     # First line provides coordinates of the starting cell
-    start = lines[0].split(',')
+    start_str = lines[0][3:].split(',') # Start at index 3 because of weird char in front
+    start = tuple([int(c) for c in start_str])
 
     # Second line provides coordinates of the goal cell
-    goal = lines[1].split(',')
+    goal_str = lines[1].split(',')
+    goal = tuple([int(c) for c in goal_str])
     
     # Next eight lines provide the coordinates of the centers of hard to traverse regions
     htt_centers = []
     for i in range(8):
-        htt_centers.append(lines[2 + i].split(','))
+        htt_center_str = lines[2 + i].split(',')
+        htt_center = tuple([int(c) for c in htt_center_str])
+        htt_centers.append(htt_center)
+    print htt_centers
         
     """
     Remaining 120 lines represent the map where
@@ -74,13 +78,14 @@ def read_from_file(file_name):
 
     for i in range(10, len(lines)):
         row = []
-        for [c in c in lines[i + 10]]:
+        line = lines[i]
+        for char in line:
             tempCell = None
-            if c=='0' || c=='1' || c=='2':
-                tempCell = Cell(int(c), False)
-            elif c == 'a':
+            if char=='0' or char=='1' or char=='2':
+                tempCell = Cell(int(char), False)
+            elif char == 'a':
                 tempCell = Cell(1, True)
-            elif c == 'b':
+            elif char == 'b':
                 tempCell = Cell(2, True)
 
             row.append(tempCell)
@@ -97,23 +102,24 @@ def uniform_cost_search(start, goal, grid):
     goal = coordinates of the goal position
     grid = entire 160x120 grid map
     """
-
-    
+    print("UCS")
     # Run search
     # Return the path (1D array)
-}
+    return (None, None)
 
-def heuristic_search(){
+def heuristic_search():
     # Get data
     # Run search
     # Return the path (1D array)
-}
+    print("Hello")
+    return (None, None)
 
-def weighted_heuristic_search(){
+def weighted_heuristic_search():
     # Get data
     # Run search
     # Return the path (1D array)
-}
+    print("Hello")
+    return (None, None)
 
 if __name__ == "__main__":
     # Make sure there are enough argument given
@@ -128,6 +134,9 @@ if __name__ == "__main__":
 
     # Read from file
     [start, goal, grid] = read_from_file(file_name)
+
+    # In grid, x = y coordinate and y = x coordiante on actual grid
+    print grid[4][0]
 
     if search_type == "u":
         [path, grid] = uniform_cost_search(start, goal, grid)
