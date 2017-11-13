@@ -120,7 +120,7 @@ var fileConfig = []
               if(!this.props.inputToggle){
                     cellType=pathConfig[r][c]
 
-                      //blue color center
+                     // blue color center
                       // for(let cc in randCoordinates)
                       //   if(r===randCoordinates[cc][0]&&c===randCoordinates[cc][1])
                       //           cellType=-1
