@@ -6,9 +6,10 @@ function uniform_cost_search(start, goal, grid){
     goal = coordinates of the goal position
     grid = entire 160x120 grid map
     */
-
     
     // Run search
+    
+
     // Return the path (1D array)
 }
 
