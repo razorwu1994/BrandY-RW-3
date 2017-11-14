@@ -1,7 +1,4 @@
-<<<<<<< HEAD
-export function uniform_cost_search(pathConfig){
-    // Get data
-=======
+
 function uniform_cost_search(start, goal, grid){
     /* Do uniform cost search on the given grid, start and goal
 
@@ -10,10 +7,9 @@ function uniform_cost_search(start, goal, grid){
     goal = coordinates of the goal position
     grid = entire 160x120 grid map
     */
-    
->>>>>>> cdafa6539b6e9578deff170aaeae7c28e58b9233
+
     // Run search
-    
+
 
     // Return the path (1D array)
 }
