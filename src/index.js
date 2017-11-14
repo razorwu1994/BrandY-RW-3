@@ -31,28 +31,29 @@ var fileConfig = []
       const labelGroup={s:'S',f:'G'}
       var storedval = r+","+c
 
-      var bgIMG = this.props.inputToggle===false&&sfCells[0]===r+","+c?
-                    start:
-                    this.props.inputToggle===false&&sfCells[1]===r+","+c?
-                    goal:{}
+      // var bgIMG = this.props.inputToggle===false&&startANDgoal[0]===r+","+c?
+      //               start:
+      //               this.props.inputToggle===false&&startANDgoal[1]===r+","+c?
+      //               goal:{}
                     // {bgIMG?<span style={{backgroundImage: "url("+bgIMG+")",backgroundRepeat:'no-repeat',
                     // backgroundSize:'100% 100%'}}>wt</span>:{}}
       return (
           <Button key={storedval} value={storedval+",gvalue-"+1} className="square" cursor="pointer" onClick={handleClick}
           style={{background:colorGroup[cellType]}}>
+          {this.props.startANDgoal[0]===r+","+c&&
+            <span value={storedval+",gvalue-"+1} class="separator_start"></span>}
+          {this.props.startANDgoal[1]===r+","+c&&
+            <span value={storedval+",gvalue-"+1} class="separator_goal"></span>}
           {cellType==='a'&&<span value={storedval+",gvalue-"+1} class="separator"></span>}
           {cellType==='b'&&<span value={storedval+",gvalue-"+1} class="separator"></span>}
-          {this.props.inputToggle===false&&sfCells[0]===r+","+c&&
-            <span value={storedval+",gvalue-"+1} class="separator_start"></span>}
-          {this.props.inputToggle===false&&sfCells[1]===r+","+c&&
-            <span value={storedval+",gvalue-"+1} class="separator_goal"></span>}
+
           </Button>
       );
     }
 
     genNewSF=()=>{
       this.setState({genSFtoggle:!this.state.genSFtoggle})
-      gen_start_final_cells()
+      this.props.updateSFcells()
     }
 
     handleClick= (e)=>{
@@ -164,12 +165,29 @@ var fileConfig = []
         inputToggle:false,
         outputToggle:false,
         config:"",
+        startANDgoal:sfCells,
+        blockedArray:[]
       }
     }
 
     uploadFile=(result)=>{
-      this.setState({config:result})
+      var tmpResult = result.split("\n").slice(10)
+      var tmp=[]
+      for(let r=0;r<120;r++){
+        for(let c=0;c<160;c++){
+          if(tmpResult[r].charAt(c)==0)
+            tmp.push(r+","+c)
+        }
+      }
+      console.log(tmp)
+      this.setState({config:result,blockedArray:tmp})
     }
+    updateSFcells=()=>{
+      gen_start_final_cells(this.state.blockedArray)
+      this.setState({startANDgoal:sfCells})
+      console.log(sfCells)
+    }
+
     handleChange = (files) => {
         if(files[0]  === null){
           this.setState({inputToggle:false})
@@ -183,14 +201,14 @@ var fileConfig = []
         }
         reader.readAsText(files[0]);
            setTimeout(()=>{
-                    this.setState({inputToggle:true})
+                    this.setState({inputToggle:true,startANDgoal:this.state.config.split("\n").slice(0,2)})
+                    console.log(this.state.startANDgoal)
             }, 1000);
     }
 
     closeOutput=()=>{
       this.setState({outputToggle:false})
     }
-
 
     render() {
       return (
@@ -203,12 +221,16 @@ var fileConfig = []
               <Button cursor="pointer" style={{width:"100%"}}>Upload</Button>
           </ReactFileReader>
           </div>
+          Start cell :   <span class="separator_start"></span>
+          Goal cell :    <span class="separator_goal"></span>
         </div>
         <Board
         closeOutput={this.closeOutput}
         fileConfig={this.state.config}
         inputToggle={this.state.inputToggle}
         outputToggle={this.state.outputToggle}
+        startANDgoal={this.state.startANDgoal}
+        updateSFcells={this.updateSFcells}
         />
         </div>
 
