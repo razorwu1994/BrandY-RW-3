@@ -1,11 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {Button} from 'react-bootstrap';
+import {Button,Glyphicon} from 'react-bootstrap';
 import './index.css';
 import {randCoordinates,gen_everything,sfCells,pathConfig,gen_start_final_cells} from './constants.js'
 import FileReaderInput from 'react-file-reader-input';
 import ReactFileReader from 'react-file-reader'
 import {uniform_cost_search} from './search'
+import start from './start.png'
+import goal from './goal.png'
+
 const BLOCKED_CELL = 0
 const REG_UNBLOCKED_CELL = 1
 const HARD_TRAVERSE_CELL = 2
@@ -27,15 +30,17 @@ var fileConfig = []
       const colorGroup={'-1':'blue',0:'lightcoral',1:'white',2:'lightgrey','a':'white','b':'lightgrey'}
       const labelGroup={s:'S',f:'G'}
       var storedval = r+","+c
+      var bgIMG = this.props.inputToggle===false&&sfCells[0]===r+","+c?
+                    start:
+                    this.props.inputToggle===false&&sfCells[1]===r+","+c?
+                    goal:{}
       return (
           <Button key={storedval} value={storedval+",gvalue-"+1} className="square" cursor="pointer" onClick={handleClick}
-          style={{background:colorGroup[cellType]}}>
+          style={{background:colorGroup[cellType],backgroundImage: "url("+bgIMG+")",backgroundRepeat:'no-repeat',
+          backgroundSize:'100% 100%'}}>
           {cellType==='a'&&<span value={storedval+",gvalue-"+1} class="separator"></span>}
           {cellType==='b'&&<span value={storedval+",gvalue-"+1} class="separator"></span>}
-          {this.props.inputToggle===false&&sfCells[0]===r+","+c&&
-            <span value={storedval+",gvalue-"+1} style={{color:'blue',fontSize:'1.0vmin'}}>S</span>}
-          {this.props.inputToggle===false&&sfCells[1]===r+","+c&&
-            <span value={storedval+",gvalue-"+1} style={{color:'blue',fontSize:'1.0vmin'}}>G</span>}
+
           </Button>
       );
     }
@@ -47,7 +52,7 @@ var fileConfig = []
 
     handleClick= (e)=>{
         var location = e.target.value
-        console.log(e.target)
+        //console.log(e.target)
 
         var updateInfo = "The clicked cell is "+location
         console.log(updateInfo)
