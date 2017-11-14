@@ -5,7 +5,7 @@ import './index.css';
 import {randCoordinates,gen_everything,sfCells,pathConfig} from './constants.js'
 import FileReaderInput from 'react-file-reader-input';
 import ReactFileReader from 'react-file-reader'
-
+import {uniform_cost_search} from './search'
 const BLOCKED_CELL = 0
 const REG_UNBLOCKED_CELL = 1
 const HARD_TRAVERSE_CELL = 2
@@ -30,8 +30,8 @@ var fileConfig = []
           style={{background:colorGroup[cellType]}}>
           {cellType==='a'&&<span class="separator"></span>}
           {cellType==='b'&&<span class="separator"></span>}
-          {this.props.inputToggle===false&&sfCells[0]===r+","+c&&<span style={{width:'80%',color:'blue',fontSize:'5px'}}>S</span>}
-          {this.props.inputToggle===false&&sfCells[1]===r+","+c&&<span style={{width:'80%',color:'blue',fontSize:'5px'}}>G</span>}
+          {this.props.inputToggle===false&&sfCells[0]===r+","+c&&<span style={{width:'80%',color:'blue',fontSize:'1.5vmin'}}>S</span>}
+          {this.props.inputToggle===false&&sfCells[1]===r+","+c&&<span style={{width:'80%',color:'blue',fontSize:'1.5vmin'}}>G</span>}
           </Button>
       );
     }

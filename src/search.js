@@ -1,4 +1,4 @@
-function uniform_cost_search(){
+export function uniform_cost_search(pathConfig){
     // Get data
     // Run search
     // Return the path (1D array)
