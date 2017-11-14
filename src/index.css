@@ -13,6 +13,16 @@ body {
     vertical-align: top;
 }
 
+.separator_sf {
+    content: '';
+    display: inline-block;
+    background: blue;
+    margin: 12%;
+    height: 8px;
+    width: 8px;
+    vertical-align: top;
+}
+
 ol,
 ul {
     padding-left: 30px;

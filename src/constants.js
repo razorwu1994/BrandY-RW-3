@@ -265,7 +265,7 @@ var gen_blocked_cells=()=>{
         else i--
     }
 }
-var gen_start_final_cells=()=>{
+export var gen_start_final_cells=()=>{
     var flag
     for(let i=0;i<2;i++){
         flag=true
@@ -329,7 +329,7 @@ var gen_start_final_cells=()=>{
 export var pathConfig =[]
 
 var gen_path_config=()=>{
-
+  var randC=0
   var hardTraverseCoordinates=[]
   var hardHwyCoordinates=[]
   var unblockedHwyCoordinates=[]
@@ -342,8 +342,8 @@ var gen_path_config=()=>{
             }
             while (counter<8){
               // console.log(r,point[0],c,point[1])
-                if(r>=randCoordinates[counter][0]-31&&r<=randCoordinates[counter][0]+31&&
-                  c>=randCoordinates[counter][1]-31&&c<=randCoordinates[counter][1]+31){
+                if(r>=randCoordinates[counter][0]-15&&r<=randCoordinates[counter][0]+15&&
+                  c>=randCoordinates[counter][1]-15&&c<=randCoordinates[counter][1]+15){
                   if(Math.random()<0.5){
                     hardTraverseCoordinates.push(r+","+c)
                     if(highWayCoordinates.indexOf(r+","+c)!==-1){
@@ -374,6 +374,7 @@ var gen_path_config=()=>{
           else  pathConfig[r].push(1)
         }
     }
+
 }
 
 export var gen_everything=()=>{

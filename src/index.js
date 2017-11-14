@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {Button,ToggleButtonGroup,ToggleButton} from 'react-bootstrap';
+import {Button} from 'react-bootstrap';
 import './index.css';
-import {randCoordinates,gen_everything,sfCells,pathConfig} from './constants.js'
+import {randCoordinates,gen_everything,sfCells,pathConfig,gen_start_final_cells} from './constants.js'
 import FileReaderInput from 'react-file-reader-input';
 import ReactFileReader from 'react-file-reader'
 import {uniform_cost_search} from './search'
@@ -20,25 +20,36 @@ var fileConfig = []
         super(props);
         this.state = {
             dataMatrix:Array(120).fill(Array(160).fill(0)),
+            genSFtoggle:false,
         };
     }
     renderSquare(r,c,handleClick,cellType) {
       const colorGroup={'-1':'blue',0:'lightcoral',1:'white',2:'lightgrey','a':'white','b':'lightgrey'}
       const labelGroup={s:'S',f:'G'}
+      var storedval = r+","+c
       return (
-          <Button key={r+","+c} value={r+","+c+",gvalue-"+1} className="square" cursor="pointer" onClick={handleClick}
+          <Button key={storedval} value={storedval+",gvalue-"+1} className="square" cursor="pointer" onClick={handleClick}
           style={{background:colorGroup[cellType]}}>
-          {cellType==='a'&&<span class="separator"></span>}
-          {cellType==='b'&&<span class="separator"></span>}
-          {this.props.inputToggle===false&&sfCells[0]===r+","+c&&<span style={{width:'80%',color:'blue',fontSize:'1.5vmin'}}>S</span>}
-          {this.props.inputToggle===false&&sfCells[1]===r+","+c&&<span style={{width:'80%',color:'blue',fontSize:'1.5vmin'}}>G</span>}
+          {cellType==='a'&&<span value={storedval+",gvalue-"+1} class="separator"></span>}
+          {cellType==='b'&&<span value={storedval+",gvalue-"+1} class="separator"></span>}
+          {this.props.inputToggle===false&&sfCells[0]===r+","+c&&
+            <span value={storedval+",gvalue-"+1} style={{color:'blue',fontSize:'1.0vmin'}}>S</span>}
+          {this.props.inputToggle===false&&sfCells[1]===r+","+c&&
+            <span value={storedval+",gvalue-"+1} style={{color:'blue',fontSize:'1.0vmin'}}>G</span>}
           </Button>
       );
     }
 
+    genNewSF=()=>{
+      this.setState({genSFtoggle:!this.state.genSFtoggle})
+      gen_start_final_cells()
+    }
+
     handleClick= (e)=>{
-        let location = e.target.value,
-            updateInfo = "The clicked cell is "+location
+        var location = e.target.value
+        console.log(e.target)
+
+        var updateInfo = "The clicked cell is "+location
         console.log(updateInfo)
     }
 
@@ -109,7 +120,7 @@ var fileConfig = []
               if(!this.props.inputToggle){
                     cellType=pathConfig[r][c]
 
-                      //blue color center
+                     // blue color center
                       // for(let cc in randCoordinates)
                       //   if(r===randCoordinates[cc][0]&&c===randCoordinates[cc][1])
                       //           cellType=-1
@@ -129,6 +140,7 @@ var fileConfig = []
         this.outputFile()
         return (
         <div style={{overflowX:'visible',overflowY:'visible',width:'200%',height:'150%'}}>
+        <Button onClick={this.genNewSF}>gen new start and goal</Button>
         {board}
         </div>
       );
@@ -168,21 +180,26 @@ var fileConfig = []
     closeOutput=()=>{
       this.setState({outputToggle:false})
     }
+
+
     render() {
       return (
         <div>
-        <Button>Uniform Cost</Button>
-        <Button onClick={(e)=>this.setState({outputToggle:!this.state.outputToggle})}>File Output</Button>
-        <div style={{width:'90px'}}>
-        <ReactFileReader handleFiles={this.handleChange} fileTypes={'.txt'} >
-            <Button cursor="pointer" style={{width:"100%"}}>Upload</Button>
-        </ReactFileReader>
+        <div style={{display:'flex'}}>
+          <Button>Uniform Cost</Button>
+          <Button onClick={(e)=>this.setState({outputToggle:!this.state.outputToggle})}>File Output</Button>
+          <div style={{width:'90px'}}>
+          <ReactFileReader handleFiles={this.handleChange} fileTypes={'.txt'} >
+              <Button cursor="pointer" style={{width:"100%"}}>Upload</Button>
+          </ReactFileReader>
+          </div>
         </div>
         <Board
         closeOutput={this.closeOutput}
         fileConfig={this.state.config}
         inputToggle={this.state.inputToggle}
-        outputToggle={this.state.outputToggle}/>
+        outputToggle={this.state.outputToggle}
+        />
         </div>
 
       );
