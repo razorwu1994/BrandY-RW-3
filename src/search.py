@@ -6,6 +6,7 @@ class Cell:
     Represents a cell in the 160x120 grid
 
     Attr:
+        prev_cell: the previously visited cell to reach the current one, None by default
         terrain_type: 0 for blocked, 1 for unblocked, 2 for hard-to-traverse
         has_highway: 0 if it has no highway, 1 if it does
         f: function value
@@ -19,6 +20,7 @@ class Cell:
         """
         By default, set f = 0, g = 0, h = 0
         """
+        self.prev_cell = None
         self.terrain_type = terrain_type
         self.has_highway = has_highway
         f = 0
@@ -103,6 +105,7 @@ def uniform_cost_search(start, goal, grid):
     grid = entire 160x120 grid map
     """
     print("UCS")
+    start_cell = grid[start][]
     # Run search
     # Return the path (1D array)
     return (None, None)
@@ -111,14 +114,14 @@ def heuristic_search():
     # Get data
     # Run search
     # Return the path (1D array)
-    print("Hello")
+    print("A* Search")
     return (None, None)
 
 def weighted_heuristic_search():
     # Get data
     # Run search
     # Return the path (1D array)
-    print("Hello")
+    print("Weighted A* Search")
     return (None, None)
 
 if __name__ == "__main__":
