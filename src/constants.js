@@ -268,7 +268,6 @@ var gen_blocked_cells=()=>{
 export var gen_start_final_cells=(blk)=>{
     if(blk&&blk.length){
       blkedCoordinates=blk
-      console.log(blk)
     }
 
     var flag
@@ -328,8 +327,6 @@ export var gen_start_final_cells=(blk)=>{
 
     }
 
-    console.log(blkedCoordinates,blkedCoordinates.indexOf(sfCells[0]),
-  blkedCoordinates.indexOf(sfCells[1]))
 
 }
 
