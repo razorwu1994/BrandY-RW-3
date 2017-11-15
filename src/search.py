@@ -32,7 +32,7 @@ class Cell:
             return 'b'
         else:
             return str(self.terrain_type)
-    
+
     def __str__(self):
         """
         Prints out the card with the format: <value> of <suit>
@@ -51,7 +51,7 @@ def read_from_file(file_name):
     """
     # Split by lines
     lines = [line.rstrip('\n') for line in open(file_name)]
-        
+
     # First line provides coordinates of the starting cell
     start_str = lines[0][3:].split(',') # Start at index 3 because of weird char in front
     start = tuple([int(c) for c in start_str])
@@ -59,7 +59,7 @@ def read_from_file(file_name):
     # Second line provides coordinates of the goal cell
     goal_str = lines[1].split(',')
     goal = tuple([int(c) for c in goal_str])
-    
+
     # Next eight lines provide the coordinates of the centers of hard to traverse regions
     htt_centers = []
     for i in range(8):
@@ -67,7 +67,7 @@ def read_from_file(file_name):
         htt_center = tuple([int(c) for c in htt_center_str])
         htt_centers.append(htt_center)
     print htt_centers
-        
+
     """
     Remaining 120 lines represent the map where
         '0' = blocked cell
@@ -149,7 +149,7 @@ def heu_manhatan(start, goal, grid):
             c+=1
         r+=1
     return grid
-def heu_diagonal(start, goal, grid):
+def heu_diagonal_brkingties(start, goal, grid):
     xcor =goal[0]
     ycor =goal[1]
     r=0
@@ -157,18 +157,19 @@ def heu_diagonal(start, goal, grid):
     for row in grid:
         for col in row:
             h = abs(r-xcor)+abs(c-ycor)+(math.sqrt(2)-2)*min(abs(r-xcor),abs(c-ycor))
+            h = h * (1+0.01) # 0.01 is the p to break tie
             col.set_h(h)
             c+=1
         r+=1
     return grid
-def heu_eucliden(start, goal, grid):
+def heu_eucliden_powtwo(start, goal, grid):
     xcor =goal[0]
     ycor =goal[1]
     r=0
     c=0
     for row in grid:
         for col in row:
-            h = math.sqrt(math.pow(abs(r-xcor),2)+math.pow(abs(c-ycor),2))
+            h = math.pow(abs(r-xcor),2)+math.pow(abs(c-ycor),2)
             col.set_h(h)
             c+=1
         r+=1
@@ -202,7 +203,7 @@ if __name__ == "__main__":
     if len(sys.argv) >3:
         heuristic_type = sys.argv[3] # 1:linear, 2:manhatan,3:diagonal,4:eucliden,5:sample in instruction
     else:
-        heuristic_type=5
+        heuristic_type="5"
     # Read from file
     [start, goal, grid] = read_from_file(file_name)
 
@@ -220,9 +221,9 @@ if __name__ == "__main__":
     if heuristic_type.__eq__("2"):
         testGrid = heu_manhatan(start, goal, grid)
     if heuristic_type.__eq__("3"):
-        testGrid = heu_diagonal(start, goal, grid)
+        testGrid = heu_diagonal_brkingties(start, goal, grid)
     if heuristic_type.__eq__("4"):
-        testGrid = heu_eucliden(start, goal, grid)
+        testGrid = heu_eucliden_powtwo(start, goal, grid)
     if heuristic_type.__eq__("5"):
         testGrid = heu_sample(start, goal, grid)
 
