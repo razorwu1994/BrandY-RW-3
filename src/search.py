@@ -105,6 +105,9 @@ class Cell:
         """
         Compare two cells based on their f (priority) values
         """
+        if not isinstance(other, Cell):
+            return False
+
         if self.pos == other.pos:
             return True
         return False
@@ -115,7 +118,7 @@ class Cell:
         Jokers are just printed out as 'joker'
         """
         t_type = self.convert_to_char()
-        return "({}, f={}, g={}, h={})".format(t_type, self.f, self.g, self.h)
+        return "(({0}, {1}), {2}, f={3}, g={4}, h={5})".format(self.pos[0], self.pos[1], t_type, self.f, self.g, self.h)
 
 def retrieve_path(start, goal, grid):
     """
@@ -129,7 +132,7 @@ def retrieve_path(start, goal, grid):
     Returns:
     1D array of (x, y) coordinates to follow from start to goal
     """
-    curr_cell = grid[goal[0], goal[1]]
+    curr_cell = grid[goal[0]][goal[1]]
     path = [curr_cell.pos] # Start at goal
     
     while curr_cell.pos != start:
@@ -137,7 +140,6 @@ def retrieve_path(start, goal, grid):
         path.append(parent.pos)
         curr_cell = parent
         
-    path.append(curr_cell.pos) # End at start
     path.reverse() # Reverse path so it starts at start and ends at goal
     return path
 
@@ -167,7 +169,7 @@ def get_neighbors(cell, grid):
     possible_neighbors = [top_left_pos, top_pos, top_right_pos, right_pos, bottom_right_pos, bottom_pos, bottom_left_pos, left_pos]
 
     # Filter out invalid neighbors (out of bounds or blocked cell)
-    possible_neighbors = [pos for pos in possible_neighbors if pos[0] >= 0 and pos[0] <= 160 and pos[1] >= 0 and pos[1] <= 120]
+    possible_neighbors = [pos for pos in possible_neighbors if pos[0] >= 0 and pos[0] < 120 and pos[1] >= 0 and pos[1] < 160]
     
     for neighbor in possible_neighbors:
         if grid[neighbor[0]][neighbor[1]].terrain_type == BLOCKED:
@@ -263,6 +265,8 @@ def uniform_cost_search(start, goal, grid):
     # Run search
     start_cell = grid[start[0]][start[1]]
     start_cell.g = 0
+    start_cell.h = get_heuristic(start_cell, grid)
+    start_cell.f = start_cell.g + start_cell.h
     start_cell.parent = start
     fringe = [] 
     hq.heappush(fringe, (start_cell.f, start_cell)) # Insert start to fringe, need to use a 2-tuple so the heapq orders based on f-value
@@ -273,14 +277,14 @@ def uniform_cost_search(start, goal, grid):
         if s.pos == goal:
             path = retrieve_path(start, goal, grid) # Get path from start to goal
             return path
-        closed.append(s)
+        closed.append(s.pos)
         neighbors = get_neighbors(s, grid)
         for neighbor in neighbors:
-            if neighbor not in closed: # Possible optimizaiton opportunity
-                if neighbor not in fringe:
+            if neighbor.pos not in closed: # Possible optimization opportunity
+                if (neighbor.f, neighbor) not in fringe:
                     neighbor.g = 20000 # 20,000 = infinity
                     neighbor.parent = None
-                update_vertex(s, neighbor, grid)
+                update_vertex(s, neighbor, fringe)
     return None # No path found
 
     # Done with search, retrieve path or no path found
@@ -305,7 +309,7 @@ def weighted_heuristic_search():
 if __name__ == "__main__":
     (start, goal, grid) = read_from_file("map1.txt")
     path = uniform_cost_search(start, goal, grid)
-    
+    print path
     """
     # Make sure there are enough argument given
     if(len(sys.argv) < 3):
