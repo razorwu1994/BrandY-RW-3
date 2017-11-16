@@ -29,7 +29,6 @@ def read_from_file(file_name):
         htt_center_str = lines[2 + i].split(',')
         htt_center = tuple([int(c) for c in htt_center_str])
         htt_centers.append(htt_center)
-    print htt_centers
         
     """
     Remaining 120 lines represent the map where
@@ -40,19 +39,23 @@ def read_from_file(file_name):
         'b' = hard-to-traverse cell with highway
     """
 
-    grid = [] # For storing data on each cell in the 160x120 grid
-
+    grid = [] # For storing data on each cell in the 160x120
+    x = -1
+    y = -1
     for i in range(10, len(lines)):
+        y += 1
+        x = -1
         row = []
         line = lines[i]
         for char in line:
+            x +=1
             tempCell = None
             if char=='0' or char=='1' or char=='2':
-                tempCell = Cell(int(char), False)
+                tempCell = Cell((y, x), int(char), False)
             elif char == 'a':
-                tempCell = Cell(1, True)
+                tempCell = Cell((y, x), 1, True)
             elif char == 'b':
-                tempCell = Cell(2, True)
+                tempCell = Cell((y, x), 2, True)
 
             row.append(tempCell)
         grid.append(row)
@@ -164,6 +167,12 @@ def get_neighbors(cell, grid):
         if grid[neighbor[0]][neighbor[1]].terrain_type == BLOCKED:
             possible_neighbors.remove(neighbor)
 
+    print "Neighbors:"
+    for neighbor in possible_neighbors:
+        print neighbor
+
+    print "" 
+
     valid_neighbors = [grid[pos[0]][pos[1]] for pos in possible_neighbors]
     return valid_neighbors
 
@@ -185,7 +194,7 @@ def get_distance(s, neighbor):
     euclid_distance = math.sqrt(math.pow(x2-x1, 2) + math.pow(y2-y1, 2))
 
     # Factor in terrain types
-    temp_dict = [s:euclid_distance/2, neigbor:euclid_distance/2]
+    temp_dict = {s:euclid_distance/2, neigbor:euclid_distance/2}
 
     for cell in temp_dict.keys:
         if cell.terrain_type == ROUGH:
@@ -225,7 +234,7 @@ def uniform_cost_search(start, goal, grid):
 
     while len(fringe) != 0: # Checking that fringe is nonempty
         s = heappop(fringe)
-        if s.coord = goal:
+        if s.coord == goal:
             # Retrieve path
             path = retrieve_path(start, goal, grid)
             return path
@@ -259,6 +268,8 @@ def weighted_heuristic_search():
     return (None, None)
 
 if __name__ == "__main__":
+    (start, goal, grid) = read_from_file("map1.txt")
+    """ Testing
     # Make sure there are enough argument given
     if(len(sys.argv) < 3):
         print "2 arguments required: search.py [file] [search type]"
@@ -281,3 +292,4 @@ if __name__ == "__main__":
         path = heuristic_search(start, goal, grid)
     else:
         path = weighted_heuristic_search(start, goal, grid)
+    """
