@@ -193,15 +193,7 @@ var pathGroup = ["0,0","0,1","0,2","1,2","2,2"]
         this.outputFile()
         return (
         <div style={{overflowX:'visible',overflowY:'visible',width:'200%',height:'150%'}}>
-        <Button onClick={this.genNewSF}>gen new start and goal</Button>
-        <DropdownButton 
-          bsStyle="success" title={"select heuristic"} id={`heuristic`} onSelect={this.props.changeHeuristic}>
-          <MenuItem eventKey="1">heu_linear</MenuItem>
-          <MenuItem eventKey="2">heu_manhatan</MenuItem>
-          <MenuItem eventKey="3">heu_diagonal</MenuItem>
-          <MenuItem eventKey="4">heu_eucliden</MenuItem>
-          <MenuItem eventKey="5">heu_sample</MenuItem>
-          </DropdownButton>
+        <Button onClick={this.genNewSF} style={{backgroundColor:'purple',color:'white'}}>gen new start and goal</Button>
         {board}
         </div>
       );
@@ -232,19 +224,8 @@ var pathGroup = ["0,0","0,1","0,2","1,2","2,2"]
       2:heuristic_search
       3:weighted_heuristic_search
       */
-      if(e=="1")
-      {
-        uniform_cost_search()
-      }
-      else if(e=="2")
-      {
-        heuristic_search()
-      }
-      else if(e=="3")
-      {
-        weighted_heuristic_search()
-      }
-      //this.setState({searchMethod:e})
+      console.log(e)
+      this.setState({searchMethod:e})
     }
 
     uploadFile=(result)=>{
@@ -287,22 +268,45 @@ var pathGroup = ["0,0","0,1","0,2","1,2","2,2"]
       this.setState({outputToggle:false})
     }
 
+    //only take file name with mapconfig.txt
+    runScript=()=>{
+      /*
+      1:uniform_cost_search
+      2:heuristic_search
+      3:weighted_heuristic_search
+      */
+      
+      var method = this.state.searchMethod
+      var methodHash={"1":'u',"2":'a',"3":'w'}
+      var pycmd = "py search.py mapconfig.txt "+methodHash[method]+" "+this.state.heuristic
+      console.log(pycmd)
+    }
+
     render() {
       return (
         <div>
         <div style={{display:'flex'}}>
           <DropdownButton 
-          bsStyle="info" title={"search method"} id={`search`} onSelect={this.props.changeSearch}>
+          bsStyle="info" title={"search method"} id={`search`} onSelect={this.changeSearch}>
           <MenuItem eventKey="1">Uniform Cost</MenuItem>
           <MenuItem eventKey="2">A* Search</MenuItem>
           <MenuItem eventKey="3">Weighted A* Search</MenuItem>
           </DropdownButton>
-          <Button onClick={(e)=>this.setState({outputToggle:!this.state.outputToggle})}>File Output</Button>
-          <div style={{width:'90px'}}>
-          <ReactFileReader handleFiles={this.handleChange} fileTypes={'.txt'} >
-              <Button cursor="pointer" style={{width:"100%"}}>Upload</Button>
-          </ReactFileReader>
-          </div>
+          <DropdownButton 
+          bsStyle="success" title={"select heuristic"} id={`heuristic`} onSelect={this.changeHeuristic}>
+          <MenuItem eventKey="1">heu_linear</MenuItem>
+          <MenuItem eventKey="2">heu_manhatan</MenuItem>
+          <MenuItem eventKey="3">heu_diagonal</MenuItem>
+          <MenuItem eventKey="4">heu_eucliden</MenuItem>
+          <MenuItem eventKey="5">heu_sample</MenuItem>
+          </DropdownButton>
+          <Button bsStyle="danger" onClick={this.runScript} style={{width:'100px'}}>Run</Button>
+          <Button bsStyle="warning" onClick={(e)=>this.setState({outputToggle:!this.state.outputToggle})}>File Output</Button>
+            <div style={{width:'90px'}}>
+            <ReactFileReader handleFiles={this.handleChange} fileTypes={'.txt'} >
+                <Button bsStyle="primary" cursor="pointer" style={{width:"100%"}}>Upload</Button>
+            </ReactFileReader>
+            </div>
           <div style={{display:'flex',marginLeft:'10px'}}>
           Start cell :   <span class="separator_start"></span>
           Goal cell :    <span class="separator_goal"></span>
@@ -317,7 +321,6 @@ var pathGroup = ["0,0","0,1","0,2","1,2","2,2"]
         startANDgoal={this.state.startANDgoal}
         updateSFcells={this.updateSFcells}
         heuristic={this.state.heuristic}
-        changeHeuristic={this.changeHeuristic}
         />
         </div>
 
