@@ -90,7 +90,7 @@ class Cell:
         self.h = 0
         self.f = self.g + self.h
 
-    def convert_to_char():
+    def convert_to_char(self):
         """
         Converts cell to '0', '1', '2', 'a' or 'b' depending on its characteristics
         """
@@ -113,7 +113,7 @@ class Cell:
         Jokers are just printed out as 'joker'
         """
         t_type = self.convert_to_char()
-        return "({0}, f={2}, g={3}, h={4))".format(t_type, self.f, self.g, self.h)
+        return "({}, f={}, g={}, h={})".format(t_type, self.f, self.g, self.h)
 
 def retrieve_path(start, goal, grid):
     """
