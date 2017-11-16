@@ -68,7 +68,7 @@ class Cell:
 
     Attr:
         pos: coordinates for this cell in the form of 2-tuple: (x, y)
-        prev: coordinate for the previously visited cell to reach the current one, None by default
+        parent: coordinate for the previously visited cell to reach the current one, None by default
         terrain_type: 0 for blocked, 1 for unblocked, 2 for hard-to-traverse
         has_highway: 0 if it has no highway, 1 if it does
         f: function value
@@ -83,7 +83,7 @@ class Cell:
         By default, set f = 0, g = 20000, h = 0
         """
         self.pos = pos
-        self.prev = None
+        self.parent = None
         self.terrain_type = terrain_type
         self.has_highway = has_highway
         self.g = 20000 # 20000 represents infinity
@@ -123,22 +123,26 @@ def retrieve_path(start, goal, grid):
     start: (x, y) coordinates of the start position
     goal: (x, y) coordaintes of goal position
     grid: 160x120 array of Cells
+
+    Returns:
+    1D array of (x, y) coordinates to follow from start to goal
     """
     curr_cell = grid[goal[0], goal[1]]
     path = [curr_cell.pos] # Start at goal
     
     while curr_cell.coord != start:
-        prev = curr_cell.prev
-        path.insert(0, prev.pos) # Insert at front
+        parent = curr_cell.parent
+        path.append(prev.pos)
         curr_cell = prev
-
-    path.insert(0, curr_cell.pos) # End at start (at front of list)
+        
+    path.append(curr_cell.pos) # End at start
+    path.reverse() # Reverse path so it starts at start and ends at goal
     return path
 
 def get_neighbors(cell, grid):
     """
     Find the valid neighbors for the given cell.
-    Check 8-neighbors around the cell, ignore blocked cells and cells outside of the boundary
+    Check 8-neighbors around the cell, ignore blocked cells and cells outside of the boundary.
 
     Parameters:
     cell = target Cell
@@ -209,7 +213,7 @@ def get_cost(s, neighbor):
 
     return distance
 
-def get_h(cell, grid):
+def get_heuristic(cell, grid):
     """
     Calculate the heursitic for a cell
 
@@ -221,8 +225,21 @@ def get_h(cell, grid):
     """
     return 0 # For UCS use 0, replace with something else for A* and weighted A*
 
+
 def update_vertex(s, neighbor):
-    return None
+    """
+    Update values for a neighbor based on s
+
+    Parameters:
+    s = a Cell
+    neighbor = a Cell next to s
+
+    Returns: None
+    """
+    f = s.g + get_cost(s, neighbor)
+    if f < neighbor.g:
+        neighbor.g = f
+        neighbor.parent = 
 
 def uniform_cost_search(start, goal, grid):
     """
@@ -235,21 +252,18 @@ def uniform_cost_search(start, goal, grid):
 
     Returns: path, a 1D array of coordinates ((x, y) tuples)
     """
-    print("UCS")
-            
     # Run search
-    start_cell = grid[start[0]][start[1]] # -------------------May have swapped x and y coord
+    start_cell = grid[start[0]][start[1]]
     start_cell.g = 0
     start_cell.prev = start
     fringe = [] 
-    heappush(fringe, start_cell) # Insert to fringe
+    heappush(fringe, start_cell) # Insert start to fringe
     closed = [] # closed := empty set
 
     while len(fringe) != 0: # Checking that fringe is nonempty
         s = heappop(fringe)
         if s.coord == goal:
-            # Retrieve path
-            path = retrieve_path(start, goal, grid)
+            path = retrieve_path(start, goal, grid) # Get path from start to goal
             return path
         closed.append(s)
         neighbors = get_neighbors(s)
