@@ -1,5 +1,5 @@
 import sys
-import heapq
+import heapq as hq
 import math
 
 # Constants for terrain type
@@ -101,11 +101,13 @@ class Cell:
         else:
             return str(self.terrain_type)
 
-    def __cmp__(self, other):
+    def __eq__(self, other):
         """
         Compare two cells based on their f (priority) values
         """
-        return cmp(self.f, other.f)
+        if self.pos == other.pos:
+            return True
+        return False
     
     def __str__(self):
         """
@@ -130,10 +132,10 @@ def retrieve_path(start, goal, grid):
     curr_cell = grid[goal[0], goal[1]]
     path = [curr_cell.pos] # Start at goal
     
-    while curr_cell.coord != start:
+    while curr_cell.pos != start:
         parent = curr_cell.parent
-        path.append(prev.pos)
-        curr_cell = prev
+        path.append(parent.pos)
+        curr_cell = parent
         
     path.append(curr_cell.pos) # End at start
     path.reverse() # Reverse path so it starts at start and ends at goal
@@ -171,11 +173,12 @@ def get_neighbors(cell, grid):
         if grid[neighbor[0]][neighbor[1]].terrain_type == BLOCKED:
             possible_neighbors.remove(neighbor)
 
+    """ Testing
     print "Neighbors:"
     for neighbor in possible_neighbors:
         print neighbor
-
-    print "" 
+    print ""
+    """
 
     valid_neighbors = [grid[pos[0]][pos[1]] for pos in possible_neighbors]
     return valid_neighbors
@@ -226,7 +229,7 @@ def get_heuristic(cell, grid):
     return 0 # For UCS use 0, replace with something else for A* and weighted A*
 
 
-def update_vertex(s, neighbor):
+def update_vertex(s, neighbor, fringe):
     """
     Update values for a neighbor based on s
 
@@ -236,10 +239,15 @@ def update_vertex(s, neighbor):
 
     Returns: None
     """
-    f = s.g + get_cost(s, neighbor)
-    if f < neighbor.g:
-        neighbor.g = f
-        neighbor.parent = 
+    total_cost = s.g + get_cost(s, neighbor)
+    if total_cost < neighbor.g:
+        neighbor.g = total_cost
+        neighbor.parent = s
+        if (neighbor.f, neighbor) in fringe:
+            fringe.remove((neighbor.f, neighbor)) # Possible optimization opportunity?
+
+        neighbor.f = neighbor.g + neighbor.h # Update neighbor's f-value
+        hq.heappush(fringe, (neighbor.f, neighbor)) # Insert neighbor back into fringe
 
 def uniform_cost_search(start, goal, grid):
     """
@@ -255,24 +263,24 @@ def uniform_cost_search(start, goal, grid):
     # Run search
     start_cell = grid[start[0]][start[1]]
     start_cell.g = 0
-    start_cell.prev = start
+    start_cell.parent = start
     fringe = [] 
-    heappush(fringe, start_cell) # Insert start to fringe
+    hq.heappush(fringe, (start_cell.f, start_cell)) # Insert start to fringe, need to use a 2-tuple so the heapq orders based on f-value
     closed = [] # closed := empty set
 
     while len(fringe) != 0: # Checking that fringe is nonempty
-        s = heappop(fringe)
-        if s.coord == goal:
+        (f, s) = hq.heappop(fringe)
+        if s.pos == goal:
             path = retrieve_path(start, goal, grid) # Get path from start to goal
             return path
         closed.append(s)
-        neighbors = get_neighbors(s)
+        neighbors = get_neighbors(s, grid)
         for neighbor in neighbors:
-            if neighbor not in closed:
+            if neighbor not in closed: # Possible optimizaiton opportunity
                 if neighbor not in fringe:
-                    neighbor.g = 20000
+                    neighbor.g = 20000 # 20,000 = infinity
                     neighbor.parent = None
-                update_vertex(s, neighbor)
+                update_vertex(s, neighbor, grid)
     return None # No path found
 
     # Done with search, retrieve path or no path found
@@ -296,7 +304,9 @@ def weighted_heuristic_search():
 
 if __name__ == "__main__":
     (start, goal, grid) = read_from_file("map1.txt")
-    """ Testing
+    path = uniform_cost_search(start, goal, grid)
+    
+    """
     # Make sure there are enough argument given
     if(len(sys.argv) < 3):
         print "2 arguments required: search.py [file] [search type]"
@@ -319,4 +329,9 @@ if __name__ == "__main__":
         path = heuristic_search(start, goal, grid)
     else:
         path = weighted_heuristic_search(start, goal, grid)
+
+    if path is None:
+        print "No path found"
+    else:
+        print "Path: {}".format(path)
     """
