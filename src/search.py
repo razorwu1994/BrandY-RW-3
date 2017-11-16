@@ -176,9 +176,9 @@ def get_neighbors(cell, grid):
     valid_neighbors = [grid[pos[0]][pos[1]] for pos in possible_neighbors]
     return valid_neighbors
 
-def get_distance(s, neighbor):
+def get_cost(s, neighbor):
     """
-    Calculate the distance from s to its neighboring cell.
+    Calculate cost to move from s to its neighboring cell.
         - Unblocked cells cost 1 to traverse along an edge
         - Hard-to-traverse cells cost 2 to traverse along an edge
         - Moving from highway to highway cuts overall cost by a factor of 4  
@@ -186,27 +186,40 @@ def get_distance(s, neighbor):
     s = Cell for the furthest cell on the optimal path
     neighbor = Cell for a neighbor of s
 
-    Returns: distance to move from s to neighbor
+    Returns: cost to move from s to neighbor
     """
     # Find Euclidean distance
-    (x1, y1) = s.coord
-    (x2, y2) = neighbor.coord
-    euclid_distance = math.sqrt(math.pow(x2-x1, 2) + math.pow(y2-y1, 2))
+    (x1, y1) = s.pos
+    (x2, y2) = neighbor.pos
+    distance = math.sqrt(math.pow(x2-x1, 2) + math.pow(y2-y1, 2))
 
     # Factor in terrain types
-    temp_dict = {s:euclid_distance/2, neigbor:euclid_distance/2}
+    temp_cells = [s, neighbor]
+    temp_dists = [distance/2, distance/2]
 
-    for cell in temp_dict.keys:
-        if cell.terrain_type == ROUGH:
-            temp_dict[cell] *= 2 # Rough terrain costs 2x to move across
+    for i in range(len(temp_cells)):
+        if temp_cells[i].terrain_type == ROUGH:
+            temp_dists[i] *= 2 # Rough terrain costs 2x to move across
 
-    distance = sum(temp_dict.values())
+    distance = sum(temp_dists)
 
     # Check if highway cuts cost further (4x)
-    if s.hasHighway is True and neighbor.hasHighway is True:
+    if s.has_highway is True and neighbor.has_highway is True:
         distance /= 4
 
     return distance
+
+def get_h(cell, grid):
+    """
+    Calculate the heursitic for a cell
+
+    Parameters:
+    cell = target cell
+    grid = 160x120 grid
+
+    Returns: h value for the cell
+    """
+    return 0 # For UCS use 0, replace with something else for A* and weighted A*
 
 def update_vertex(s, neighbor):
     return None
