@@ -47,10 +47,6 @@ class Cell:
         t_type = self.convert_to_char()
         return "({0}, {1}, {2}, {3})".format(t_type, self.f, self.g, self.h)
 
-    def set_h(self, h):
-        self.h = h
-
-
 def read_from_file(file_name):
     """
     Extract grid data from given file.
@@ -370,7 +366,7 @@ def heu_linear(start, goal, grid):
     for row in grid:
         for col in row:
             h = math.sqrt(math.pow(r - xcor, 2) + math.pow(c - ycor, 2))
-            col.set_h(h)
+            col.h = h
             c += 1
         r += 1
     return grid
@@ -384,7 +380,7 @@ def heu_manhatan(start, goal, grid):
     for row in grid:
         for col in row:
             h = abs(r - xcor) + abs(c - ycor)
-            col.set_h(h)
+            col.h = h
             c += 1
         r += 1
     return grid
@@ -399,7 +395,7 @@ def heu_diagonal_brkingties(start, goal, grid):
         for col in row:
             h = abs(r - xcor) + abs(c - ycor) + (math.sqrt(2) - 2) * min(abs(r - xcor), abs(c - ycor))
             h = h * (1 + 0.01)  # 0.01 is the p to break tie
-            col.set_h(h)
+            col.h = h
             c += 1
         r += 1
     return grid
@@ -413,7 +409,7 @@ def heu_eucliden_powtwo(start, goal, grid):
     for row in grid:
         for col in row:
             h = math.pow(abs(r - xcor), 2) + math.pow(abs(c - ycor), 2)
-            col.set_h(h)
+            col.h = h
             c += 1
         r += 1
     return grid
@@ -429,7 +425,7 @@ def heu_sample(start, goal, grid):
             manhaX = abs(r - xcor)
             manhaY = abs(c - ycor)
             h = math.sqrt(2) * min(manhaX, manhaY) + max(manhaX, manhaY) - min(manhaX, manhaY)
-            col.set_h(h)
+            col.h = h
             c += 1
         r += 1
     return grid
@@ -458,13 +454,13 @@ if __name__ == "__main__":
     # Read from file
     (start, goal, grid) = read_from_file(file_name)
 
-    print heuristic_type
+    # print heuristic_type
     # heu_linear
     # heu_manhatan
     # heu_diagonal
     # heu_eucliden
     # heu_sample
-    print start, goal
+    # print start, goal
 
     testGrid = grid
     if heuristic_type.__eq__("1"):
@@ -478,7 +474,7 @@ if __name__ == "__main__":
     if heuristic_type.__eq__("5"):
         testGrid = heu_sample(start, goal, grid)
 
-    print testGrid[50][75]
+    # print testGrid[50][75]
 
     # In grid, x = y coordinate and y = x coordiante on actual grid
     # print grid[4][0]
