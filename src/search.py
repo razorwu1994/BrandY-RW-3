@@ -1,47 +1,10 @@
 import sys
 import heapq
 
-class Cell:
-    """
-    Represents a cell in the 160x120 grid
-
-    Attr:
-        prev_cell: the previously visited cell to reach the current one, None by default
-        terrain_type: 0 for blocked, 1 for unblocked, 2 for hard-to-traverse
-        has_highway: 0 if it has no highway, 1 if it does
-        f: function value
-        g: distance from start
-        h: heuristic value
-
-    Only unblocked (1) and hard-to-traverse (2) terrains can have highways.
-    """
-
-    def __init__(self, terrain_type, has_highway):
-        """
-        By default, set f = 0, g = 0, h = 0
-        """
-        self.prev_cell = None
-        self.terrain_type = terrain_type
-        self.has_highway = has_highway
-        f = 0
-        g = 0
-        h = 0
-
-    def convert_to_char():
-        if self.terrain_type == 1 and self.has_highway == True:
-            return 'a'
-        elif self.terrain_type == 2 and self.has_highway == True:
-            return 'b'
-        else:
-            return str(self.terrain_type)
-    
-    def __str__(self):
-        """
-        Prints out the card with the format: <value> of <suit>
-        Jokers are just printed out as 'joker'
-        """
-        t_type = self.convert_to_char()
-        return "({0}, {2}, {3}, {4))".format(t_type, self.f, self.g, self.h)
+# Constants for terrain type
+BLOCKED = 0
+UNBLOCKED = 1
+ROUGH = 2 # aka hard-to-traverse
 
 def read_from_file(file_name):
     """
@@ -95,6 +58,108 @@ def read_from_file(file_name):
 
     return (start, goal, grid)
 
+class Cell:
+    """
+    Represents a cell in the 160x120 grid
+
+    Attr:
+        pos: coordinates for this cell in the form of 2-tuple: (x, y)
+        prev: coordinate for the previously visited cell to reach the current one, None by default
+        terrain_type: 0 for blocked, 1 for unblocked, 2 for hard-to-traverse
+        has_highway: 0 if it has no highway, 1 if it does
+        f: function value
+        g: distance from start
+        h: heuristic value
+
+    Only unblocked (1) and hard-to-traverse (2) terrains can have highways.
+    """
+
+    def __init__(self, pos, terrain_type, has_highway):
+        """
+        By default, set f = 0, g = 20000, h = 0
+        """
+        self.pos = pos
+        self.prev = None
+        self.terrain_type = terrain_type
+        self.has_highway = has_highway
+        self.g = 20000 # 20000 represents infinity
+        self.h = 0
+        self.f = self.g + self.h
+
+    def convert_to_char():
+        """
+        Converts cell to '0', '1', '2', 'a' or 'b' depending on its characteristics
+        """
+        if self.terrain_type == 1 and self.has_highway == True:
+            return 'a'
+        elif self.terrain_type == 2 and self.has_highway == True:
+            return 'b'
+        else:
+            return str(self.terrain_type)
+
+    def __cmp__(self, other):
+        """
+        Compare two cells based on their f (priority) values
+        """
+        return cmp(self.f, other.f)
+    
+    def __str__(self):
+        """
+        Prints out the card with the format: <value> of <suit>
+        Jokers are just printed out as 'joker'
+        """
+        t_type = self.convert_to_char()
+        return "({0}, f={2}, g={3}, h={4))".format(t_type, self.f, self.g, self.h)
+
+def retrieve_path(start, goal, grid):
+    """
+    Find the path leading from start to goal by working backwards from the goal
+
+    Parameters:
+    start: (x, y) coordinates of the start position
+    goal: (x, y) coordaintes of goal position
+    grid: 160x120 array of Cells
+    """
+    curr_cell = grid[goal[0], goal[1]]
+    path = [curr_cell.pos] # Start at goal
+    
+    while curr_cell.coord != start:
+        prev = curr_cell.prev
+        path.insert(0, prev.pos) # Insert at front
+        curr_cell = prev
+
+    path.insert(0, curr_cell.pos) # End at start (at front of list)
+    return path
+
+def get_neighbors(cell, grid):
+    """
+    Find the valid neighbors for the given cell.
+    Check 8-neighbors around the cell, ignore blocked cells and cells outside of the boundary
+    """
+    # Find 8 neighboring positions
+    pos = cell.pos
+    
+    top_left_pos = (pos[0] - 1, pos[1] + 1)
+    top_pos = (pos[0], pos[1] + 1)
+    top_right_pos = (pos[0] + 1, pos[1] + 1)
+    right_pos = (pos[0] + 1, pos[1])
+    bottom_right_pos = (pos[0] + 1, pos[1] - 1)
+    bottom_pos = (pos[0], pos[1] - 1)
+    bottom_left_pos = (pos[0] - 1, pos[1] - 1)
+    left_pos = (pos[0] - 1, pos[1])
+    
+    possible_neighbors = [top_left_pos, top_pos, top_right_pos, right_pos, bottom_right_pos, bottom_pos, bottom_left_pos, left_pos]
+
+    # Filter out invalid neighbors (out of bounds or blocked cell)
+    valid_neighbors = [pos for pos in arr if pos[0] >= 0 and pos[0] <= 160 and pos[1] >= 0 and pos[1] <= 120]
+    
+    for neighbor in valid_neighbors:
+        if grid[neighbor[0]][neighbor[1]].terrain_type == BLOCKED:
+            valid_neighbors.remove(neighbor)
+
+    return valid_neighbors
+    
+
 def uniform_cost_search(start, goal, grid):
     """
     Do uniform cost search on the given grid, start and goal
@@ -103,10 +168,37 @@ def uniform_cost_search(start, goal, grid):
     start = coordinates of the start position
     goal = coordinates of the goal position
     grid = entire 160x120 grid map
+
+    Returns: path, a 1D array of coordinates ((x, y) tuples)
     """
     print("UCS")
-    start_cell = grid[start][]
+            
     # Run search
+    start_cell = grid[start[0]][start[1]] # -------------------May have swapped x and y coord
+    start_cell.g = 0
+    start_cell.prev = start
+    fringe = [] 
+    heappush(fringe, start_cell) # Insert to fringe
+    closed = [] # closed := empty set
+
+    while len(fringe) != 0: # Checking that fringe is nonempty
+        s = heappop(fringe)
+        if s.coord = goal:
+            # Retrieve path
+            path = retrieve_path(start, goal, grid)
+            return path
+        closed.append(s)
+        neighbors = get_neighbors(s)
+        for neighbor in neighbors:
+            if neighbor not in closed:
+                if neighbor not in fringe:
+                    neighbor.g = 20000
+                    neighbor.parent = None
+                update_vertex(s, neighbor)
+    return "no path found"
+
+    # Done with search, retrieve path or no path found
+
     # Return the path (1D array)
     return (None, None)
 
@@ -136,14 +228,14 @@ if __name__ == "__main__":
     search_type = sys.argv[2] # u = uniform-cost search, a = A* search, w = weighted A* search
 
     # Read from file
-    [start, goal, grid] = read_from_file(file_name)
+    (start, goal, grid) = read_from_file(file_name)
 
     # In grid, x = y coordinate and y = x coordiante on actual grid
     print grid[4][0]
 
     if search_type == "u":
-        [path, grid] = uniform_cost_search(start, goal, grid)
+        path = uniform_cost_search(start, goal, grid)
     elif search_type == "a":
-        [path, grid] = heuristic_search(start, goal, grid)
+        path = heuristic_search(start, goal, grid)
     else:
-        [path, grid] = weighted_heuristic_search(start, goal, grid)
+        path = weighted_heuristic_search(start, goal, grid)
