@@ -307,10 +307,12 @@ def weighted_heuristic_search():
     return (None, None)
 
 if __name__ == "__main__":
+    """ For testing
     (start, goal, grid) = read_from_file("map1.txt")
     path = uniform_cost_search(start, goal, grid)
     print path
     """
+    
     # Make sure there are enough argument given
     if(len(sys.argv) < 3):
         print "2 arguments required: search.py [file] [search type]"
@@ -324,9 +326,6 @@ if __name__ == "__main__":
     # Read from file
     (start, goal, grid) = read_from_file(file_name)
 
-    # In grid, x = y coordinate and y = x coordiante on actual grid
-    print grid[4][0]
-
     if search_type == "u":
         path = uniform_cost_search(start, goal, grid)
     elif search_type == "a":
@@ -338,4 +337,3 @@ if __name__ == "__main__":
         print "No path found"
     else:
         print "Path: {}".format(path)
-    """
