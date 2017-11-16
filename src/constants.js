@@ -265,7 +265,11 @@ var gen_blocked_cells=()=>{
         else i--
     }
 }
-export var gen_start_final_cells=()=>{
+export var gen_start_final_cells=(blk)=>{
+    if(blk&&blk.length){
+      blkedCoordinates=blk
+    }
+
     var flag
     for(let i=0;i<2;i++){
         flag=true
@@ -322,6 +326,7 @@ export var gen_start_final_cells=()=>{
         }
 
     }
+
 
 }
 

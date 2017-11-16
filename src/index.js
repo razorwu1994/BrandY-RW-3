@@ -1,10 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {Button} from 'react-bootstrap';
+import {Button,DropdownButton,MenuItem} from 'react-bootstrap';
 import './index.css';
 import {randCoordinates,gen_everything,sfCells,pathConfig,gen_start_final_cells} from './constants.js'
 import FileReaderInput from 'react-file-reader-input';
 import ReactFileReader from 'react-file-reader'
+import {uniform_cost_search,heuristic_search,weighted_heuristic_search} from './search'
+import start from './start.png'
+import goal from './goal.png'
 
 const BLOCKED_CELL = 0
 const REG_UNBLOCKED_CELL = 1
@@ -14,43 +17,90 @@ const HARD_TRAVERSE_HWY_CELL = 'b'
 const row = 120,col=160
 gen_everything();
 var fileConfig = []
-
+var pathGroup = ["0,0","0,1","0,2","1,2","2,2"]
   class Board extends React.PureComponent  {
     constructor(props) {
         super(props);
         this.state = {
             dataMatrix:Array(120).fill(Array(160).fill(0)),
-            genSFtoggle:false,            
+            genSFtoggle:false,
         };
     }
-    renderSquare(r,c,handleClick,cellType) {
+    renderSquare(r,c,handleClick,cellType,heuristic) {
       const colorGroup={'-1':'blue',0:'lightcoral',1:'white',2:'lightgrey','a':'white','b':'lightgrey'}
       const labelGroup={s:'S',f:'G'}
       var storedval = r+","+c
+      // var bgIMG = this.props.inputToggle===false&&startANDgoal[0]===r+","+c?
+      //               start:
+      //               this.props.inputToggle===false&&startANDgoal[1]===r+","+c?
+      //               goal:{}
+                    // {bgIMG?<span style={{backgroundImage: "url("+bgIMG+")",backgroundRepeat:'no-repeat',
+                    // backgroundSize:'100% 100%'}}>wt</span>:{}}
       return (
-          <Button key={storedval} value={storedval+",gvalue-"+1} className="square" cursor="pointer" onClick={handleClick} 
+          <Button key={storedval} value={storedval+",h:"+heuristic} className="square" cursor="pointer" onClick={handleClick}
           style={{background:colorGroup[cellType]}}>
-          {cellType==='a'&&<span value={storedval+",gvalue-"+1} class="separator"></span>}
-          {cellType==='b'&&<span value={storedval+",gvalue-"+1} class="separator"></span>}
-          {this.props.inputToggle===false&&sfCells[0]===r+","+c&&
-            <span value={storedval+",gvalue-"+1} style={{color:'blue',fontSize:'1.0vmin'}}>S</span>}
-          {this.props.inputToggle===false&&sfCells[1]===r+","+c&&
-            <span value={storedval+",gvalue-"+1} style={{color:'blue',fontSize:'1.0vmin'}}>G</span>}
+          {this.props.startANDgoal[0]===r+","+c&&
+            <span value={storedval+",h:"+heuristic} class="separator_start"></span>}
+          {this.props.startANDgoal[1]===r+","+c&&
+            <span value={storedval+",h:"+heuristic} class="separator_goal"></span>}
+          {cellType==='a'&&<span value={storedval+",h:"+heuristic} class="separator"></span>}
+          {cellType==='b'&&<span value={storedval+",h:"+heuristic} class="separator"></span>}
+          {pathGroup.indexOf(storedval)!==-1&&<span value={storedval+",h:"+heuristic} className="egg"></span>}
+
           </Button>
       );
     }
 
+
+
+    computeHeuristic=(r,c,goal,mode)=>{
+      // 1 heu_linear
+      // 2 heu_manhatan
+      // 3 heu_diagonal
+      // 4 heu_eucliden
+      // 5 heu_sample
+      var i =0      
+      let xcor = goal.split(",")[0],ycor = goal.split(",")[1]
+      switch(mode){
+        case "1":
+              i = Math.sqrt(Math.pow(r-xcor,2)+Math.pow(c-ycor,2)) 
+              break
+        case "2":
+              i = Math.abs(r-xcor)+Math.abs(c-ycor)
+              break
+        case "3":
+              i = Math.abs(r-xcor)+Math.abs(c-ycor)+(Math.sqrt(2)-2)*Math.min(Math.abs(r-xcor),Math.abs(c-ycor))* 1.01 //0.01 to break ties
+              break
+        case "4":
+              i = Math.pow(r-xcor,2)+Math.pow(c-ycor,2)         
+              break
+        case "5":
+              let manhaX=Math.abs(r-xcor)
+              let manhaY=Math.abs(c-ycor)
+              i = Math.sqrt(2)*Math.min(manhaX,manhaY)+Math.max(manhaX,manhaY)-Math.min(manhaX,manhaY)
+              break
+        default:
+              //console.log("invalid heuristic error")
+              break
+      }
+      return i
+      
+    }
     genNewSF=()=>{
       this.setState({genSFtoggle:!this.state.genSFtoggle})
-      gen_start_final_cells()      
+      this.props.updateSFcells()
     }
 
     handleClick= (e)=>{
         var location = e.target.value
-        console.log(e.target)
+
+        if(location!=undefined){
+          var updateInfo = "The clicked cell is "+location
+          console.log(updateInfo)
+        }
+        else
+          console.log(e.target)
         
-        var updateInfo = "The clicked cell is "+location
-        console.log(updateInfo)
     }
 
     outputFile = ()=>{
@@ -98,7 +148,7 @@ var fileConfig = []
       }
       this.props.closeOutput
     }
-
+    
     render() {
         let r,c
         var board =[]
@@ -115,11 +165,12 @@ var fileConfig = []
           }
 
         }
+        var heuristic=0
         for(r=0;r<row;r++){
             for(c=0;c<col;c++){
               if(!this.props.inputToggle){
                     cellType=pathConfig[r][c]
-
+                    heuristic = this.computeHeuristic(r,c,this.props.startANDgoal[1],this.props.heuristic)
                      // blue color center
                       // for(let cc in randCoordinates)
                       //   if(r===randCoordinates[cc][0]&&c===randCoordinates[cc][1])
@@ -127,8 +178,10 @@ var fileConfig = []
               }
               else{//take an input file
                   cellType=fileConfig[r][c]
+                  heuristic = this.computeHeuristic(r,c,this.props.startANDgoal[1],this.props.heuristic)
+                  
               }
-             rows.push(this.renderSquare(r,c,this.handleClick,cellType))
+             rows.push(this.renderSquare(r,c,this.handleClick,cellType,heuristic))
             }
             board.push(
                 <div className="board">
@@ -140,7 +193,7 @@ var fileConfig = []
         this.outputFile()
         return (
         <div style={{overflowX:'visible',overflowY:'visible',width:'200%',height:'150%'}}>
-        <Button onClick={this.genNewSF}>gen new start and goal</Button>
+        <Button onClick={this.genNewSF} style={{backgroundColor:'purple',color:'white'}}>gen new start and goal</Button>
         {board}
         </div>
       );
@@ -154,12 +207,45 @@ var fileConfig = []
         inputToggle:false,
         outputToggle:false,
         config:"",
+        startANDgoal:sfCells,
+        blockedArray:[],
+        heuristic:"5", 
+        searchMethod:'1'       
       }
     }
 
-    uploadFile=(result)=>{
-      this.setState({config:result})
+    changeHeuristic=(e)=>{
+      this.setState({heuristic:e})
     }
+
+    changeSearch=(e)=>{
+      /*
+      1:uniform_cost_search
+      2:heuristic_search
+      3:weighted_heuristic_search
+      */
+      console.log(e)
+      this.setState({searchMethod:e})
+    }
+
+    uploadFile=(result)=>{
+      var tmpResult = result.split("\n").slice(10)
+      var tmp=[]
+      for(let r=0;r<120;r++){
+        for(let c=0;c<160;c++){
+          if(tmpResult[r].charAt(c)==0)
+            tmp.push(r+","+c)
+        }
+      }
+      //console.log(tmp)
+      this.setState({config:result,blockedArray:tmp})
+    }
+    updateSFcells=()=>{
+      gen_start_final_cells(this.state.blockedArray)
+      this.setState({startANDgoal:sfCells})
+      console.log(sfCells)
+    }
+
     handleChange = (files) => {
         if(files[0]  === null){
           this.setState({inputToggle:false})
@@ -173,32 +259,68 @@ var fileConfig = []
         }
         reader.readAsText(files[0]);
            setTimeout(()=>{
-                    this.setState({inputToggle:true})
+                    this.setState({inputToggle:true,startANDgoal:this.state.config.split("\n").slice(0,2)})
+                    console.log(this.state.startANDgoal)
             }, 1000);
     }
 
     closeOutput=()=>{
       this.setState({outputToggle:false})
-    }  
+    }
 
+    //only take file name with mapconfig.txt
+    runScript=()=>{
+      /*
+      1:uniform_cost_search
+      2:heuristic_search
+      3:weighted_heuristic_search
+      */
+      
+      var method = this.state.searchMethod
+      var methodHash={"1":'u',"2":'a',"3":'w'}
+      var pycmd = "py search.py mapconfig.txt "+methodHash[method]+" "+this.state.heuristic
+      console.log(pycmd)
+    }
 
     render() {
       return (
         <div>
         <div style={{display:'flex'}}>
-          <Button>Uniform Cost</Button>
-          <Button onClick={(e)=>this.setState({outputToggle:!this.state.outputToggle})}>File Output</Button>
-          <div style={{width:'90px'}}>
-          <ReactFileReader handleFiles={this.handleChange} fileTypes={'.txt'} >
-              <Button cursor="pointer" style={{width:"100%"}}>Upload</Button>
-          </ReactFileReader>
+          <DropdownButton 
+          bsStyle="info" title={"search method"} id={`search`} onSelect={this.changeSearch}>
+          <MenuItem eventKey="1">Uniform Cost</MenuItem>
+          <MenuItem eventKey="2">A* Search</MenuItem>
+          <MenuItem eventKey="3">Weighted A* Search</MenuItem>
+          </DropdownButton>
+          <DropdownButton 
+          bsStyle="success" title={"select heuristic"} id={`heuristic`} onSelect={this.changeHeuristic}>
+          <MenuItem eventKey="1">heu_linear</MenuItem>
+          <MenuItem eventKey="2">heu_manhatan</MenuItem>
+          <MenuItem eventKey="3">heu_diagonal</MenuItem>
+          <MenuItem eventKey="4">heu_eucliden</MenuItem>
+          <MenuItem eventKey="5">heu_sample</MenuItem>
+          </DropdownButton>
+          <Button bsStyle="danger" onClick={this.runScript} style={{width:'100px'}}>Run</Button>
+          <Button bsStyle="warning" onClick={(e)=>this.setState({outputToggle:!this.state.outputToggle})}>File Output</Button>
+            <div style={{width:'90px'}}>
+            <ReactFileReader handleFiles={this.handleChange} fileTypes={'.txt'} >
+                <Button bsStyle="primary" cursor="pointer" style={{width:"100%"}}>Upload</Button>
+            </ReactFileReader>
+            </div>
+          <div style={{display:'flex',marginLeft:'10px'}}>
+          Start cell :   <span class="separator_start"></span>
+          Goal cell :    <span class="separator_goal"></span>
           </div>
         </div>
+        
         <Board
         closeOutput={this.closeOutput}
         fileConfig={this.state.config}
         inputToggle={this.state.inputToggle}
         outputToggle={this.state.outputToggle}
+        startANDgoal={this.state.startANDgoal}
+        updateSFcells={this.updateSFcells}
+        heuristic={this.state.heuristic}
         />
         </div>
 
