@@ -1,5 +1,6 @@
 import sys
 import heapq
+import math
 
 # Constants for terrain type
 BLOCKED = 0
@@ -135,6 +136,12 @@ def get_neighbors(cell, grid):
     """
     Find the valid neighbors for the given cell.
     Check 8-neighbors around the cell, ignore blocked cells and cells outside of the boundary
+
+    Parameters:
+    cell = target Cell
+    grid = 160x120 grid of Cells
+
+    Returns: 1D array of Cells
     """
     # Find 8 neighboring positions
     pos = cell.pos
@@ -151,14 +158,49 @@ def get_neighbors(cell, grid):
     possible_neighbors = [top_left_pos, top_pos, top_right_pos, right_pos, bottom_right_pos, bottom_pos, bottom_left_pos, left_pos]
 
     # Filter out invalid neighbors (out of bounds or blocked cell)
-    valid_neighbors = [pos for pos in arr if pos[0] >= 0 and pos[0] <= 160 and pos[1] >= 0 and pos[1] <= 120]
+    possible_neighbors = [pos for pos in possible_neighbors if pos[0] >= 0 and pos[0] <= 160 and pos[1] >= 0 and pos[1] <= 120]
     
-    for neighbor in valid_neighbors:
+    for neighbor in possible_neighbors:
         if grid[neighbor[0]][neighbor[1]].terrain_type == BLOCKED:
-            valid_neighbors.remove(neighbor)
+            possible_neighbors.remove(neighbor)
 
+    valid_neighbors = [grid[pos[0]][pos[1]] for pos in possible_neighbors]
     return valid_neighbors
-    
+
+def get_distance(s, neighbor):
+    """
+    Calculate the distance from s to its neighboring cell.
+        - Unblocked cells cost 1 to traverse along an edge
+        - Hard-to-traverse cells cost 2 to traverse along an edge
+        - Moving from highway to highway cuts overall cost by a factor of 4  
+    Parameter:
+    s = Cell for the furthest cell on the optimal path
+    neighbor = Cell for a neighbor of s
+
+    Returns: distance to move from s to neighbor
+    """
+    # Find Euclidean distance
+    (x1, y1) = s.coord
+    (x2, y2) = neighbor.coord
+    euclid_distance = math.sqrt(math.pow(x2-x1, 2) + math.pow(y2-y1, 2))
+
+    # Factor in terrain types
+    temp_dict = [s:euclid_distance/2, neigbor:euclid_distance/2]
+
+    for cell in temp_dict.keys:
+        if cell.terrain_type == ROUGH:
+            temp_dict[cell] *= 2 # Rough terrain costs 2x to move across
+
+    distance = sum(temp_dict.values())
+
+    # Check if highway cuts cost further (4x)
+    if s.hasHighway is True and neighbor.hasHighway is True:
+        distance /= 4
+
+    return distance
+
+def update_vertex(s, neighbor):
+    return None
 
 def uniform_cost_search(start, goal, grid):
     """
@@ -195,7 +237,7 @@ def uniform_cost_search(start, goal, grid):
                     neighbor.g = 20000
                     neighbor.parent = None
                 update_vertex(s, neighbor)
-    return "no path found"
+    return None # No path found
 
     # Done with search, retrieve path or no path found
 
