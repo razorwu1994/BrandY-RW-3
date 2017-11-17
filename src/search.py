@@ -270,7 +270,6 @@ def get_heuristic(cell, grid):
     """
     return 0 # For UCS use 0, replace with something else for A* and weighted A*
 
-
 def update_vertex(s, neighbor, fringe):
     """
     Update values for a neighbor based on s
@@ -300,7 +299,7 @@ def uniform_cost_search(start, goal, grid):
     goal = coordinates of the goal position
     grid = entire 160x120 grid map
 
-    Returns: path, a 1D array of coordinates ((x, y) tuples)
+    Returns: path, a 1D array of coordinates ((x, y) tuples), None if path does not exist
     """
     # Run search
     start_cell = grid[start[0]][start[1]]
@@ -327,18 +326,12 @@ def uniform_cost_search(start, goal, grid):
                 update_vertex(s, neighbor, fringe)
     return None # No path found
 
-    # Done with search, retrieve path or no path found
-
-    # Return the path (1D array)
-    return (None, None)
-
-
 def heuristic_search(start, goal, grid):
     # Get data
     # Run search
     # Return the path (1D array)
     print("A* Search")
-    return (None, None)
+    return None
 
 
 def weighted_heuristic_search(start, goal, grid):
@@ -346,7 +339,7 @@ def weighted_heuristic_search(start, goal, grid):
     # Run search
     # Return the path (1D array)
     print("Weighted A* Search")
-    return (None, None)
+    return None
 
 
 def heu_linear(start, goal, grid):
