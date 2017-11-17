@@ -7,46 +7,6 @@ BLOCKED = 0
 UNBLOCKED = 1
 ROUGH = 2 # aka hard-to-traverse
 
-class Cell:
-    """
-    Represents a cell in the 160x120 grid
-
-    Attr:
-        terrain_type: 0 for blocked, 1 for unblocked, 2 for hard-to-traverse
-        has_highway: 0 if it has no highway, 1 if it does
-        f: function value
-        g: distance from start
-        h: heuristic value
-
-    Only unblocked (1) and hard-to-traverse (2) terrains can have highways.
-    """
-
-    def __init__(self, terrain_type, has_highway):
-        """
-        By default, set f = 0, g = 0, h = 0
-        """
-        self.terrain_type = terrain_type
-        self.has_highway = has_highway
-        self.f = 0
-        self.g = 0
-        self.h = 0
-
-    def convert_to_char(self):
-        if self.terrain_type == 1 and self.has_highway == True:
-            return 'a'
-        elif self.terrain_type == 2 and self.has_highway == True:
-            return 'b'
-        else:
-            return str(self.terrain_type)
-
-    def __str__(self):
-        """
-        Prints out the card with the format: <value> of <suit>
-        Jokers are just printed out as 'joker'
-        """
-        t_type = self.convert_to_char()
-        return "({0}, {1}, {2}, {3})".format(t_type, self.f, self.g, self.h)
-
 def read_from_file(file_name):
     """
     Extract grid data from given file.
@@ -108,7 +68,7 @@ class Cell:
 
     Attr:
         pos: coordinates for this cell in the form of 2-tuple: (x, y)
-        parent: coordinate for the previously visited cell to reach the current one, None by default
+        parent: previously visited Cell before reaching current one, None by default
         terrain_type: 0 for blocked, 1 for unblocked, 2 for hard-to-traverse
         has_highway: 0 if it has no highway, 1 if it does
         f: function value
@@ -143,7 +103,7 @@ class Cell:
 
     def __eq__(self, other):
         """
-        Compare two cells based on their f (priority) values
+        Compare two cells based on their positions
         """
         if not isinstance(other, Cell):
             return False
@@ -154,8 +114,7 @@ class Cell:
     
     def __str__(self):
         """
-        Prints out the card with the format: <value> of <suit>
-        Jokers are just printed out as 'joker'
+        Prints out the Cell in format ((x, y), f, g, h)
         """
         t_type = self.convert_to_char()
         return "(({0}, {1}), {2}, f={3}, g={4}, h={5})".format(self.pos[0], self.pos[1], t_type, self.f, self.g, self.h)
@@ -166,7 +125,7 @@ def retrieve_path(start, goal, grid):
 
     Parameters:
     start: (x, y) coordinates of the start position
-    goal: (x, y) coordaintes of goal position
+    goal: (x, y) coordinates of goal position
     grid: 160x120 array of Cells
 
     Returns:
