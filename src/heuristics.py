@@ -1,70 +1,53 @@
-def heu_linear(start, goal, grid):
+
+import math
+
+def heu_linear(cell,goal):
     xcor = goal[0]
     ycor = goal[1]
-    r = 0
-    c = 0
-    for row in grid:
-        for col in row:
-            h = math.sqrt(math.pow(r - xcor, 2) + math.pow(c - ycor, 2))
-            col.h = h
-            c += 1
-        r += 1
-    return grid
+    cellXcor = cell[0]
+    cellYcor = cell[1]
+    h = math.sqrt(math.pow(cellXcor - xcor, 2) + math.pow(cellYcor - ycor, 2))
+    cell.h = h
+    return h
 
-def heu_manhatan(start, goal, grid):
+def heu_manhatan(cell,goal):
     xcor = goal[0]
     ycor = goal[1]
-    r = 0
-    c = 0
-    for row in grid:
-        for col in row:
-            h = abs(r - xcor) + abs(c - ycor)
-            col.h = h
-            c += 1
-        r += 1
-    return grid
+    cellXcor = cell[0]
+    cellYcor = cell[1]
+    h = abs(cellXcor - xcor) + abs(cellYcor - ycor)
+    cell.h = h
+    return h
 
 
-def heu_diagonal_brkingties(start, goal, grid):
+def heu_diagonal_brkingties(cell,goal):
     xcor = goal[0]
     ycor = goal[1]
-    r = 0
-    c = 0
-    for row in grid:
-        for col in row:
-            h = abs(r - xcor) + abs(c - ycor) + (math.sqrt(2) - 2) * min(abs(r - xcor), abs(c - ycor))
-            h = h * (1 + 0.01)  # 0.01 is the p to break tie
-            col.h = h
-            c += 1
-        r += 1
-    return grid
+    cellXcor = cell[0]
+    cellYcor = cell[1]
+    h = abs(cellXcor - xcor) + abs(cellYcor - ycor) + (math.sqrt(2) - 2) * min(abs(cellXcor - xcor), abs(cellYcor - ycor))
+    cell.h = h
+    return h
 
 
-def heu_eucliden_powtwo(start, goal, grid):
+
+def heu_eucliden_powtwo(cell,goal):
     xcor = goal[0]
     ycor = goal[1]
-    r = 0
-    c = 0
-    for row in grid:
-        for col in row:
-            h = math.pow(abs(r - xcor), 2) + math.pow(abs(c - ycor), 2)
-            col.h = h
-            c += 1
-        r += 1
-    return grid
+    cellXcor = cell[0]
+    cellYcor = cell[1]
+    h = math.pow(abs(cellXcor - xcor), 2) + math.pow(abs(cellYcor - ycor), 2)
+    cell.h = h
+    return h
 
 
-def heu_sample(start, goal, grid):
+def heu_sample(cell,goal):
     xcor = goal[0]
     ycor = goal[1]
-    r = 0
-    c = 0
-    for row in grid:
-        for col in row:
-            manhaX = abs(r - xcor)
-            manhaY = abs(c - ycor)
-            h = math.sqrt(2) * min(manhaX, manhaY) + max(manhaX, manhaY) - min(manhaX, manhaY)
-            col.h = h
-            c += 1
-        r += 1
-    return grid
+    cellXcor = cell[0]
+    cellYcor = cell[1]
+    manhaX = abs(cellXcor - xcor)
+    manhaY = abs(cellYcor - ycor)
+    h = math.sqrt(2) * min(manhaX, manhaY) + max(manhaX, manhaY) - min(manhaX, manhaY)
+    cell.h = h
+    return h
