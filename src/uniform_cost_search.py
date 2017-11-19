@@ -237,7 +237,8 @@ class UniformCostSearch:
             (f, s) = hq.heappop(fringe)
             if s.pos == goal:
                 path = retrieve_path(start, goal)  # Get path from start to goal
-                return path
+                num_nodes_expanded = len(closed)
+                return path, num_nodes_expanded
             closed.append(s.pos)
             neighbors = get_neighbors(s)
             for neighbor in neighbors:
@@ -246,4 +247,4 @@ class UniformCostSearch:
                         neighbor.g = 20000  # 20,000 = infinity
                         neighbor.parent = None
                     update_vertex(s, neighbor, fringe)
-        return None  # No path found
+        return None, -1  # No path found, no nodes expanded

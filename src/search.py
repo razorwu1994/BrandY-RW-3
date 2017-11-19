@@ -86,13 +86,18 @@ if __name__ == "__main__":
         print "2 arguments required: search.py [file] [search type]"
         exit()
 
-    # Get file name and search type
+    # Get file name, search type (also heuristic type and weight, if given)
     file_name = sys.argv[1]
     search_type = sys.argv[2]  # u = uniform-cost search, a = A* search, w = weighted A* search
+    heuristic_type = -1
     if len(sys.argv) > 3:
         heuristic_type = sys.argv[3]  # 1:linear, 2:manhatan,3:diagonal,4:eucliden,5:sample in instruction
     else:
         heuristic_type = "5"
+
+    weight = 1
+    if len(sys.argv) > 4:
+        weight = sys.argv[4] # Weight to be used in weighted A* search
 
     # Read from file
     (start, goal, grid) = read_from_file(file_name)
@@ -109,22 +114,28 @@ if __name__ == "__main__":
         heuristic = hrsts.heu_eucliden_powtwo
     elif heuristic_type == "5":
         heuristic = hrsts.heu_sample
+    else:
+        raise ValueError('Please pick a valid heursitic')
 
     # Use chosen search to find path
+    path = None
+    num_nodes_expanded = -1
+
     if search_type == "u":
         uniform_cost_search = ucs.UniformCostSearch(grid)
-        path = uniform_cost_search.search(start, goal)
+        path, num_nodes_expanded = uniform_cost_search.search(start, goal)
     elif search_type == "a":
         heuristic_search = hs.HeuristicSearch(grid, heuristic)
-        path = heuristic_search.search(start, goal)
+        path, num_nodes_expanded = heuristic_search.search(start, goal)
     elif search_type == "w":
-        weighted_heuristic_search = whs.WeightedHeuristicSearch(grid, heuristic)
-        path = weighted_heuristic_search.search(start, goal)
+        weighted_heuristic_search = whs.WeightedHeuristicSearch(grid, heuristic, weight)
+        path, num_nodes_expanded = weighted_heuristic_search.search(start, goal)
     else:
-        raise ValueError('Please use a valid search tyep: u = uniform-cost search, a = A* search, w = weighted A* search')
+        raise ValueError('Please use a valid search type: u = uniform-cost search, a = A* search, w = weighted A* search')
 
     # Output result
     if path is None:
         print 'No path found'
     else:
         print 'Path: {}'.format(path)
+        print 'Time (# nodes expanded): {}'.format(num_nodes_expanded)
