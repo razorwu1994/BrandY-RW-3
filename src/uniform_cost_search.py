@@ -198,7 +198,7 @@ class UniformCostSearch:
 
         Returns: None
         """
-        total_cost = s.g + get_cost(s, neighbor)
+        total_cost = s.g + self.get_cost(s, neighbor)
         if total_cost < neighbor.g:
             neighbor.g = total_cost
             neighbor.parent = s
@@ -221,7 +221,7 @@ class UniformCostSearch:
         # Run heuristic on every cell in the grid
         for i in range(len(self.grid)):
             for j in range(len(self.grid[0])):
-                apply_heuristic(grid[i][j], goal)
+                self.apply_heuristic(self.grid[i][j], goal)
 
         # Run search
         start_cell = self.grid[start[0]][start[1]]
@@ -236,15 +236,15 @@ class UniformCostSearch:
         while len(fringe) != 0:  # Checking that fringe is nonempty
             (f, s) = hq.heappop(fringe)
             if s.pos == goal:
-                path = retrieve_path(start, goal)  # Get path from start to goal
+                path = self.retrieve_path(start, goal)  # Get path from start to goal
                 num_nodes_expanded = len(closed)
                 return path, num_nodes_expanded
             closed.append(s.pos)
-            neighbors = get_neighbors(s)
+            neighbors = self.get_neighbors(s)
             for neighbor in neighbors:
                 if neighbor.pos not in closed:  # Possible optimization opportunity
                     if (neighbor.f, neighbor) not in fringe:
                         neighbor.g = 20000  # 20,000 = infinity
                         neighbor.parent = None
-                    update_vertex(s, neighbor, fringe)
+                    self.update_vertex(s, neighbor, fringe)
         return None, -1  # No path found, no nodes expanded

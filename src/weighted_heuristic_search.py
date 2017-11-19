@@ -23,5 +23,5 @@ class WeightedHeuristicSearch(HeuristicSearch):
 
         Returns: h value for the cell
         """
-        cell.h = self.weight * self.heuristic(cell, goal)
+        cell.h = self.weight * self.heuristic(cell.pos, goal)
         return cell.h

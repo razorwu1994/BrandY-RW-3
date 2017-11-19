@@ -23,5 +23,5 @@ class HeuristicSearch(UniformCostSearch):
 
         Returns: h value for the cell
         """
-        cell.h = self.heuristic(cell, goal)
+        cell.h = self.heuristic(cell.pos, goal)
         return cell.h

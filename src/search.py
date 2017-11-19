@@ -83,7 +83,7 @@ if __name__ == "__main__":
 
     # Make sure there are enough argument given
     if (len(sys.argv) < 3):
-        print "2 arguments required: search.py [file] [search type]"
+        print "2 arguments required: search.py [file] [search type] [heuristic type] [weight]"
         exit()
 
     # Get file name, search type (also heuristic type and weight, if given)
@@ -115,7 +115,7 @@ if __name__ == "__main__":
     elif heuristic_type == "5":
         heuristic = hrsts.heu_sample
     else:
-        raise ValueError('Please pick a valid heursitic')
+        raise ValueError('Please pick a valid heuristic from 1 to 5')
 
     # Use chosen search to find path
     path = None
