@@ -121,7 +121,8 @@ if __name__ == "__main__":
     # print grid[4][0]
 
     if search_type == "u":
-        path = ucs.uniform_cost_search(start, goal, grid)
+        uniform_cost_search = ucs.UniformCostSearch(grid)
+        path = uniform_cost_search.search(start, goal)
     elif search_type == "a":
         path = heuristic_search(start, goal, grid)
     else:

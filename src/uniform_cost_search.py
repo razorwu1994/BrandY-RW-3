@@ -63,174 +63,187 @@ class Cell:
         t_type = self.convert_to_char()
         return "(({0}, {1}), {2}, f={3}, g={4}, h={5})".format(self.pos[0], self.pos[1], t_type, self.f, self.g, self.h)
 
-
-def retrieve_path(start, goal, grid):
+class UniformCostSearch:
     """
-    Find the path leading from start to goal by working backwards from the goal
+    Class that performs uniform cost search on a 160x120 grid.
+    Use search to find a path of coordinates to follow from start to finish.
 
-    Parameters:
-    start: (x, y) coordinates of the start position
-    goal: (x, y) coordinates of goal position
-    grid: 160x120 array of Cells
-
-    Returns:
-    1D array of (x, y) coordinates to follow from start to goal
-    """
-    curr_cell = grid[goal[0]][goal[1]]
-    path = [curr_cell.pos]  # Start at goal
-
-    while curr_cell.pos != start:
-        parent = curr_cell.parent
-        path.append(parent.pos)
-        curr_cell = parent
-
-    path.reverse()  # Reverse path so it starts at start and ends at goal
-    return path
-
-def get_neighbors(cell, grid):
-    """
-    Find the valid neighbors for the given cell.
-    Check 8-neighbors around the cell, ignore blocked cells and cells outside of the boundary.
-
-    Parameters:
-    cell = target Cell
-    grid = 160x120 grid of Cells
-
-    Returns: 1D array of Cells
-    """
-    # Find 8 neighboring positions
-    pos = cell.pos
-
-    top_left_pos = (pos[0] - 1, pos[1] + 1)
-    top_pos = (pos[0], pos[1] + 1)
-    top_right_pos = (pos[0] + 1, pos[1] + 1)
-    right_pos = (pos[0] + 1, pos[1])
-    bottom_right_pos = (pos[0] + 1, pos[1] - 1)
-    bottom_pos = (pos[0], pos[1] - 1)
-    bottom_left_pos = (pos[0] - 1, pos[1] - 1)
-    left_pos = (pos[0] - 1, pos[1])
-
-    possible_neighbors = [top_left_pos, top_pos, top_right_pos, right_pos, bottom_right_pos, bottom_pos,
-                          bottom_left_pos, left_pos]
-
-    # Filter out invalid neighbors (out of bounds or blocked cell)
-    possible_neighbors = [pos for pos in possible_neighbors if
-                          pos[0] >= 0 and pos[0] < 120 and pos[1] >= 0 and pos[1] < 160]
-
-    for neighbor in possible_neighbors:
-        if grid[neighbor[0]][neighbor[1]].terrain_type == BLOCKED:
-            possible_neighbors.remove(neighbor)
-
-    """ Testing
-    print "Neighbors:"
-    for neighbor in possible_neighbors:
-        print neighbor
-    print ""
+    Attributes:
+    grid = 160x120 grid of cells that represent the map
     """
 
-    valid_neighbors = [grid[pos[0]][pos[1]] for pos in possible_neighbors]
-    return valid_neighbors
+    def __init__(self, grid):
+        self.grid = grid
+
+    def retrieve_path(self, start, goal):
+        """
+        Find the path leading from start to goal by working backwards from the goal
+
+        Parameters:
+        start: (x, y) coordinates of the start position
+        goal: (x, y) coordinates of goal position
+
+        Returns:
+        1D array of (x, y) coordinates to follow from start to goal
+        """
+        curr_cell = self.grid[goal[0]][goal[1]]
+        path = [curr_cell.pos]  # Start at goal
+
+        while curr_cell.pos != start:
+            parent = curr_cell.parent
+            path.append(parent.pos)
+            curr_cell = parent
+
+        path.reverse()  # Reverse path so it starts at start and ends at goal
+        return path
+
+    def get_neighbors(self, cell):
+        """
+        Find the valid neighbors for the given cell.
+        Check 8-neighbors around the cell, ignore blocked cells and cells outside of the boundary.
+
+        Parameters:
+        cell = target Cell
+
+        Returns: 1D array of Cells
+        """
+        # Find 8 neighboring positions
+        pos = cell.pos
+
+        top_left_pos = (pos[0] - 1, pos[1] + 1)
+        top_pos = (pos[0], pos[1] + 1)
+        top_right_pos = (pos[0] + 1, pos[1] + 1)
+        right_pos = (pos[0] + 1, pos[1])
+        bottom_right_pos = (pos[0] + 1, pos[1] - 1)
+        bottom_pos = (pos[0], pos[1] - 1)
+        bottom_left_pos = (pos[0] - 1, pos[1] - 1)
+        left_pos = (pos[0] - 1, pos[1])
+
+        possible_neighbors = [top_left_pos, top_pos, top_right_pos, right_pos, bottom_right_pos, bottom_pos,
+                              bottom_left_pos, left_pos]
+
+        # Filter out invalid neighbors (out of bounds or blocked cell)
+        possible_neighbors = [pos for pos in possible_neighbors if
+                              pos[0] >= 0 and pos[0] < 120 and pos[1] >= 0 and pos[1] < 160]
+
+        for neighbor in possible_neighbors:
+            if self.grid[neighbor[0]][neighbor[1]].terrain_type == BLOCKED:
+                possible_neighbors.remove(neighbor)
+
+        """ Testing
+        print "Neighbors:"
+        for neighbor in possible_neighbors:
+            print neighbor
+        print ""
+        """
+
+        valid_neighbors = [self.grid[pos[0]][pos[1]] for pos in possible_neighbors]
+        return valid_neighbors
 
 
-def get_cost(s, neighbor):
-    """
-    Calculate cost to move from s to its neighboring cell.
-        - Unblocked cells cost 1 to traverse along an edge
-        - Hard-to-traverse cells cost 2 to traverse along an edge
-        - Moving from highway to highway cuts overall cost by a factor of 4
-    Parameter:
-    s = Cell for the furthest cell on the optimal path
-    neighbor = Cell for a neighbor of s
+    def get_cost(self, s, neighbor):
+        """
+        Calculate cost to move from s to its neighboring cell.
+            - Unblocked cells cost 1 to traverse along an edge
+            - Hard-to-traverse cells cost 2 to traverse along an edge
+            - Moving from highway to highway cuts overall cost by a factor of 4
 
-    Returns: cost to move from s to neighbor
-    """
-    # Find Euclidean distance
-    (x1, y1) = s.pos
-    (x2, y2) = neighbor.pos
-    distance = math.sqrt(math.pow(x2 - x1, 2) + math.pow(y2 - y1, 2))
+        Parameters:
+        s = Cell for the furthest cell on the optimal path
+        neighbor = Cell for a neighbor of s
 
-    # Factor in terrain types
-    temp_cells = [s, neighbor]
-    temp_dists = [distance / 2, distance / 2]
+        Returns: cost to move from s to neighbor
+        """
+        # Find Euclidean distance
+        (x1, y1) = s.pos
+        (x2, y2) = neighbor.pos
+        distance = math.sqrt(math.pow(x2 - x1, 2) + math.pow(y2 - y1, 2))
 
-    for i in range(len(temp_cells)):
-        if temp_cells[i].terrain_type == ROUGH:
-            temp_dists[i] *= 2  # Rough terrain costs 2x to move across
+        # Factor in terrain types
+        temp_cells = [s, neighbor]
+        temp_dists = [distance/2, distance/2]
 
-    distance = sum(temp_dists)
+        for i in range(len(temp_cells)):
+            if temp_cells[i].terrain_type == ROUGH:
+                temp_dists[i] *= 2  # Rough terrain costs 2x to move across
 
-    # Check if highway cuts cost further (4x)
-    if s.has_highway is True and neighbor.has_highway is True:
-        distance /= 4
+        distance = sum(temp_dists)
 
-    return distance
+        # Check if highway cuts cost further (4x)
+        if s.has_highway is True and neighbor.has_highway is True:
+            distance /= 4
 
+        return distance
 
-def get_heuristic(cell, grid):
-    """
-    Calculate the heursitic for a cell
+    def apply_heuristic(self, cell, goal):
+        """
+        Calculate and set the heuristic for a cell
 
-    Parameters:
-    cell = target cell
-    grid = 160x120 grid
+        Parameters:
+        cell = target cell
+        goal = coordinates of goal cell
 
-    Returns: h value for the cell
-    """
-    return 0  # For UCS use 0, replace with something else for A* and weighted A*
+        Returns: h value for the cell
+        """
+        cell.h = 0
+        return cell.h  # For UCS use 0, replace with something else for A* and weighted A*
 
-def update_vertex(s, neighbor, fringe):
-    """
-    Update values for a neighbor based on s
+    def update_vertex(self, s, neighbor, fringe):
+        """
+        Update values for a neighbor based on s
 
-    Parameters:
-    s = a Cell
-    neighbor = a Cell next to s
+        Parameters:
+        s = a Cell
+        neighbor = a Cell next to s
 
-    Returns: None
-    """
-    total_cost = s.g + get_cost(s, neighbor)
-    if total_cost < neighbor.g:
-        neighbor.g = total_cost
-        neighbor.parent = s
-        if (neighbor.f, neighbor) in fringe:
-            fringe.remove((neighbor.f, neighbor))  # Possible optimization opportunity?
+        Returns: None
+        """
+        total_cost = s.g + get_cost(s, neighbor)
+        if total_cost < neighbor.g:
+            neighbor.g = total_cost
+            neighbor.parent = s
+            if (neighbor.f, neighbor) in fringe:
+                fringe.remove((neighbor.f, neighbor))  # Possible optimization opportunity?
 
-        neighbor.f = neighbor.g + neighbor.h  # Update neighbor's f-value
-        hq.heappush(fringe, (neighbor.f, neighbor))  # Insert neighbor back into fringe
+            neighbor.f = neighbor.g + neighbor.h  # Update neighbor's f-value
+            hq.heappush(fringe, (neighbor.f, neighbor))  # Insert neighbor back into fringe
 
-def uniform_cost_search(start, goal, grid):
-    """
-    Do uniform cost search on the given grid, start and goal
+    def search(self, start, goal):
+        """
+        Do uniform cost search on the grid, find a path from start to goal
 
-    Parameters:
-    start = coordinates of the start position
-    goal = coordinates of the goal position
-    grid = entire 160x120 grid map
+        Parameters:
+        start = coordinates of the start position
+        goal = coordinates of the goal position
 
-    Returns: path, a 1D array of coordinates ((x, y) tuples), None if path does not exist
-    """
-    # Run search
-    start_cell = grid[start[0]][start[1]]
-    start_cell.g = 0
-    start_cell.h = get_heuristic(start_cell, grid)
-    start_cell.f = start_cell.g + start_cell.h
-    start_cell.parent = start
-    fringe = []
-    hq.heappush(fringe, (
-    start_cell.f, start_cell))  # Insert start to fringe, need to use a 2-tuple so the heapq orders based on f-value
-    closed = []  # closed := empty set
+        Returns: path, a 1D array of coordinates ((x, y) tuples), None if path does not exist
+        """
+        # Run heuristic on every cell in the grid
+        for i in range(len(self.grid)):
+            for j in range(len(self.grid[0])):
+                apply_heuristic(grid[i][j], goal)
 
-    while len(fringe) != 0:  # Checking that fringe is nonempty
-        (f, s) = hq.heappop(fringe)
-        if s.pos == goal:
-            path = retrieve_path(start, goal, grid)  # Get path from start to goal
-            return path
-        closed.append(s.pos)
-        neighbors = get_neighbors(s, grid)
-        for neighbor in neighbors:
-            if neighbor.pos not in closed:  # Possible optimization opportunity
-                if (neighbor.f, neighbor) not in fringe:
-                    neighbor.g = 20000  # 20,000 = infinity
-                    neighbor.parent = None
-                update_vertex(s, neighbor, fringe)
-    return None  # No path found
+        # Run search
+        start_cell = self.grid[start[0]][start[1]]
+        start_cell.g = 0
+        start_cell.f = start_cell.g + start_cell.h
+        start_cell.parent = start
+        fringe = []
+        hq.heappush(fringe, (
+        start_cell.f, start_cell))  # Insert start to fringe, need to use a 2-tuple so the heapq orders based on f-value
+        closed = []  # closed := empty set
+
+        while len(fringe) != 0:  # Checking that fringe is nonempty
+            (f, s) = hq.heappop(fringe)
+            if s.pos == goal:
+                path = retrieve_path(start, goal)  # Get path from start to goal
+                return path
+            closed.append(s.pos)
+            neighbors = get_neighbors(s)
+            for neighbor in neighbors:
+                if neighbor.pos not in closed:  # Possible optimization opportunity
+                    if (neighbor.f, neighbor) not in fringe:
+                        neighbor.g = 20000  # 20,000 = infinity
+                        neighbor.parent = None
+                    update_vertex(s, neighbor, fringe)
+        return None  # No path found
