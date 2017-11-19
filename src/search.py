@@ -93,10 +93,11 @@ if __name__ == "__main__":
         heuristic_type = sys.argv[3]  # 1:linear, 2:manhatan,3:diagonal,4:eucliden,5:sample in instruction
     else:
         heuristic_type = "5"
+
     # Read from file
     (start, goal, grid) = read_from_file(file_name)
 
-    # Get heuristic function
+    # Select heuristic function
     heuristic = None
     if heuristic_type == "1":
         heuristic = hrsts.heu_linear
@@ -109,7 +110,7 @@ if __name__ == "__main__":
     elif heuristic_type == "5":
         heuristic = hrsts.heu_sample
 
-    # Use search type
+    # Use chosen search to find path
     if search_type == "u":
         uniform_cost_search = ucs.UniformCostSearch(grid)
         path = uniform_cost_search.search(start, goal)
@@ -117,7 +118,7 @@ if __name__ == "__main__":
         heuristic_search = hs.HeuristicSearch(grid, heuristic)
         path = heuristic_search.search(start, goal)
     elif search_type == "w":
-        weighted_heuristic_search = whs.WeightedHeuristicSearch(grid, heuristic, 3.0)
+        weighted_heuristic_search = whs.WeightedHeuristicSearch(grid, heuristic)
         path = weighted_heuristic_search.search(start, goal)
     else:
         raise ValueError('Please use a valid search tyep: u = uniform-cost search, a = A* search, w = weighted A* search')
