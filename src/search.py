@@ -1,6 +1,8 @@
 import sys
 import uniform_cost_search as ucs
-import heuristics as hrst
+import heuristic_search as hs
+import weighted_heuristic_search as whs
+import heuristics as hrsts
 
 def read_from_file(file_name):
     """
@@ -82,7 +84,6 @@ if __name__ == "__main__":
     # Make sure there are enough argument given
     if (len(sys.argv) < 3):
         print "2 arguments required: search.py [file] [search type]"
-        print "search types: u = uniform-cost search, a = A* search, w = weighted A* search"
         exit()
 
     # Get file name and search type
@@ -95,40 +96,34 @@ if __name__ == "__main__":
     # Read from file
     (start, goal, grid) = read_from_file(file_name)
 
-    # print heuristic_type
-    # heu_linear
-    # heu_manhatan
-    # heu_diagonal
-    # heu_eucliden
-    # heu_sample
-    # print start, goal
+    # Get heuristic function
+    heuristic = None
+    if heuristic_type == "1":
+        heuristic = hrsts.heu_linear
+    elif heuristic_type == "2":
+        heuristic = hrsts.heu_manhatan
+    elif heuristic_type == "3":
+        heuristic = hrsts.heu_diagonal_brkingties
+    elif heuristic_type == "4":
+        heuristic = hrsts.heu_eucliden_powtwo
+    elif heuristic_type == "5":
+        heuristic = hrsts.heu_sample
 
-    testGrid = grid
-    if heuristic_type.__eq__("1"):
-        testGrid = hrst.heu_linear(start, goal, grid)
-    if heuristic_type.__eq__("2"):
-        testGrid = hrst.heu_manhatan(start, goal, grid)
-    if heuristic_type.__eq__("3"):
-        testGrid = hrst.heu_diagonal_brkingties(start, goal, grid)
-    if heuristic_type.__eq__("4"):
-        testGrid = hrst.heu_eucliden_powtwo(start, goal, grid)
-    if heuristic_type.__eq__("5"):
-        testGrid = hrst.heu_sample(start, goal, grid)
-
-    # print testGrid[50][75]
-
-    # In grid, x = y coordinate and y = x coordiante on actual grid
-    # print grid[4][0]
-
+    # Use search type
     if search_type == "u":
         uniform_cost_search = ucs.UniformCostSearch(grid)
         path = uniform_cost_search.search(start, goal)
     elif search_type == "a":
-        path = heuristic_search(start, goal, grid)
+        heuristic_search = hs.HeuristicSearch(grid, heuristic)
+        path = heuristic_search.search(start, goal)
+    elif search_type == "w":
+        weighted_heuristic_search = whs.WeightedHeuristicSearch(grid, heuristic, 3.0)
+        path = weighted_heuristic_search.search(start, goal)
     else:
-        path = weighted_heuristic_search(start, goal, grid)
+        raise ValueError('Please use a valid search tyep: u = uniform-cost search, a = A* search, w = weighted A* search')
 
+    # Output result
     if path is None:
-        print "No path found"
+        print 'No path found'
     else:
-        print "Path: {}".format(path)
+        print 'Path: {}'.format(path)
