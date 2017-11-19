@@ -11,7 +11,6 @@ def heu_linear(start, goal, grid):
         r += 1
     return grid
 
-
 def heu_manhatan(start, goal, grid):
     xcor = goal[0]
     ycor = goal[1]
