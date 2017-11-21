@@ -66,7 +66,8 @@ def heuristic_search(start, goal, grid):
     print("A* Search")
     return None
 
-
+def flat(tuple):
+    return "\""+",".join(map(str,tuple))+"\""
 def weighted_heuristic_search(start, goal, grid):
     # Get data
     # Run search
@@ -139,3 +140,6 @@ if __name__ == "__main__":
     else:
         print 'Path: {}'.format(path)
         print 'Time (# nodes expanded): {}'.format(num_nodes_expanded)
+        f = open('path.txt','w')
+        f.write("["+','.join(map(flat,path))+"]")
+        f.close()

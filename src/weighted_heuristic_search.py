@@ -11,7 +11,7 @@ class WeightedHeuristicSearch(HeuristicSearch):
 
     def __init__(self, grid, heuristic, weight):
         HeuristicSearch.__init__(self, grid, heuristic)
-        self.weight = weight
+        self.weight = float(weight)
 
     def apply_heuristic(self, cell, goal):
         """
