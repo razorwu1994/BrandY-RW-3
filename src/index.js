@@ -5,7 +5,6 @@ import './index.css';
 import {randCoordinates,gen_everything,sfCells,pathConfig,gen_start_final_cells} from './constants.js'
 import FileReaderInput from 'react-file-reader-input';
 import ReactFileReader from 'react-file-reader'
-import {uniform_cost_search,heuristic_search,weighted_heuristic_search} from './search'
 import start from './start.png'
 import goal from './goal.png'
 
@@ -45,7 +44,7 @@ var pathGroup = ["0,0","0,1","0,2","1,2","2,2"]
             <span value={storedval+",h:"+heuristic} class="separator_goal"></span>}
           {cellType==='a'&&<span value={storedval+",h:"+heuristic} class="separator"></span>}
           {cellType==='b'&&<span value={storedval+",h:"+heuristic} class="separator"></span>}
-          {pathGroup.indexOf(storedval)!==-1&&<span value={storedval+",h:"+heuristic} className="egg"></span>}
+          {this.props.path.indexOf(storedval)!==-1&&<span value={storedval+",h:"+heuristic} className="egg"></span>}
 
           </Button>
       );
@@ -59,11 +58,11 @@ var pathGroup = ["0,0","0,1","0,2","1,2","2,2"]
       // 3 heu_diagonal
       // 4 heu_eucliden
       // 5 heu_sample
-      var i =0      
+      var i =0
       let xcor = goal.split(",")[0],ycor = goal.split(",")[1]
       switch(mode){
         case "1":
-              i = Math.sqrt(Math.pow(r-xcor,2)+Math.pow(c-ycor,2)) 
+              i = Math.sqrt(Math.pow(r-xcor,2)+Math.pow(c-ycor,2))
               break
         case "2":
               i = Math.abs(r-xcor)+Math.abs(c-ycor)
@@ -72,7 +71,7 @@ var pathGroup = ["0,0","0,1","0,2","1,2","2,2"]
               i = Math.abs(r-xcor)+Math.abs(c-ycor)+(Math.sqrt(2)-2)*Math.min(Math.abs(r-xcor),Math.abs(c-ycor))* 1.01 //0.01 to break ties
               break
         case "4":
-              i = Math.pow(r-xcor,2)+Math.pow(c-ycor,2)         
+              i = Math.pow(r-xcor,2)+Math.pow(c-ycor,2)
               break
         case "5":
               let manhaX=Math.abs(r-xcor)
@@ -84,7 +83,7 @@ var pathGroup = ["0,0","0,1","0,2","1,2","2,2"]
               break
       }
       return i
-      
+
     }
     genNewSF=()=>{
       this.setState({genSFtoggle:!this.state.genSFtoggle})
@@ -100,7 +99,7 @@ var pathGroup = ["0,0","0,1","0,2","1,2","2,2"]
         }
         else
           console.log(e.target)
-        
+
     }
 
     outputFile = ()=>{
@@ -148,7 +147,7 @@ var pathGroup = ["0,0","0,1","0,2","1,2","2,2"]
       }
       this.props.closeOutput
     }
-    
+
     render() {
         let r,c
         var board =[]
@@ -179,7 +178,7 @@ var pathGroup = ["0,0","0,1","0,2","1,2","2,2"]
               else{//take an input file
                   cellType=fileConfig[r][c]
                   heuristic = this.computeHeuristic(r,c,this.props.startANDgoal[1],this.props.heuristic)
-                  
+
               }
              rows.push(this.renderSquare(r,c,this.handleClick,cellType,heuristic))
             }
@@ -209,8 +208,9 @@ var pathGroup = ["0,0","0,1","0,2","1,2","2,2"]
         config:"",
         startANDgoal:sfCells,
         blockedArray:[],
-        heuristic:"5", 
-        searchMethod:'1'       
+        heuristic:"5",
+        searchMethod:'1',
+        path:[]
       }
     }
 
@@ -269,30 +269,37 @@ var pathGroup = ["0,0","0,1","0,2","1,2","2,2"]
     }
 
     //only take file name with mapconfig.txt
-    runScript=()=>{
+    runScript=(files)=>{
       /*
       1:uniform_cost_search
       2:heuristic_search
       3:weighted_heuristic_search
       */
-      
-      var method = this.state.searchMethod
-      var methodHash={"1":'u',"2":'a',"3":'w'}
-      var pycmd = "py search.py mapconfig.txt "+methodHash[method]+" "+this.state.heuristic
-      console.log(pycmd)
+      let pathCopy=[]
+      var reader = new FileReader();
+      reader.onload = (e) =>{
+      // Use reader.result
+      pathCopy=JSON.parse(reader.result)
+      }
+      reader.readAsText(files[0]);
+         setTimeout(()=>{
+                  this.setState({path:pathCopy})
+                  console.log(pathCopy)
+          }, 1000);
+
     }
 
     render() {
       return (
         <div>
         <div style={{display:'flex'}}>
-          <DropdownButton 
+          <DropdownButton
           bsStyle="info" title={"search method"} id={`search`} onSelect={this.changeSearch}>
           <MenuItem eventKey="1">Uniform Cost</MenuItem>
           <MenuItem eventKey="2">A* Search</MenuItem>
           <MenuItem eventKey="3">Weighted A* Search</MenuItem>
           </DropdownButton>
-          <DropdownButton 
+          <DropdownButton
           bsStyle="success" title={"select heuristic"} id={`heuristic`} onSelect={this.changeHeuristic}>
           <MenuItem eventKey="1">heu_linear</MenuItem>
           <MenuItem eventKey="2">heu_manhatan</MenuItem>
@@ -300,7 +307,9 @@ var pathGroup = ["0,0","0,1","0,2","1,2","2,2"]
           <MenuItem eventKey="4">heu_eucliden</MenuItem>
           <MenuItem eventKey="5">heu_sample</MenuItem>
           </DropdownButton>
-          <Button bsStyle="danger" onClick={this.runScript} style={{width:'100px'}}>Run</Button>
+          <ReactFileReader handleFiles={this.runScript} fileTypes={'.txt'} >
+              <Button bsStyle="danger" cursor="pointer" style={{width:"100px"}}>Show Path</Button>
+          </ReactFileReader>
           <Button bsStyle="warning" onClick={(e)=>this.setState({outputToggle:!this.state.outputToggle})}>File Output</Button>
             <div style={{width:'90px'}}>
             <ReactFileReader handleFiles={this.handleChange} fileTypes={'.txt'} >
@@ -312,7 +321,7 @@ var pathGroup = ["0,0","0,1","0,2","1,2","2,2"]
           Goal cell :    <span class="separator_goal"></span>
           </div>
         </div>
-        
+
         <Board
         closeOutput={this.closeOutput}
         fileConfig={this.state.config}
@@ -321,6 +330,7 @@ var pathGroup = ["0,0","0,1","0,2","1,2","2,2"]
         startANDgoal={this.state.startANDgoal}
         updateSFcells={this.updateSFcells}
         heuristic={this.state.heuristic}
+        path={this.state.path}
         />
         </div>
 
