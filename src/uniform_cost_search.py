@@ -184,13 +184,15 @@ class UniformCostSearch:
         cell.h = 0
         return cell.h  # For UCS use 0, replace with something else for A* and weighted A*
 
-    def update_vertex(self, s, neighbor, fringe):
+    def update_vertex(self, s, neighbor, fringe, goal):
         """
         Update values for a neighbor based on s
 
         Parameters:
         s = a Cell
         neighbor = a Cell next to s
+        fringe = priority queue that stores nodes to be considered for expansion
+        goal = coordinates of goal node
 
         Returns: None
         """
@@ -201,6 +203,7 @@ class UniformCostSearch:
             if (neighbor.f, neighbor) in fringe:
                 fringe.remove((neighbor.f, neighbor))  # Possible optimization opportunity?
 
+            self.apply_heuristic(neighbor, goal)
             neighbor.f = neighbor.g + neighbor.h  # Update neighbor's f-value
             hq.heappush(fringe, (neighbor.f, neighbor))  # Insert neighbor back into fringe
 
@@ -224,15 +227,10 @@ class UniformCostSearch:
 
         Returns: path, a 1D array of coordinates ((x, y) tuples), None if path does not exist
         """
-
-        # Run heuristic on every cell in the grid
-        for i in range(len(self.grid)):
-            for j in range(len(self.grid[0])):
-                self.apply_heuristic(self.grid[i][j], goal)
-
         # Run search
         start_cell = self.grid[start[0]][start[1]]
         start_cell.g = 0
+        self.apply_heuristic(start_cell, goal)
         start_cell.f = start_cell.g + start_cell.h
         start_cell.parent = start
         fringe = []
@@ -260,6 +258,9 @@ class UniformCostSearch:
             for neighbor in neighbors:
                 neighbor_key = self.get_hash_key(neighbor.pos)
                 if neighbor_key not in closed or neighbor.pos not in closed[neighbor_key]:
-                    self.update_vertex(s, neighbor, fringe)
+                    if (neighbor.f, neighbor) not in fringe:
+                        neighbor.g = 20000  # 20,000 = infinity
+                        neighbor.parent = None
+                    self.update_vertex(s, neighbor, fringe, goal)
 
         return None, -1  # No path found, no nodes expanded
