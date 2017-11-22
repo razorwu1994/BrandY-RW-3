@@ -204,6 +204,16 @@ class UniformCostSearch:
             neighbor.f = neighbor.g + neighbor.h  # Update neighbor's f-value
             hq.heappush(fringe, (neighbor.f, neighbor))  # Insert neighbor back into fringe
 
+    def get_hash_key(self, pos):
+        """
+        Get the hash key for given (x,y) position
+
+        :param pos: 2-tuple (x,y) that represents the position of a cell on the grid
+        :return: hash key to use in the closed list dictionary
+        """
+        hash_code = 23
+        return pos[0] * hash_code + pos[1]
+
     def search(self, start, goal):
         """
         Do uniform cost search on the grid, find a path from start to goal
@@ -228,20 +238,31 @@ class UniformCostSearch:
         fringe = []
         hq.heappush(fringe, (
         start_cell.f, start_cell))  # Insert start to fringe, need to use a 2-tuple so the heapq orders based on f-value
-        closed = []  # closed := empty set
+        closed = {}  # closed := empty dictionary
+        num_nodes_expanded = 0
 
         while len(fringe) != 0:  # Checking that fringe is nonempty
             (f, s) = hq.heappop(fringe)
             if s.pos == goal:
                 path = self.retrieve_path(start, goal)  # Get path from start to goal
-                num_nodes_expanded = len(closed)
                 return path, num_nodes_expanded
-            closed.append(s.pos)
+
+            # Store in closed list
+            key = self.get_hash_key(s.pos)
+            if key in closed:
+                closed[key].append(s.pos)
+            else:
+                closed[key] = [s.pos]
+            num_nodes_expanded += 1
+
+            # For each neighbor
             neighbors = self.get_neighbors(s)
             for neighbor in neighbors:
-                if neighbor.pos not in closed:  # Possible optimization opportunity
+                neighbor_key = self.get_hash_key(neighbor.pos)
+                if neighbor_key not in closed or neighbor.pos not in closed[neighbor_key]:
                     if (neighbor.f, neighbor) not in fringe:
                         neighbor.g = 20000  # 20,000 = infinity
                         neighbor.parent = None
                     self.update_vertex(s, neighbor, fringe)
+
         return None, -1  # No path found, no nodes expanded
