@@ -6,11 +6,12 @@ body {
 .separator {
     content: '';
     display: inline-block;
-    background: black;
-    margin: 40%;
-    height: 4px;
-    width: 4px;
+    background: white;
     vertical-align: top;
+    border: 2px solid black;
+    border-radius: 10px;
+    height:10px;
+    width:10px;
 }
 
 .pathmarker {
