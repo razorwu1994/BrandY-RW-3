@@ -59,21 +59,8 @@ def read_from_file(file_name):
 
     return (start, goal, grid)
 
-def heuristic_search(start, goal, grid):
-    # Get data
-    # Run search
-    # Return the path (1D array)
-    print("A* Search")
-    return None
-
 def flat(tuple):
     return "\""+",".join(map(str,tuple))+"\""
-def weighted_heuristic_search(start, goal, grid):
-    # Get data
-    # Run search
-    # Return the path (1D array)
-    print("Weighted A* Search")
-    return None
 
 if __name__ == "__main__":
     # # For testing
