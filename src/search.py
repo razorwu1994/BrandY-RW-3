@@ -144,12 +144,16 @@ if __name__ == "__main__":
         # Write f,g,h data to a file in format[(f, g, h), (f, g, h), ..., (f, g, h)]
         f = open('extra.txt', 'w')
         f.write("[")
-
+        outputArray = []
         for i in range(len(grid)):
             for j in range(len(grid[0])):
                 f_value = round(grid[i][j].f, 2)
                 g_value = round(grid[i][j].g, 2)
-                h_value = round(grid[i][j].g, 2)
-                f.write("({}, {}, {})".format(f_value, g_value, h_value))
-
+                h_value = round(grid[i][j].h, 2)
+                outputArray.append([f_value, g_value, h_value])
+            f.write("["+','.join(map(flat,outputArray))+"]")
+            if i != len(grid)-1:
+                f.write(",")
+            outputArray=[]
+        f.write("]")
         f.close()

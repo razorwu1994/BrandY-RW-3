@@ -16,7 +16,6 @@ const HARD_TRAVERSE_HWY_CELL = 'b'
 const row = 120,col=160
 gen_everything();
 var fileConfig = []
-var pathGroup = ["0,0","0,1","0,2","1,2","2,2"]
   class Board extends React.PureComponent  {
     constructor(props) {
         super(props);
@@ -25,20 +24,11 @@ var pathGroup = ["0,0","0,1","0,2","1,2","2,2"]
             genSFtoggle:false,
         };
     }
-    renderSquare(r,c,handleClick,cellType,heuristic) {
+    renderSquare(r,c,handleClick,cellType,cellFGH) {
       const colorGroup={'-1':'blue',0:'lightcoral',1:'white',2:'lightgrey','a':'white','b':'lightgrey'}
       const labelGroup={s:'S',f:'G'}
       var storedval = r+","+c
-      // var bgIMG = this.props.inputToggle===false&&startANDgoal[0]===r+","+c?
-      //               start:
-      //               this.props.inputToggle===false&&startANDgoal[1]===r+","+c?
-      //               goal:{}
-                    // {bgIMG?<span style={{backgroundImage: "url("+bgIMG+")",backgroundRepeat:'no-repeat',
-                    // backgroundSize:'100% 100%'}}>wt</span>:{}}
-                    // {cellType==='a'&&<span value={storedval+",h:"+heuristic} class="separator">
-                    // </span>}
-                    // {cellType==='b'&&<span value={storedval+",h:"+heuristic} class="separator">
-                    // </span>}
+
       const hwydots = cellType==='a'||cellType==='b'?"separator":""
       const dotsConfig=[{text:"P",color:"#84DE02"},{text:"S",color:"blue"},{text:"G",color:"purple"}]
       const dot =  this.props.startANDgoal[0]===r+","+c?dotsConfig[1]:
@@ -46,10 +36,10 @@ var pathGroup = ["0,0","0,1","0,2","1,2","2,2"]
                    this.props.path.indexOf(storedval)!==-1?dotsConfig[0]:
                    ""
       return (
-          <Button key={storedval} value={storedval+",h:"+heuristic} className="square" cursor="pointer" onClick={handleClick}
+          <Button key={storedval} value={storedval+",[f,g,h]:"+cellFGH} className="square" cursor="pointer" onClick={handleClick}
           style={{background:colorGroup[cellType]}}>
 
-          <span value={storedval+",h:"+heuristic} style={{color:dot.color,width:'10px',fontSize:'15px'}}
+          <span id={storedval+",[f,g,h]:"+cellFGH} value={storedval+",[f,g,h]:"+cellFGH} style={{color:dot.color,width:'10px',fontSize:'15px'}}
             className={hwydots}>
           {dot.text}
           </span>
@@ -99,13 +89,17 @@ var pathGroup = ["0,0","0,1","0,2","1,2","2,2"]
 
     handleClick= (e)=>{
         var location = e.target.value
-
+        var info = document.getElementById("info")
         if(location!=undefined){
-          var updateInfo = "The clicked cell is "+location
+          var updateInfo = location
+          info.innerHTML=updateInfo
           console.log(updateInfo)
         }
-        else
+        else{
+          info.innerHTML=e.target.id
           console.log(e.target)
+        }
+
 
     }
 
@@ -171,12 +165,13 @@ var pathGroup = ["0,0","0,1","0,2","1,2","2,2"]
           }
 
         }
-        var heuristic=0
+        var cellFGH=[]
         for(r=0;r<row;r++){
             for(c=0;c<col;c++){
               if(!this.props.inputToggle){
                     cellType=pathConfig[r][c]
-                    heuristic = this.computeHeuristic(r,c,this.props.startANDgoal[1],this.props.heuristic)
+                    cellFGH = this.props.cellFGH[r][c]
+                    // heuristic = this.computeHeuristic(r,c,this.props.startANDgoal[1],this.props.heuristic)
                      // blue color center
                       // for(let cc in randCoordinates)
                       //   if(r===randCoordinates[cc][0]&&c===randCoordinates[cc][1])
@@ -184,10 +179,11 @@ var pathGroup = ["0,0","0,1","0,2","1,2","2,2"]
               }
               else{//take an input file
                   cellType=fileConfig[r][c]
-                  heuristic = this.computeHeuristic(r,c,this.props.startANDgoal[1],this.props.heuristic)
+                  cellFGH = this.props.cellFGH[r][c]
+                  // heuristic = this.computeHeuristic(r,c,this.props.startANDgoal[1],this.props.heuristic)
 
               }
-             rows.push(this.renderSquare(r,c,this.handleClick,cellType,heuristic))
+             rows.push(this.renderSquare(r,c,this.handleClick,cellType,cellFGH))
             }
             board.push(
                 <div className="board">
@@ -200,6 +196,7 @@ var pathGroup = ["0,0","0,1","0,2","1,2","2,2"]
         return (
         <div style={{overflowX:'visible',overflowY:'visible',width:'200%',height:'150%'}}>
         <Button onClick={this.genNewSF} style={{backgroundColor:'purple',color:'white'}}>gen new start and goal</Button>
+        Clicked Cell info :<span id="info"></span>
         {board}
         </div>
       );
@@ -217,7 +214,8 @@ var pathGroup = ["0,0","0,1","0,2","1,2","2,2"]
         blockedArray:[],
         heuristic:"5",
         searchMethod:'1',
-        path:[]
+        path:[],
+        cellFGH:Array(120).fill(Array(160).fill([0,0,0])),
       }
     }
 
@@ -282,16 +280,27 @@ var pathGroup = ["0,0","0,1","0,2","1,2","2,2"]
       2:heuristic_search
       3:weighted_heuristic_search
       */
+      let flag =files[0].name.startsWith("extra")?0:1 //0:cell,1:path
       let pathCopy=[]
+      let cellFGHcopy=[]
       var reader = new FileReader();
       reader.onload = (e) =>{
       // Use reader.result
-      pathCopy=JSON.parse(reader.result)
+      if(flag===0){
+        cellFGHcopy=JSON.parse(reader.result)
+      }
+      else
+        pathCopy=JSON.parse(reader.result)
       }
       reader.readAsText(files[0]);
-         setTimeout(()=>{
-                  this.setState({path:pathCopy})
-                  console.log(pathCopy)
+        setTimeout(()=>{
+          if(flag===0){
+          this.setState({cellFGH:cellFGHcopy})
+          console.log(cellFGHcopy)
+          }
+          else {
+            this.setState({path:pathCopy})
+          }
           }, 1000);
 
     }
@@ -300,12 +309,9 @@ var pathGroup = ["0,0","0,1","0,2","1,2","2,2"]
       return (
         <div>
         <div style={{display:'flex'}}>
-          <DropdownButton
-          bsStyle="info" title={"search method"} id={`search`} onSelect={this.changeSearch}>
-          <MenuItem eventKey="1">Uniform Cost</MenuItem>
-          <MenuItem eventKey="2">A* Search</MenuItem>
-          <MenuItem eventKey="3">Weighted A* Search</MenuItem>
-          </DropdownButton>
+        <ReactFileReader handleFiles={this.runScript} fileTypes={'.txt'} >
+            <Button bsStyle="info" cursor="pointer" style={{width:"100px"}}>Cell Info</Button>
+        </ReactFileReader>
           <DropdownButton
           bsStyle="success" title={"select heuristic"} id={`heuristic`} onSelect={this.changeHeuristic}>
           <MenuItem eventKey="1">heu_linear</MenuItem>
@@ -338,6 +344,7 @@ var pathGroup = ["0,0","0,1","0,2","1,2","2,2"]
         updateSFcells={this.updateSFcells}
         heuristic={this.state.heuristic}
         path={this.state.path}
+        cellFGH={this.state.cellFGH}
         />
         </div>
 
