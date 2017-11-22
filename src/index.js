@@ -41,9 +41,10 @@ var pathGroup = ["0,0","0,1","0,2","1,2","2,2"]
                     // </span>}
       const hwydots = cellType==='a'||cellType==='b'?"separator":""
       const dotsConfig=[{text:"P",color:"#84DE02"},{text:"S",color:"blue"},{text:"G",color:"purple"}]
-      const dot = this.props.path.indexOf(storedval)!==-1?dotsConfig[0]:
-                  this.props.startANDgoal[0]===r+","+c?dotsConfig[1]:
-                  this.props.startANDgoal[1]===r+","+c?dotsConfig[2]:""
+      const dot =  this.props.startANDgoal[0]===r+","+c?dotsConfig[1]:
+                   this.props.startANDgoal[1]===r+","+c?dotsConfig[2]:
+                   this.props.path.indexOf(storedval)!==-1?dotsConfig[0]:
+                   ""
       return (
           <Button key={storedval} value={storedval+",h:"+heuristic} className="square" cursor="pointer" onClick={handleClick}
           style={{background:colorGroup[cellType]}}>
