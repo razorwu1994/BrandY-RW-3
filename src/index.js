@@ -35,17 +35,23 @@ var pathGroup = ["0,0","0,1","0,2","1,2","2,2"]
       //               goal:{}
                     // {bgIMG?<span style={{backgroundImage: "url("+bgIMG+")",backgroundRepeat:'no-repeat',
                     // backgroundSize:'100% 100%'}}>wt</span>:{}}
+                    // {cellType==='a'&&<span value={storedval+",h:"+heuristic} class="separator">
+                    // </span>}
+                    // {cellType==='b'&&<span value={storedval+",h:"+heuristic} class="separator">
+                    // </span>}
+      const hwydots = cellType==='a'||cellType==='b'?"separator":""
+      const dotsConfig=[{text:"P",color:"#84DE02"},{text:"S",color:"blue"},{text:"G",color:"purple"}]
+      const dot = this.props.path.indexOf(storedval)!==-1?dotsConfig[0]:
+                  this.props.startANDgoal[0]===r+","+c?dotsConfig[1]:
+                  this.props.startANDgoal[1]===r+","+c?dotsConfig[2]:""
       return (
           <Button key={storedval} value={storedval+",h:"+heuristic} className="square" cursor="pointer" onClick={handleClick}
           style={{background:colorGroup[cellType]}}>
-          {this.props.startANDgoal[0]===r+","+c&&
-            <span value={storedval+",h:"+heuristic} class="separator_start"></span>}
-          {this.props.startANDgoal[1]===r+","+c&&
-            <span value={storedval+",h:"+heuristic} class="separator_goal"></span>}
-          {cellType==='a'&&<span value={storedval+",h:"+heuristic} class="separator"></span>}
-          {cellType==='b'&&<span value={storedval+",h:"+heuristic} class="separator"></span>}
-          {this.props.path.indexOf(storedval)!==-1&&<span value={storedval+",h:"+heuristic} className="egg"></span>}
 
+          <span value={storedval+",h:"+heuristic} style={{color:dot.color,width:'10px',fontSize:'15px'}}
+            className={hwydots}>
+          {dot.text}
+          </span>
           </Button>
       );
     }
