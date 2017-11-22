@@ -260,9 +260,6 @@ class UniformCostSearch:
             for neighbor in neighbors:
                 neighbor_key = self.get_hash_key(neighbor.pos)
                 if neighbor_key not in closed or neighbor.pos not in closed[neighbor_key]:
-                    if (neighbor.f, neighbor) not in fringe:
-                        neighbor.g = 20000  # 20,000 = infinity
-                        neighbor.parent = None
                     self.update_vertex(s, neighbor, fringe)
 
         return None, -1  # No path found, no nodes expanded
