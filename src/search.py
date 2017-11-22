@@ -76,11 +76,19 @@ def weighted_heuristic_search(start, goal, grid):
     return None
 
 if __name__ == "__main__":
-    """ For testing
-    (start, goal, grid) = read_from_file("map1.txt")
-    path = ucs.uniform_cost_search(start, goal, grid)
-    print path
-    """
+    # # For testing
+    # (start, goal, grid) = read_from_file("map1.txt")
+    # uniform_cost_search = ucs.UniformCostSearch(grid)
+    # #path, num_nodes_expanded = uniform_cost_search.search(start, goal)
+    #
+    # neighbor_cells = uniform_cost_search.get_neighbors(grid[5][48])
+    # # Output result
+    # if path is None:
+    #     print 'No path found'
+    # else:
+    #     print 'Path: {}'.format(path)
+    #     print 'Time (# nodes expanded): {}'.format(num_nodes_expanded)
+
 
     # Make sure there are enough argument given
     if (len(sys.argv) < 3):

@@ -108,38 +108,34 @@ class UniformCostSearch:
         Returns: 1D array of Cells
         """
         # Find 8 neighboring positions
-        pos = cell.pos
+        source_pos = cell.pos
+        x = source_pos[0]
+        y = source_pos[1]
 
-        top_left_pos = (pos[0] - 1, pos[1] + 1)
-        top_pos = (pos[0], pos[1] + 1)
-        top_right_pos = (pos[0] + 1, pos[1] + 1)
-        right_pos = (pos[0] + 1, pos[1])
-        bottom_right_pos = (pos[0] + 1, pos[1] - 1)
-        bottom_pos = (pos[0], pos[1] - 1)
-        bottom_left_pos = (pos[0] - 1, pos[1] - 1)
-        left_pos = (pos[0] - 1, pos[1])
+        top_left_pos = (x - 1, y + 1)
+        top_pos = (x, y + 1)
+        top_right_pos = (x + 1, y + 1)
+        right_pos = (x + 1, y)
+        bottom_right_pos = (x + 1, y - 1)
+        bottom_pos = (x, y - 1)
+        bottom_left_pos = (x - 1, y - 1)
+        left_pos = (x - 1, y)
 
         possible_neighbors = [top_left_pos, top_pos, top_right_pos, right_pos, bottom_right_pos, bottom_pos,
                               bottom_left_pos, left_pos]
 
         # Filter out invalid neighbors (out of bounds or blocked cell)
-        possible_neighbors = [pos for pos in possible_neighbors if
-                              pos[0] >= 0 and pos[0] < 120 and pos[1] >= 0 and pos[1] < 160]
+        possible_neighbors = [position for position in possible_neighbors if
+                              position[0] >= 0 and position[0] < 120 and position[1] >= 0 and position[1] < 160]
+        valid_neighbors = []
 
         for neighbor in possible_neighbors:
-            if self.grid[neighbor[0]][neighbor[1]].terrain_type == BLOCKED:
-                possible_neighbors.remove(neighbor)
+            if self.grid[neighbor[0]][neighbor[1]].terrain_type != BLOCKED:
+                valid_neighbors.append(neighbor)
 
-        """ Testing
-        print "Neighbors:"
-        for neighbor in possible_neighbors:
-            print neighbor
-        print ""
-        """
+        valid_neighbor_cells = [self.grid[position[0]][position[1]] for position in valid_neighbors]
 
-        valid_neighbors = [self.grid[pos[0]][pos[1]] for pos in possible_neighbors]
-        return valid_neighbors
-
+        return valid_neighbor_cells
 
     def get_cost(self, s, neighbor):
         """
@@ -218,6 +214,7 @@ class UniformCostSearch:
 
         Returns: path, a 1D array of coordinates ((x, y) tuples), None if path does not exist
         """
+
         # Run heuristic on every cell in the grid
         for i in range(len(self.grid)):
             for j in range(len(self.grid[0])):
