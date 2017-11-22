@@ -148,6 +148,21 @@ if __name__ == "__main__":
     else:
         print 'Path: {}'.format(path)
         print 'Time (# nodes expanded): {}'.format(num_nodes_expanded)
+
+        # Write path to a file
         f = open('path.txt','w')
         f.write("["+','.join(map(flat,path))+"]")
+        f.close()
+
+        # Write f,g,h data to a file in format[(f, g, h), (f, g, h), ..., (f, g, h)]
+        f = open('extra.txt', 'w')
+        f.write("[")
+
+        for i in range(len(grid)):
+            for j in range(len(grid[0])):
+                f_value = round(grid[i][j].f, 2)
+                g_value = round(grid[i][j].g, 2)
+                h_value = round(grid[i][j].g, 2)
+                f.write("({}, {}, {})".format(f_value, g_value, h_value))
+
         f.close()
