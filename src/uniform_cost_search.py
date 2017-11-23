@@ -214,7 +214,7 @@ class UniformCostSearch:
         :param pos: 2-tuple (x,y) that represents the position of a cell on the grid
         :return: hash key to use in the closed list dictionary
         """
-        hash_code = 23
+        hash_code = 91
         return pos[0] * hash_code + pos[1]
 
     def search(self, start, goal):
@@ -243,11 +243,22 @@ class UniformCostSearch:
             (f, s) = hq.heappop(fringe)
             if s.pos == goal:
                 path = self.retrieve_path(start, goal)  # Get path from start to goal
+
+                avgLength = 0;
+                numKeys = len(closed)
+
+                for key in closed:
+                    avgLength += len(closed[key])
+
+                avgLength /= numKeys * 1.0
+
+                print "average length of bucket in closed list: {}".format(avgLength)
+
                 return path, num_nodes_expanded
 
             # Store in closed list
             key = self.get_hash_key(s.pos)
-            if key in closed:
+            if key in closed: # Uses hash to determine if key is in closed, still O(1)
                 closed[key].append(s.pos)
             else:
                 closed[key] = [s.pos]
