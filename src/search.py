@@ -107,9 +107,9 @@ if __name__ == "__main__":
     elif heuristic_type == "2":
         heuristic = hrsts.heu_manhatan
     elif heuristic_type == "3":
-        heuristic = hrsts.heu_diagonal_brkingties
+        heuristic = hrsts.heu_diagonal
     elif heuristic_type == "4":
-        heuristic = hrsts.heu_eucliden_powtwo
+        heuristic = hrsts.heu_eucliden_squared
     elif heuristic_type == "5":
         heuristic = hrsts.heu_sample
     else:
