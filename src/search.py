@@ -3,6 +3,7 @@ import uniform_cost_search as ucs
 import heuristic_search as hs
 import weighted_heuristic_search as whs
 import heuristics as hrsts
+from datetime import datetime
 
 def read_from_file(file_name):
     """
@@ -81,6 +82,7 @@ if __name__ == "__main__":
     if (len(sys.argv) < 3):
         print "2 arguments required: search.py [file] [search type] [heuristic type] [weight]"
         exit()
+    t1 = datetime.now()
 
     # Get file name, search type (also heuristic type and weight, if given)
     file_name = sys.argv[1]
@@ -134,11 +136,15 @@ if __name__ == "__main__":
         print 'No path found'
     else:
         print 'Path: {}'.format(path)
+        print 'Path length: {}'.format(len(path))
         print 'Time (# nodes expanded): {}'.format(num_nodes_expanded)
-
+        t2 = datetime.now()
+        delta = t2 - t1
+        print 'Time (In seconds):{}'.format(delta.total_seconds())
         # Write path to a file
-        f = open('path.txt','w')
-        f.write("["+','.join(map(flat,path))+"]")
+        f = open('experimental.csv','a+')
+        output = "\n"+file_name+","+search_type+","+heuristic_type+","+str(weight)+","+str(len(path))+","+str(num_nodes_expanded)+","+str(delta.total_seconds())+"\n"
+        f.write(output)
         f.close()
 
         # Write f,g,h data to a file in format[(f, g, h), (f, g, h), ..., (f, g, h)]

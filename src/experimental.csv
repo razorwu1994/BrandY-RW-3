@@ -1,0 +1,25 @@
+filename,searchType,heuristic(if applicable),weight,path length,node expanded,time
+map_benchmarks/map1/map1-0.txt,u,5,1,132,10387,0.608303
+map_benchmarks/map1/map1-0.txt,a,1,1,114,803,0.083418
+map_benchmarks/map1/map1-0.txt,a,2,1,123,236,0.064782
+map_benchmarks/map1/map1-0.txt,a,3,1,115,466,0.076987
+map_benchmarks/map1/map1-0.txt,a,4,1,102,101,0.058189
+map_benchmarks/map1/map1-0.txt,a,5,1,119,490,0.07786
+map_benchmarks/map1/map1-0.txt,w,1,1.25,106,233,0.056152
+map_benchmarks/map1/map1-0.txt,w,2,1.25,112,148,0.057141
+
+map_benchmarks/map1/map1-0.txt,w,3,1.25,107,174,0.058776
+
+map_benchmarks/map1/map1-0.txt,w,4,1.25,102,101,0.058018
+
+map_benchmarks/map1/map1-0.txt,w,5,1.25,107,175,0.065925
+
+map_benchmarks/map1/map1-0.txt,w,1,2,103,104,0.051038
+
+map_benchmarks/map1/map1-0.txt,w,2,2,102,102,0.052617
+
+map_benchmarks/map1/map1-0.txt,w,3,2,102,102,0.052602
+
+map_benchmarks/map1/map1-0.txt,w,4,2,102,101,0.056277
+
+map_benchmarks/map1/map1-0.txt,w,5,2,102,102,0.05557
