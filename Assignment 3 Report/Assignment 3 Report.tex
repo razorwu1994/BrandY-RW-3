@@ -3,12 +3,54 @@
 \graphicspath{ {Images/} }
 
 \begin{document}
-\noindent\textbf{\large Assignment 3 A*}\newline
-\textbf{By Brandon Young and Ruicheng Wu}
+\noindent \textbf{\large Assignment 3 Heuristic Search }\newline
+\noindent \textbf{By Brandon Young and Ruicheng Wu}
 
 \bigskip
 
-\noindent \textbf{c. Optimizations}
+\noindent \textbf{A. Interface}
+
+Here are two examples of the GUI. The first image shows the overall GUI. The buttons on the top-left are used to interact with the grid. The red "Show Path" button is used to upload a path file to show a green path on the grid. The yellow "File Output" is used to output a file representing the current grid. The blue "Upload" button is used to upload and show a grid from an existing file. Clicking on a cell on the grid shows its h, g and f values below the buttons and above the grid.
+
+\medskip
+
+\noindent \includegraphics[scale=0.35]{"a-map1-0"}
+
+\medskip 
+
+This second image shows a closer look to the grid representation. Red squares represent blocked cells, gray for hard-to-traverse cells and white for unblocked cells. A black circle within a square shows that the cell has a highway on it. Green P's show the path. The start (in blue) and goal (in purple) are either represented by S and G respectively or pie-shaped symbols.
+
+\medskip
+
+\includegraphics[scale=0.45]{"a-map1-4"}
+
+\medskip
+
+\pagebreak %----------------------------------------------------------------------
+
+\noindent \textbf{B. UCS, A* and Weighted A* Implementations}
+
+There are three examples shown below, running uniform-cost search (UCS), A* and weighted A* respectively on the same map.
+
+1. Uniform-cost search:\newline
+\medskip
+\textbf{Path length:143, Node Expanded:11595,	Run Time: 0.528}\newline
+\noindent \includegraphics[scale=0.4]{"b-map5-1-u"}\newline
+
+2. A * search: \newline
+\medskip
+\textbf{Path length:136, Node Expanded:1466,	Run Time: 0.109}\newline
+\noindent \includegraphics[scale=0.4]{"b-map5-1-a"}\newline
+
+3. Weighted A * search search:\newline
+\medskip
+\textbf{Path length:93, Node Expanded:93,	Run Time: 0.047}\newline
+\noindent \includegraphics[scale=0.4]{"b-map5-1-w-2"}\newline
+
+
+\pagebreak %--------------------------------------------------------------------
+
+\noindent \textbf{C. Optimizations}
 
 To optimize the search algorithms, we used a Python dictionary as a heap, rather than a Python list (array), to implement the closed list more efficiently. Since we just needed to insert or check if a pair of coordinates existed inside the close list, a heap would speed up the check and may help the insertion. Overall, checking if a element exists takes O(n) for an array and O(1) for a heap.
 
@@ -16,10 +58,9 @@ For the heap, we initially used the sum of coordinate values to use as the key. 
 
 We also optimized the way the heuristic was applied to the grid. At first we applied the heuristic over the entire graph before running the search algorithm. However, this wasted resources when only a portion of the overall grid was searched. Instead, we compute the heuristic during the search, to ensure only relevant cells in the grid have the heuristic applied to them.
 
-\bigskip
-\noindent------------------------------------------------------------------------------------------------------
+\pagebreak %----------------------------------------------------------------
 
-\noindent \textbf{d. Heuristics}
+\noindent \textbf{D. Heuristics}
 
 \noindent 1. Diagonal Distance Heuristic
 
@@ -67,13 +108,19 @@ The formula for cell $(x1, y1)$ and goal $(x2, y2)$ is:
 $$h((x1,y1)) = \sqrt{2} * min(dx, dy) + max(dx, dy) - min(dx, dy)$$
 where $dx = |x2 - x1|$ and $dy = |y2 - y1|$. 
 
-\bigskip
-\noindent------------------------------------------------------------------------------------------------------
+\pagebreak %---------------------------------------------------------------
 
-\noindent \textbf{e. UCS, A*, Weighted A* Statistics}
+\noindent \textbf{E. UCS, A*, Weighted A* Statistics}
 
-Stuff
+\noindent \includegraphics[scale=0.6]{"avg-nodeexpanded"}
 
+\medskip
 
+\noindent \includegraphics[scale=0.8]{"avg-pathlength"}
 
+\medskip
+
+\noindent \includegraphics[scale=0.8]{"avg-runtime"}
+
+\medskip
 \end{document}
