@@ -330,8 +330,8 @@ var fileConfig = []
             </ReactFileReader>
             </div>
           <div style={{display:'flex',marginLeft:'10px'}}>
-          Start cell :   <span class="separator_start"></span>
-          Goal cell :    <span class="separator_goal"></span>
+          Start cell :   <span className="separator_start"></span>
+          Goal cell :    <span className="separator_goal"></span>
           </div>
         </div>
 

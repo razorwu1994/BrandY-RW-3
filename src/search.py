@@ -143,7 +143,7 @@ if __name__ == "__main__":
         print 'Time (In seconds):{}'.format(delta.total_seconds())
         # Write path to a file
         f = open('experimental.csv','a+')
-        output = "\n"+file_name+","+search_type+","+heuristic_type+","+str(weight)+","+str(len(path))+","+str(num_nodes_expanded)+","+str(delta.total_seconds())+"\n"
+        output = file_name+","+search_type+","+heuristic_type+","+str(weight)+","+str(len(path))+","+str(num_nodes_expanded)+","+str(delta.total_seconds())+"\n"
         f.write(output)
         f.close()
 
