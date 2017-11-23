@@ -53,6 +53,27 @@ The heuristic is inadmissible for the grid problem because diagonal movements ar
 \bigskip
 \noindent 4. Euclidean Squared
 
+The formula for cell $(x1, y1)$ and goal $(x2, y2)$ is:
+$$h((x1,y1)) = (x2-x1)^2 + (y2-y1)^2$$
+
+Similar to Euclidean distance, but outputting much higher values, so the heuristic is not admissible. However, because the square root is not used, some computation time is saved. In general, pretty bad heuristic because its h-value will tend to be much higher than the g-value.
+
+\bigskip
+\noindent 5. Sample Heuristic
+
+The heuristic given in the assignment instructions. May not be admissible or consistent for the grid problem. 
+
+The formula for cell $(x1, y1)$ and goal $(x2, y2)$ is:
+$$h((x1,y1)) = \sqrt{2} * min(dx, dy) + max(dx, dy) - min(dx, dy)$$
+where $dx = |x2 - x1|$ and $dy = |y2 - y1|$. 
+
+\bigskip
+\noindent------------------------------------------------------------------------------------------------------
+
+\noindent \textbf{e. UCS, A*, Weighted A* Statistics}
+
+Stuff
+
 
 
 \end{document}

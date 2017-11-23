@@ -80,7 +80,7 @@ def heu_sample(cell,goal):
     ycor = goal[1]
     cellXcor = cell[0]
     cellYcor = cell[1]
-    manhaX = abs(cellXcor - xcor)
-    manhaY = abs(cellYcor - ycor)
-    h = math.sqrt(2) * min(manhaX, manhaY) + max(manhaX, manhaY) - min(manhaX, manhaY)
+    dx = abs(cellXcor - xcor)
+    dy = abs(cellYcor - ycor)
+    h = math.sqrt(2) * min(dx, dy) + max(dx, dy) - min(dx, dy)
     return h
