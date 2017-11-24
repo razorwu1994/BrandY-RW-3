@@ -50,8 +50,6 @@ def heu_diagonal(cell,goal):
     h = dx + dy + (math.sqrt(2) - 2) * min(dx, dy)
     return h
 
-
-
 def heu_eucliden_squared(cell,goal):
     """
     Similar to Euclidean distance, but saves on square root computation time

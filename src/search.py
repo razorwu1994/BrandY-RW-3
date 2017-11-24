@@ -147,6 +147,8 @@ if __name__ == "__main__":
         # output = file_name+","+search_type+","+heuristic_type+","+str(weight)+","+str(len(path))+","+str(num_nodes_expanded)+","+str(delta.total_seconds())+"\n"
         # f.write(output)
         # f.close()
+        f = open('path.txt','w')
+        f.write("["+','.join(map(flat,path))+"]")
 
         # Write f,g,h data to a file in format[(f, g, h), (f, g, h), ..., (f, g, h)]
         f = open('extra.txt', 'w')

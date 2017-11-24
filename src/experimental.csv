@@ -14,3 +14,5 @@ map_benchmarks\map5\map5-1.txt,w,2,2,90,96,0.049
 map_benchmarks\map5\map5-1.txt,w,3,2,88,91,0.046
 map_benchmarks\map5\map5-1.txt,w,4,2,89,88,0.062
 map_benchmarks\map5\map5-1.txt,w,5,2,88,91,0.063
+map5-1.txt,u,5,1,143,11595,0.844
+map5-1.txt,u,5,1,143,11595,0.626
