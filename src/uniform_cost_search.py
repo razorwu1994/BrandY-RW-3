@@ -1,67 +1,11 @@
-import heapq as hq
 import math
+from priority_queue import PriorityQueue
+from cell import Cell
 
 # Constants for terrain type
 BLOCKED = 0
 UNBLOCKED = 1
 ROUGH = 2  # aka hard-to-traverse
-
-class Cell:
-    """
-    Represents a cell in the 160x120 grid
-
-    Attr:
-        pos: coordinates for this cell in the form of 2-tuple: (x, y)
-        parent: previously visited Cell before reaching current one, None by default
-        terrain_type: 0 for blocked, 1 for unblocked, 2 for hard-to-traverse
-        has_highway: 0 if it has no highway, 1 if it does
-        f: function value
-        g: distance from start
-        h: heuristic value
-
-    Only unblocked (1) and hard-to-traverse (2) terrains can have highways.
-    """
-
-    def __init__(self, pos, terrain_type, has_highway):
-        """
-        By default, set f = 0, g = 20000, h = 0
-        """
-        self.pos = pos
-        self.parent = None
-        self.terrain_type = terrain_type
-        self.has_highway = has_highway
-        self.g = 20000  # 20000 represents infinity
-        self.h = 0
-        self.f = self.g + self.h
-
-    def convert_to_char(self):
-        """
-        Converts cell to '0', '1', '2', 'a' or 'b' depending on its characteristics
-        """
-        if self.terrain_type == 1 and self.has_highway == True:
-            return 'a'
-        elif self.terrain_type == 2 and self.has_highway == True:
-            return 'b'
-        else:
-            return str(self.terrain_type)
-
-    def __eq__(self, other):
-        """
-        Compare two cells based on their positions
-        """
-        if not isinstance(other, Cell):
-            return False
-
-        if self.pos == other.pos:
-            return True
-        return False
-
-    def __str__(self):
-        """
-        Prints out the Cell in format ((x, y), f, g, h)
-        """
-        t_type = self.convert_to_char()
-        return "(({0}, {1}), {2}, f={3}, g={4}, h={5})".format(self.pos[0], self.pos[1], t_type, self.f, self.g, self.h)
 
 class UniformCostSearch:
     """
@@ -201,11 +145,11 @@ class UniformCostSearch:
             neighbor.g = total_cost
             neighbor.parent = s
             if (neighbor.f, neighbor) in fringe:
-                fringe.remove((neighbor.f, neighbor))  # Possible optimization opportunity?
+                fringe.remove_cell(neighbor)
 
             self.apply_heuristic(neighbor, goal)
             neighbor.f = neighbor.g + neighbor.h  # Update neighbor's f-value
-            hq.heappush(fringe, (neighbor.f, neighbor))  # Insert neighbor back into fringe
+            fringe.add_cell(neighbor, neighbor.f)  # Insert neighbor back into fringe
 
     def get_hash_key(self, pos):
         """
@@ -233,17 +177,19 @@ class UniformCostSearch:
         self.apply_heuristic(start_cell, goal)
         start_cell.f = start_cell.g + start_cell.h
         start_cell.parent = start
-        fringe = []
-        hq.heappush(fringe, (
-        start_cell.f, start_cell))  # Insert start to fringe, need to use a 2-tuple so the heapq orders based on f-value
+
+        fringe = PriorityQueue()
+        fringe.add_cell(start_cell, start_cell.f)
+
         closed = {}  # closed := empty dictionary
         num_nodes_expanded = 0
 
         while len(fringe) != 0:  # Checking that fringe is nonempty
-            (f, s) = hq.heappop(fringe)
+            s = fringe.pop_cell()
             if s.pos == goal:
                 path = self.retrieve_path(start, goal)  # Get path from start to goal
-                return path, num_nodes_expanded
+                path_length = round(self.grid[goal[0]][goal[1]].g, 2)
+                return path, path_length, num_nodes_expanded
 
             # Store in closed list
             key = self.get_hash_key(s.pos)
@@ -258,9 +204,9 @@ class UniformCostSearch:
             for neighbor in neighbors:
                 neighbor_key = self.get_hash_key(neighbor.pos)
                 if neighbor_key not in closed or neighbor.pos not in closed[neighbor_key]:
-                    if (neighbor.f, neighbor) not in fringe:
+                    if neighbor not in fringe:
                         neighbor.g = 20000  # 20,000 = infinity
                         neighbor.parent = None
                     self.update_vertex(s, neighbor, fringe, goal)
 
-        return None, -1  # No path found, no nodes expanded
+        return None, -1, -1  # No path found, no nodes expanded
