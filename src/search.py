@@ -142,6 +142,9 @@ if __name__ == "__main__":
         delta = t2 - t1
         print 'Time (In seconds):{}'.format(delta.total_seconds())
 
+        f = open('path.txt','w')
+        f.write("["+','.join(map(flat,path))+"]")
+        f.close()
         # Write path to a file,toggle this off when doing the demo
         # f = open('experimental.csv','a+')
         # output = file_name+","+search_type+","+heuristic_type+","+str(weight)+","+str(len(path))+","+str(num_nodes_expanded)+","+str(delta.total_seconds())+"\n"
