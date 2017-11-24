@@ -243,17 +243,6 @@ class UniformCostSearch:
             (f, s) = hq.heappop(fringe)
             if s.pos == goal:
                 path = self.retrieve_path(start, goal)  # Get path from start to goal
-
-                avgLength = 0;
-                numKeys = len(closed)
-
-                for key in closed:
-                    avgLength += len(closed[key])
-
-                avgLength /= numKeys * 1.0
-
-                print "average length of bucket in closed list: {}".format(avgLength)
-
                 return path, num_nodes_expanded
 
             # Store in closed list
