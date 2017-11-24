@@ -64,73 +64,10 @@ def flat(tuple):
     return "\""+",".join(map(str,tuple))+"\""
 
 if __name__ == "__main__":
-    # For testing
-    (start, goal, grid) = read_from_file("map5-1.txt")
-    uniform_cost_search = ucs.UniformCostSearch(grid)
-    path, path_length, num_nodes_expanded = uniform_cost_search.search(start, goal)
-
-    # Output result
-    if path is None:
-        print 'No path found'
-        sys.exit()
-
-    print 'Path: {}'.format(path)
-    print 'Path length: {}'.format(path_length)
-    print 'Time (# nodes expanded): {}'.format(num_nodes_expanded)
-
-
-    # # Make sure there are enough argument given
-    # if (len(sys.argv) < 3):
-    #     print "2 arguments required: search.py [file] [search type] [heuristic type] [weight]"
-    #     exit()
-    # t1 = datetime.now()
-    #
-    # # Get file name, search type (also heuristic type and weight, if given)
-    # file_name = sys.argv[1]
-    # search_type = sys.argv[2]  # u = uniform-cost search, a = A* search, w = weighted A* search
-    # heuristic_type = -1
-    # if len(sys.argv) > 3:
-    #     heuristic_type = sys.argv[3]  # 1:linear, 2:manhatan,3:diagonal,4:eucliden,5:sample in instruction
-    # else:
-    #     heuristic_type = "5"
-    #
-    # weight = 1
-    # if len(sys.argv) > 4:
-    #     weight = sys.argv[4] # Weight to be used in weighted A* search
-    #
-    # # Read from file
-    # (start, goal, grid) = read_from_file(file_name)
-    #
-    # # Select heuristic function
-    # heuristic = None
-    # if heuristic_type == "1":
-    #     heuristic = hrsts.heu_linear
-    # elif heuristic_type == "2":
-    #     heuristic = hrsts.heu_manhatan
-    # elif heuristic_type == "3":
-    #     heuristic = hrsts.heu_diagonal
-    # elif heuristic_type == "4":
-    #     heuristic = hrsts.heu_eucliden_squared
-    # elif heuristic_type == "5":
-    #     heuristic = hrsts.heu_sample
-    # else:
-    #     raise ValueError('Please pick a valid heuristic from 1 to 5')
-    #
-    # # Use chosen search to find path
-    # path = None
-    # num_nodes_expanded = -1
-    #
-    # if search_type == "u":
-    #     uniform_cost_search = ucs.UniformCostSearch(grid)
-    #     path, path_length, num_nodes_expanded = uniform_cost_search.search(start, goal)
-    # elif search_type == "a":
-    #     heuristic_search = hs.HeuristicSearch(grid, heuristic)
-    #     path, path_length, num_nodes_expanded = heuristic_search.search(start, goal)
-    # elif search_type == "w":
-    #     weighted_heuristic_search = whs.WeightedHeuristicSearch(grid, heuristic, weight)
-    #     path, path_length, num_nodes_expanded = weighted_heuristic_search.search(start, goal)
-    # else:
-    #     raise ValueError('Please use a valid search type: u = uniform-cost search, a = A* search, w = weighted A* search')
+    # # For testing
+    # (start, goal, grid) = read_from_file("map5-1.txt")
+    # uniform_cost_search = ucs.UniformCostSearch(grid)
+    # path, path_length, num_nodes_expanded = uniform_cost_search.search(start, goal)
     #
     # # Output result
     # if path is None:
@@ -140,34 +77,94 @@ if __name__ == "__main__":
     # print 'Path: {}'.format(path)
     # print 'Path length: {}'.format(path_length)
     # print 'Time (# nodes expanded): {}'.format(num_nodes_expanded)
-    # t2 = datetime.now()
-    # delta = t2 - t1
-    # print 'Time (In seconds):{}'.format(delta.total_seconds())
-    #
-    # f = open('path.txt','w')
-    # f.write("["+','.join(map(flat,path))+"]")
+
+    # Make sure there are enough argument given
+    if (len(sys.argv) < 3):
+        print "2 arguments required: search.py [file] [search type] [heuristic type] [weight]"
+        exit()
+    t1 = datetime.now()
+
+    # Get file name, search type (also heuristic type and weight, if given)
+    file_name = sys.argv[1]
+    search_type = sys.argv[2]  # u = uniform-cost search, a = A* search, w = weighted A* search
+    heuristic_type = -1
+    if len(sys.argv) > 3:
+        heuristic_type = sys.argv[3]  # 1:linear, 2:manhatan,3:diagonal,4:eucliden,5:sample in instruction
+    else:
+        heuristic_type = "5"
+
+    weight = 1
+    if len(sys.argv) > 4:
+        weight = sys.argv[4] # Weight to be used in weighted A* search
+
+    # Read from file
+    (start, goal, grid) = read_from_file(file_name)
+
+    # Select heuristic function
+    heuristic = None
+    if heuristic_type == "1":
+        heuristic = hrsts.heu_linear
+    elif heuristic_type == "2":
+        heuristic = hrsts.heu_manhatan
+    elif heuristic_type == "3":
+        heuristic = hrsts.heu_diagonal
+    elif heuristic_type == "4":
+        heuristic = hrsts.heu_eucliden_squared
+    elif heuristic_type == "5":
+        heuristic = hrsts.heu_sample
+    else:
+        raise ValueError('Please pick a valid heuristic from 1 to 5')
+
+    # Use chosen search to find path
+    path = None
+    num_nodes_expanded = -1
+
+    if search_type == "u":
+        uniform_cost_search = ucs.UniformCostSearch(grid)
+        path, path_length, num_nodes_expanded = uniform_cost_search.search(start, goal)
+    elif search_type == "a":
+        heuristic_search = hs.HeuristicSearch(grid, heuristic)
+        path, path_length, num_nodes_expanded = heuristic_search.search(start, goal)
+    elif search_type == "w":
+        weighted_heuristic_search = whs.WeightedHeuristicSearch(grid, heuristic, weight)
+        path, path_length, num_nodes_expanded = weighted_heuristic_search.search(start, goal)
+    else:
+        raise ValueError('Please use a valid search type: u = uniform-cost search, a = A* search, w = weighted A* search')
+
+    # Output result
+    if path is None:
+        print 'No path found'
+        sys.exit()
+
+    print 'Path: {}'.format(path)
+    print 'Path length: {}'.format(path_length)
+    print 'Time (# nodes expanded): {}'.format(num_nodes_expanded)
+    t2 = datetime.now()
+    delta = t2 - t1
+    print 'Time (In seconds):{}'.format(delta.total_seconds())
+
+    f = open('path.txt','w')
+    f.write("["+','.join(map(flat,path))+"]")
+    f.close()
+    # Write path to a file,toggle this off when doing the demo
+    # f = open('experimental.csv','a+')
+    # output = file_name+","+search_type+","+heuristic_type+","+str(weight)+","+str(len(path))+","+str(num_nodes_expanded)+","+str(delta.total_seconds())+"\n"
+    # f.write(output)
     # f.close()
-    # # Write path to a file,toggle this off when doing the demo
-    # # f = open('experimental.csv','a+')
-    # # output = file_name+","+search_type+","+heuristic_type+","+str(weight)+","+str(len(path))+","+str(num_nodes_expanded)+","+str(delta.total_seconds())+"\n"
-    # # f.write(output)
-    # # f.close()
-    # f = open('path.txt','w')
-    # f.write("["+','.join(map(flat,path))+"]")
-    #
-    # # Write f,g,h data to a file in format[(f, g, h), (f, g, h), ..., (f, g, h)]
-    # f = open('extra.txt', 'w')
-    # f.write("[")
-    # outputArray = []
-    # for i in range(len(grid)):
-    #     for j in range(len(grid[0])):
-    #         f_value = round(grid[i][j].f, 2)
-    #         g_value = round(grid[i][j].g, 2)
-    #         h_value = round(grid[i][j].h, 2)
-    #         outputArray.append([f_value, g_value, h_value])
-    #     f.write("["+','.join(map(flat,outputArray))+"]")
-    #     if i != len(grid)-1:
-    #         f.write(",")
-    #     outputArray=[]
-    # f.write("]")
-    # f.close()
+
+    # Write f,g,h data to a file in format[(f, g, h), (f, g, h), ..., (f, g, h)]
+    f = open('extra.txt', 'w')
+    f.write("[")
+    outputArray = []
+    for i in range(len(grid)):
+        for j in range(len(grid[0])):
+            f_value = round(grid[i][j].f, 2)
+            g_value = round(grid[i][j].g, 2)
+            h_value = round(grid[i][j].h, 2)
+            outputArray.append([f_value, g_value, h_value])
+        f.write("["+','.join(map(flat,outputArray))+"]")
+        if i != len(grid)-1:
+            f.write(",")
+        outputArray=[]
+    f.write("]")
+    f.close()
