@@ -217,7 +217,6 @@ class UniformCostSearch:
             # For each neighbor
             neighbors = self.get_neighbors(s)
             for neighbor in neighbors:
-                neighbor_key = self.get_hash_key(neighbor.pos)
                 if not self.contained_in_closed(neighbor.pos, closed):
                     if neighbor not in fringe:
                         neighbor.g = 20000  # 20,000 = infinity
