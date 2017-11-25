@@ -2,7 +2,7 @@ from heuristic_search import HeuristicSearch
 
 class WeightedHeuristicSearch(HeuristicSearch):
     """
-    Class that performs heuristic search on a 160x120 grid.
+    Class that performs weighted heuristic search on a 160x120 grid.
     Use search to find a path of coordinates to follow from start to finish.
 
     Attributes:
