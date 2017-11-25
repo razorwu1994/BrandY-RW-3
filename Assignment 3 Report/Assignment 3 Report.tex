@@ -64,49 +64,49 @@ We also optimized the way the heuristic was applied to the grid. At first we app
 
 \noindent 1. Diagonal Distance Heuristic
 
+The best admissible/consistent heuristic we used was the diagonal distance heuristic. The diagonal distance heuristic is similar to the Manhattan distance heuristic, except diagonal steps are allowed. 
+
 The formula for cell $(x1,y1)$ and goal $(x2, y2)$ is:
-$$h((x1, y1)) = dx + dy (\sqrt{2} - 2) * min(dx, dy)$$
-where $dx = |x2 - x1|$ and $dy = |y2 - y1|$.
+$$h((x1, y1)) = 0.25 * (dx + dy) +  (\frac{\sqrt{2}}{4} - 2(0.25)) * min(dx, dy)$$
+where $dx = |x2 - x1|$ and $dy = |y2 - y1|$. The 0.25 comes from the cost to move horizontally and vertically between highway cells and $\frac{\sqrt{2}}{4}$ is the cost from moving diagonally between highway cells
 
-The best admissible/consistent heuristic we used was the diagonal distance heuristic. The diagonal distance heuristic is similar to the Manhattan distance heuristic, except it every cell in the grid is an unblocked cell, then computes the shortest path using diagonal, horizontal and vertical steps it takes to move from the start to the goal. 
-
-Diagonal distance was preferred over Euclidean distance because the movements it allows is close to the movements allowed on the actual grid. Therefore, the heuristic value will come closer to the actual optimal distance than the value from Euclidean distance.
+Diagonal distance is better than Manhattan distance because it is admissible and Manhattan is not. Diagonal distance was preferred over Euclidean distance because the movements it allows is closer to the movements allowed on the actual grid. Therefore, the heuristic value will come closer to the actual optimal distance than the value from Euclidean distance.
 
 \bigskip
 \noindent 2. Euclidean Distance
 
-Euclidean distance is also a admissible/consistent heuristic as it works on a subproblem of the grid problem where any degree of movement is allowed.
+Euclidean distance is also a admissible/consistent heuristic as it works on a subproblem of the grid problem where any degree of movement is allowed. We also cut the distance by 4 to mimic movement along a highway.
 
-The formula for cell $(x1, y1)$ and goal $(x2, y2)$ is:
-$$h((x1,y1)) = \sqrt{(x2-x1)^2 + (y2-y1)^2}$$
+The formula for cell $(x_1, y_1)$ and goal $(x_2, y_2)$ is:
+$$h((x_1,y_1)) = \frac{\sqrt{(x_2-x_1)^2 + (y_2-y_1)^2}}{4}$$
 
 \bigskip
 \noindent 3. Manhattan Distance
 
-This heuristic assumes every cell in the grid is an unblocked cell, then computes the shortest path using only horizontal and vertical steps.
+This heuristic assumes every cell in the grid is an unblocked cell with a highway on it. Then it computes the shortest path using only horizontal and vertical steps. We assumed every cell is a highway because using only unblocked cells results in higher than usual h-values. Often a large portion of the optimal path is along a highway, so the heuristic should reflect this.
 
-The formula for cell $(x1, y1)$ and goal $(x2, y2)$ is:
-$$h((x1, y1)) = dx + dy$$
-where $dx = |x2 - x1|$ and $dy = |y2 - y1|$.
+The formula for cell $(x_1, y_1)$ and goal $(x_2, y_2)$ is:
+$$h((x_1, y_1)) = 0.25 * (dx + dy)$$
+where $dx = |x_2 - x_1|$ and $dy = |y_2 - y_1|$. The $0.25$ comes from the cost it takes to move horizontally or vertically in one step.
 
-The heuristic is inadmissible for the grid problem because diagonal movements are allowed. As a result, Manhattan distance tends to overestimate the actual cost to the goal. Nevertheless, this metric can come in handy for sequential A* search because it overestimates.
+The heuristic is inadmissible for the grid problem because diagonal movements are normally allowed. As a result, Manhattan distance tends to overestimate the actual cost to the goal. Nevertheless, this metric can come in handy for sequential A* search because it overestimates the optimal distance slightly.
 
 \bigskip
 \noindent 4. Euclidean Squared
 
-The formula for cell $(x1, y1)$ and goal $(x2, y2)$ is:
-$$h((x1,y1)) = (x2-x1)^2 + (y2-y1)^2$$
+The formula for cell $(x_1, y_1)$ and goal $(x_2, y_2)$ is:
+$$h((x_1,y_1)) = \frac{(x_2-x_1)^2 + (y_2-y_1)^2}{16}$$
 
-Similar to Euclidean distance, but outputting much higher values, so the heuristic is not admissible. However, because the square root is not used, some computation time is saved. In general, pretty bad heuristic because its h-value will tend to be much higher than the g-value.
+This heuristic is similar to Euclidean distance, except it squares the output from Euclidean distance. As a result, it output very high values and it is not admissible. However, because the square root operation is not used, some computation time is saved. In general, this heuristic is pretty bad because its h-values will tend to be much higher than the g-values, but that may come in handy with sequential A* search.
 
 \bigskip
 \noindent 5. Sample Heuristic
 
 The heuristic given in the assignment instructions. May not be admissible or consistent for the grid problem. 
 
-The formula for cell $(x1, y1)$ and goal $(x2, y2)$ is:
-$$h((x1,y1)) = \sqrt{2} * min(dx, dy) + max(dx, dy) - min(dx, dy)$$
-where $dx = |x2 - x1|$ and $dy = |y2 - y1|$. 
+The formula for cell $(x_1, y_1)$ and goal $(x_2, y_2)$ is:
+$$h((x_1,y_1)) = \sqrt{2} * min(dx, dy) + max(dx, dy) - min(dx, dy)$$
+where $dx = |x_2 - x_1|$ and $dy = |y_2 - y_1|$. 
 
 \pagebreak %---------------------------------------------------------------
 
