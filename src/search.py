@@ -65,7 +65,7 @@ def flat(tuple):
 
 if __name__ == "__main__":
     # # For testing
-    # (start, goal, grid) = read_from_file("map5-1.txt")
+    # (start, goal, grid) = read_from_file("map5-1-test.txt")
     # uniform_cost_search = ucs.UniformCostSearch(grid)
     # path, path_length, num_nodes_expanded = uniform_cost_search.search(start, goal)
     #
@@ -78,7 +78,7 @@ if __name__ == "__main__":
     # print 'Path length: {}'.format(path_length)
     # print 'Time (# nodes expanded): {}'.format(num_nodes_expanded)
 
-    # Make sure there are enough argument given
+    # Make sure there are enough arguments given
     if (len(sys.argv) < 3):
         print "2 arguments required: search.py [file] [search type] [heuristic type] [weight]"
         exit()
