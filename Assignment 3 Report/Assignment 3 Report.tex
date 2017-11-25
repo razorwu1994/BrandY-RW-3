@@ -14,7 +14,7 @@ Here are two examples of the GUI. The first image shows the overall GUI. The but
 
 \medskip
 
-\noindent \includegraphics[scale=0.35]{"a-map1-0"}
+\includegraphics[scale=0.30]{"a-map1-0"}
 
 \medskip 
 
@@ -22,30 +22,34 @@ This second image shows a closer look to the grid representation. Red squares re
 
 \medskip
 
-\includegraphics[scale=0.45]{"a-map1-4"}
+\includegraphics[scale=0.40]{"a-map1-4"}
 
 \medskip
+
+Control Panel
+
+\includegraphics[scale=0.4]{"control-panel"}
 
 \pagebreak %----------------------------------------------------------------------
 
 \noindent \textbf{B. UCS, A* and Weighted A* Implementations}
 
-There are three examples shown below, running uniform-cost search (UCS), A* and weighted A* respectively on the same map.
+There are three examples shown below, running uniform-cost search (UCS), A* and weighted A* respectively on the same map(map5-1).
 
 1. Uniform-cost search:\newline
 \medskip
-\textbf{Path length:143, Node Expanded:11595,	Run Time: 0.528}\newline
-\noindent \includegraphics[scale=0.4]{"b-map5-1-u"}\newline
+\textbf{Path length:81.08, Node Expanded:11595,	Run Time: 0.384272}\newline
+\noindent \includegraphics[scale=0.2]{"b-map5-1-u"}\newline
 
-2. A * search: \newline
+2. A * search(h=4): \newline
 \medskip
-\textbf{Path length:136, Node Expanded:1466,	Run Time: 0.109}\newline
-\noindent \includegraphics[scale=0.4]{"b-map5-1-a"}\newline
+\textbf{Path length:137.33, Node Expanded:234,	Run Time: 0.056771}\newline
+\noindent \includegraphics[scale=0.2]{"b-map5-1-a"}\newline
 
 3. Weighted A * search search:\newline
 \medskip
-\textbf{Path length:93, Node Expanded:93,	Run Time: 0.047}\newline
-\noindent \includegraphics[scale=0.4]{"b-map5-1-w-2"}\newline
+\textbf{Path length:144.03, Node Expanded:107,	Run Time: 0.05289}\newline
+\noindent \includegraphics[scale=0.2]{"b-map5-1-w-2"}\newline
 
 
 \pagebreak %--------------------------------------------------------------------
@@ -112,15 +116,15 @@ where $dx = |x_2 - x_1|$ and $dy = |y_2 - y_1|$.
 
 \noindent \textbf{E. UCS, A*, Weighted A* Statistics}
 
-\noindent \includegraphics[scale=0.6]{"avg-nodeexpanded"}
+\noindent \includegraphics[scale=0.5]{"avg-nodeexpanded"}
 
 \medskip
 
-\noindent \includegraphics[scale=0.8]{"avg-pathlength"}
+\noindent \includegraphics[scale=0.5]{"avg-pathlength"}
 
 \medskip
 
-\noindent \includegraphics[scale=0.8]{"avg-runtime"}
+\noindent \includegraphics[scale=0.5]{"avg-runtime"}
 
 \medskip
 
@@ -129,5 +133,16 @@ where $dx = |x_2 - x_1|$ and $dy = |y_2 - y_1|$.
 \noindent \textbf{F. Analysis of UCS, A* \& Weighted A*}
 
 Between the heuristics, heuristic 3 (diagonal distance) performed the best in terms of path length and heuristic 4 (Euclidean squared) performed the best in terms of time. Heuristic 1 (H1) also performed better than H3 in terms of nodes expanded and slightly better in terms of time. 
+
+--Richard---(delete this line after Brandon confirmed and combined below statements)\newline
+
+UCS : it has the largest node to expand and highest running time, this proves its optimality based on sacrifice of speed and memory. But it guarantees an optimal path will be generated.\newline
+
+A* search: method depends on different type of heuristics.There are inadmissible ones, and so some A* family search used that heuristic (like h=4) expand much less nodes and run time than others because of this.Hence,the result path length is certainly worst sub-optimal among all heuristics.\newline
+
+Weighted A* search: now we have one more factor to add bias on the heuristic(pure A* treat this weight as 1).So clearly we can see, larger weight will have less node expansion and run time but for those "good" heuristics, the sacrifice for sub-optimality isn't that expensive. Like h=1,h=3,the weighted A* search with 2.5 weight saves a lot of time and memory to search but nearly get the exact same path length!\newline
+
+certainly ,h1 and h3 are best two heuristics to use among all 5 proposed ones. But h3 has better performance in every aspect except (finding optimal path length,h3 has slightly higher path length than h1)
+
 
 \end{document}
