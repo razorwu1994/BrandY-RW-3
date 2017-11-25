@@ -103,13 +103,13 @@ if __name__ == "__main__":
     # Select heuristic function
     heuristic = None
     if heuristic_type == "1":
-        heuristic = hrsts.heu_linear
+        heuristic = hrsts.heu_euclidean
     elif heuristic_type == "2":
-        heuristic = hrsts.heu_manhatan
+        heuristic = hrsts.heu_manhattan
     elif heuristic_type == "3":
         heuristic = hrsts.heu_diagonal
     elif heuristic_type == "4":
-        heuristic = hrsts.heu_eucliden_squared
+        heuristic = hrsts.heu_euclidean_squared
     elif heuristic_type == "5":
         heuristic = hrsts.heu_sample
     else:
