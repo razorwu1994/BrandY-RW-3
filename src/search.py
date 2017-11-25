@@ -147,10 +147,10 @@ if __name__ == "__main__":
     f.write("["+','.join(map(flat,path))+"]")
     f.close()
     # Write path to a file,toggle this off when doing the demo
-    # f = open('experimental.csv','a+')
-    # output = file_name+","+search_type+","+heuristic_type+","+str(weight)+","+str(len(path))+","+str(num_nodes_expanded)+","+str(delta.total_seconds())+"\n"
-    # f.write(output)
-    # f.close()
+    f = open('experimental.csv','a+')
+    output = file_name+","+search_type+","+heuristic_type+","+str(weight)+","+str(len(path))+","+str(num_nodes_expanded)+","+str(delta.total_seconds())+"\n"
+    f.write(output)
+    f.close()
 
     # Write f,g,h data to a file in format[(f, g, h), (f, g, h), ..., (f, g, h)]
     f = open('extra.txt', 'w')
