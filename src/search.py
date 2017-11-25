@@ -143,28 +143,28 @@ if __name__ == "__main__":
     delta = t2 - t1
     print 'Time (In seconds):{}'.format(delta.total_seconds())
 
-    f = open('path.txt','w')
-    f.write("["+','.join(map(flat,path))+"]")
-    f.close()
-    # Write path to a file,toggle this off when doing the demo
-    # f = open('experimental.csv','a+')
-    # output = file_name+","+search_type+","+heuristic_type+","+str(weight)+","+str(len(path))+","+str(num_nodes_expanded)+","+str(delta.total_seconds())+"\n"
-    # f.write(output)
+    # f = open('path.txt','w')
+    # f.write("["+','.join(map(flat,path))+"]")
     # f.close()
+    # Write path to a file,toggle this off when doing the demo
+    f = open('experimental.csv','a+')
+    output = file_name+","+search_type+","+heuristic_type+","+str(weight)+","+str(len(path))+","+str(num_nodes_expanded)+","+str(delta.total_seconds())+"\n"
+    f.write(output)
+    f.close()
 
     # Write f,g,h data to a file in format[(f, g, h), (f, g, h), ..., (f, g, h)]
-    f = open('extra.txt', 'w')
-    f.write("[")
-    outputArray = []
-    for i in range(len(grid)):
-        for j in range(len(grid[0])):
-            f_value = round(grid[i][j].f, 2)
-            g_value = round(grid[i][j].g, 2)
-            h_value = round(grid[i][j].h, 2)
-            outputArray.append([f_value, g_value, h_value])
-        f.write("["+','.join(map(flat,outputArray))+"]")
-        if i != len(grid)-1:
-            f.write(",")
-        outputArray=[]
-    f.write("]")
-    f.close()
+    # f = open('extra.txt', 'w')
+    # f.write("[")
+    # outputArray = []
+    # for i in range(len(grid)):
+    #     for j in range(len(grid[0])):
+    #         f_value = round(grid[i][j].f, 2)
+    #         g_value = round(grid[i][j].g, 2)
+    #         h_value = round(grid[i][j].h, 2)
+    #         outputArray.append([f_value, g_value, h_value])
+    #     f.write("["+','.join(map(flat,outputArray))+"]")
+    #     if i != len(grid)-1:
+    #         f.write(",")
+    #     outputArray=[]
+    # f.write("]")
+    # f.close()
