@@ -151,6 +151,25 @@ class UniformCostSearch:
             neighbor.f = neighbor.g + neighbor.h  # Update neighbor's f-value
             fringe.add_cell(neighbor, neighbor.f)  # Insert neighbor back into fringe
 
+
+    def find_path_cost(self, path):
+        """
+        Finds the actual path cost from start to goal based on the current grid.
+        Mainly for testing.
+
+        :param path: list of coordinates leading from start to goal
+        :return: path cost
+        """
+        total_cost = 0
+        for i in range(1, len(path)):
+            pos1 = path[i - 1]
+            pos2 = path[i]
+            cell1 = self.grid[pos1[0]][pos1[1]]
+            cell2 = self.grid[pos2[0]][pos2[1]]
+            total_cost += self.get_cost(cell1, cell2)
+
+        return total_cost
+
     def get_hash_key(self, pos):
         """
         Get the hash key for given (x,y) position
