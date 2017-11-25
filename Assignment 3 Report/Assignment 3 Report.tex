@@ -62,18 +62,7 @@ We also optimized the way the heuristic was applied to the grid. At first we app
 
 \noindent \textbf{D. Heuristics}
 
-\noindent 1. Diagonal Distance Heuristic
-
-The best admissible/consistent heuristic we used was the diagonal distance heuristic. The diagonal distance heuristic is similar to the Manhattan distance heuristic, except diagonal steps are allowed. 
-
-The formula for cell $(x1,y1)$ and goal $(x2, y2)$ is:
-$$h((x1, y1)) = 0.25 * (dx + dy) +  (\frac{\sqrt{2}}{4} - 2(0.25)) * min(dx, dy)$$
-where $dx = |x2 - x1|$ and $dy = |y2 - y1|$. The 0.25 comes from the cost to move horizontally and vertically between highway cells and $\frac{\sqrt{2}}{4}$ is the cost from moving diagonally between highway cells
-
-Diagonal distance is better than Manhattan distance because it is admissible and Manhattan is not. Diagonal distance was preferred over Euclidean distance because the movements it allows is closer to the movements allowed on the actual grid. Therefore, the heuristic value will come closer to the actual optimal distance than the value from Euclidean distance.
-
-\bigskip
-\noindent 2. Euclidean Distance
+\noindent 1. Euclidean Distance
 
 Euclidean distance is also a admissible/consistent heuristic as it works on a subproblem of the grid problem where any degree of movement is allowed. We also cut the distance by 4 to mimic movement along a highway.
 
@@ -81,7 +70,7 @@ The formula for cell $(x_1, y_1)$ and goal $(x_2, y_2)$ is:
 $$h((x_1,y_1)) = \frac{\sqrt{(x_2-x_1)^2 + (y_2-y_1)^2}}{4}$$
 
 \bigskip
-\noindent 3. Manhattan Distance
+\noindent 2. Manhattan Distance
 
 This heuristic assumes every cell in the grid is an unblocked cell with a highway on it. Then it computes the shortest path using only horizontal and vertical steps. We assumed every cell is a highway because using only unblocked cells results in higher than usual h-values. Often a large portion of the optimal path is along a highway, so the heuristic should reflect this.
 
@@ -90,6 +79,17 @@ $$h((x_1, y_1)) = 0.25 * (dx + dy)$$
 where $dx = |x_2 - x_1|$ and $dy = |y_2 - y_1|$. The $0.25$ comes from the cost it takes to move horizontally or vertically in one step.
 
 The heuristic is inadmissible for the grid problem because diagonal movements are normally allowed. As a result, Manhattan distance tends to overestimate the actual cost to the goal. Nevertheless, this metric can come in handy for sequential A* search because it overestimates the optimal distance slightly.
+
+\bigskip
+\noindent3. Diagonal Distance Heuristic
+
+The best admissible/consistent heuristic we used was the diagonal distance heuristic. The diagonal distance heuristic is similar to the Manhattan distance heuristic, except diagonal steps are allowed. 
+
+The formula for cell $(x1,y1)$ and goal $(x2, y2)$ is:
+$$h((x1, y1)) = 0.25 * (dx + dy) +  (\frac{\sqrt{2}}{4} - 2(0.25)) * min(dx, dy)$$
+where $dx = |x2 - x1|$ and $dy = |y2 - y1|$. The 0.25 comes from the cost to move horizontally and vertically between highway cells and $\frac{\sqrt{2}}{4}$ is the cost from moving diagonally between highway cells
+
+Diagonal distance is better than Manhattan distance because it is admissible and Manhattan is not. Diagonal distance was preferred over Euclidean distance because the movements it allows is closer to the movements allowed on the actual grid. Therefore, the heuristic value will come closer to the actual optimal distance than the value from Euclidean distance.
 
 \bigskip
 \noindent 4. Euclidean Squared
@@ -123,4 +123,11 @@ where $dx = |x_2 - x_1|$ and $dy = |y_2 - y_1|$.
 \noindent \includegraphics[scale=0.8]{"avg-runtime"}
 
 \medskip
+
+\pagebreak %---------------------------------------------------------------
+
+\noindent \textbf{F. Analysis of UCS, A* \& Weighted A*}
+
+Between the heuristics, heuristic 3 (diagonal distance) performed the best in terms of path length and heuristic 4 (Euclidean squared) performed the best in terms of time. Heuristic 1 (H1) also performed better than H3 in terms of nodes expanded and slightly better in terms of time. 
+
 \end{document}
