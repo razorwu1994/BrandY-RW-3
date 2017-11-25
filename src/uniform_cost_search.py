@@ -89,7 +89,7 @@ class UniformCostSearch:
             - Moving from highway to highway cuts overall cost by a factor of 4
 
         Parameters:
-        s = Cell for the furthest cell on the optimal path
+        s = Cell chosen for exansion
         neighbor = Cell for a neighbor of s
 
         Returns: cost to move from s to neighbor
@@ -161,6 +161,21 @@ class UniformCostSearch:
         hash_code = 91
         return pos[0] * hash_code + pos[1]
 
+    def contained_in_closed(self, pos, closed):
+        """
+        Check if cell at given position is contained in the cell or not
+
+        :param pos: position of the cell
+        :param closed: closed dictionary
+        :return: True if position is contained in the dictionary, False otherwise
+        """
+        key = self.get_hash_key(pos)
+
+        if key in closed:
+            if pos in closed[key]:
+                return True
+        return False
+
     def search(self, start, goal):
         """
         Do uniform cost search on the grid, find a path from start to goal
@@ -203,7 +218,7 @@ class UniformCostSearch:
             neighbors = self.get_neighbors(s)
             for neighbor in neighbors:
                 neighbor_key = self.get_hash_key(neighbor.pos)
-                if neighbor_key not in closed or neighbor.pos not in closed[neighbor_key]:
+                if not self.contained_in_closed(neighbor.pos, closed):
                     if neighbor not in fringe:
                         neighbor.g = 20000  # 20,000 = infinity
                         neighbor.parent = None
