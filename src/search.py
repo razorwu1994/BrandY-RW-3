@@ -66,8 +66,8 @@ def flat(tuple):
 if __name__ == "__main__":
     # # For testing
     # (start, goal, grid) = read_from_file("map1.txt", isSequential=True)
-    # w1 = 1.5
-    # w2 = 5
+    # w1 = 2.5
+    # w2 = 1.5
     # sequential_heuristic_search = shs.SequentialHeuristicSearch(grid, 1.5, 1.5)
     # path, path_length, num_nodes_expanded, memory_requirement = sequential_heuristic_search.search(start, goal)
     #
@@ -194,7 +194,6 @@ if __name__ == "__main__":
                 f.write(",")
             outputArray = []
         f.write("]")
-        # OUTPUT DATA HERE--------------------------------------------------------------
         f.close()
     else:
         f = open('extra.txt', 'w')
