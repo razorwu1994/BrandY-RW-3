@@ -19,6 +19,7 @@ class PriorityQueue:
         self.pq = []
         self.entry_finder = {}
         self.size = 0
+        self.maxsize = self.size
         self.counter = itertools.count()
 
     def add_cell(self, cell, priority=0):
@@ -36,6 +37,9 @@ class PriorityQueue:
         self.entry_finder[cell] = entry
         hq.heappush(self.pq, entry)
         self.size += 1
+
+        if self.size > self.maxsize:
+            self.maxsize = self.size
 
     def remove_cell(self, cell):
         """
@@ -61,6 +65,18 @@ class PriorityQueue:
                 del self.entry_finder[cell]
                 return cell
         raise KeyError('pop from an empty priority queue')
+
+    def get_min_key(self):
+        """
+        Peek at the priority (KEY) of the lowest priority cell
+
+        :return: priority of the lowest priority cell
+        """
+        if self.size == 0:
+            raise KeyError('peek into empty priority queue')
+
+        priority, count, cell = self.pq[0]
+        return priority
 
     def __len__(self):
         return self.size
