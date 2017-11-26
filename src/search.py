@@ -50,20 +50,11 @@ def read_from_file(file_name, isSequential=False):
             x +=1
             tempCell = None
             if char=='0' or char=='1' or char=='2':
-                if isSequential:
-                    tempCell = ss.Cell((y, x), int(char), False)
-                else:
-                    tempCell = ucs.Cell((y, x), int(char), False)
+                tempCell = ss.Cell((y, x), int(char), False) if isSequential else ucs.Cell2((y, x), int(char), False, 5)
             elif char == 'a':
-                if isSequential:
-                    tempCell = ss.Cell((y, x), 1, True)
-                else:
-                    tempCell = ucs.Cell((y, x), 1, True)
+                tempCell = ss.Cell((y, x), 1, True) if isSequential else ucs.Cell2((y, x), 1, True, 5)
             elif char == 'b':
-                if isSequential:
-                    tempCell = ss.Cell((y, x), 2, True)
-                else:
-                    tempCell = ucs.Cell((y, x), 2, True)
+                tempCell = ss.Cell((y, x), 2, True) if isSequential else ucs.Cell2((y, x), 2, True, 5)
             row.append(tempCell)
         grid.append(row)
 
