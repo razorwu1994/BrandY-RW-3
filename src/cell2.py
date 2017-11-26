@@ -9,7 +9,6 @@ class Cell2:
         parent: previously visited Cell before reaching current one, None by default
         terrain_type: 0 for blocked, 1 for unblocked, 2 for hard-to-traverse
         has_highway: 0 if it has no highway, 1 if it does
-        f: list of function values
         g: list of distances from start
         h: list of heuristic values
 
@@ -28,7 +27,6 @@ class Cell2:
         self.parent = []
         self.g = []
         self.h = []
-        self.f = []
         for i in range(num_heuristics):
             parent = None
             g = INFINITY
@@ -36,7 +34,6 @@ class Cell2:
             self.parent.append(parent)
             self.g.append(g)  # 20000 represents infinity
             self.h.append(h)
-            self.f.append(g + h)
 
     def convert_to_char(self):
         """
@@ -65,16 +62,14 @@ class Cell2:
         Prints out the Cell in format ((x, y), f, g, h)
         """
         t_type = self.convert_to_char()
-        f_temp = self.f[:]
         g_temp = self.g[:]
         h_temp = self.h[:]
 
         for i in range(len(f_temp)):
-            f_temp[i] = round(f_temp[i], 2)
             g_temp[i] = round(g_temp[i], 2)
             h_temp[i] = round(h_temp[i], 2)
 
-        return "(({0}, {1}), {2}, f={3}, g={4}, h={5})".format(self.pos[0], self.pos[1], t_type, f_temp, g_temp, h_temp)
+        return "(({0}, {1}), {2}, g={4}, h={5})".format(self.pos[0], self.pos[1], t_type, f_temp, g_temp, h_temp)
 
     def __hash__(self):
         """

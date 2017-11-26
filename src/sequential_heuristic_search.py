@@ -184,19 +184,19 @@ class SequentialHeuristicSearch:
         Insert the given cell into the given dictionary, if it does not exist in the dictionary already
 
         :param cell: cell to place in dictionary
-        :param closed: dictionary of hash keys to a list of cells with that hash key
+        :param dict: dictionary of hash keys to a list of cells with that hash key
         :return: None
         """
         # If cell is already in closed, do not insert
-        if self.contained_in_dict(cell.pos, closed):
+        if self.contained_in_dict(cell.pos, dict):
             return
 
         # If cell is not in closed, add to existing bucket or create a new bucket
         hash_key = self.get_hash_key(cell.pos)
-        if hash_key in closed:  # Uses hash to determine if key is in closed, still O(1)
-            closed[hash_key].append(cell.pos)
+        if hash_key in dict:  # Uses hash to determine if key is in closed, still O(1)
+            dict[hash_key].append(cell.pos)
         else:
-            closed[hash_key] = [cell.pos]
+            dict[hash_key] = [cell.pos]
 
     def get_key(self, s, i, goal):
         """
@@ -227,23 +227,24 @@ class SequentialHeuristicSearch:
                 neighbor.g[i] = INFINITY
                 neighbor.parent[i] = None
 
-            cost = get_cost(s, neighbor)
+            cost = self.get_cost(s, neighbor)
             new_g = s.g[i] + cost
             if neighbor.g[i] > new_g:
                 neighbor.g[i] = new_g
                 neighbor.parent[i] = s
                 if not self.contained_in_dict(neighbor.pos, self.closed[i]): # if neighbor has not been expanded in CLOSED_i yet
-                    self.fringes[i].add_cell(neighbor, get_key(neighbor, i, goal)) # Insert/Update s' in OPEN_i with Key(s', i)
+                    self.fringes[i].add_cell(neighbor, self.get_key(neighbor, i, goal)) # Insert/Update s' in OPEN_i with Key(s', i)
 
     def expand_search(self, goal, i):
         """
         If sequential search is not done, expand one of the searches
 
-        :param goal: coodinates of goal cell
+        :param goal: coordinates of goal cell
         :param i: index of which search to use
         :return: None
         """
         s = self.fringes[i].pop_cell()  # OPEN_i.TOP()?
+        self.insert_in_dict(s, self.visited[i]) # MAY NOT BE NECESSARY ------------------------------------------------------------------
         self.num_nodes_expanded[i] += 1
         self.expand_state(s, i, goal)
         self.insert_in_dict(s, self.closed[i])  # Insert s in CLOSED_i
@@ -259,7 +260,7 @@ class SequentialHeuristicSearch:
         :return: path and path length
         """
         path = self.retrieve_path(start, goal, i)  # terminate and return path pointed by bp_i(s_goal)
-        path_length = grid[goal[0]][goal[1]].g[i]
+        path_length = self.grid[goal[0]][goal[1]].g[i]
         return path, path_length
 
     def search(self, start, goal):

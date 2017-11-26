@@ -50,11 +50,11 @@ def read_from_file(file_name, isSequential=False):
             x +=1
             tempCell = None
             if char=='0' or char=='1' or char=='2':
-                tempCell = ss.Cell((y, x), int(char), False) if isSequential else ucs.Cell2((y, x), int(char), False, 5)
+                tempCell = shs.Cell2((y, x), int(char), False, 5) if isSequential else ucs.Cell((y, x), int(char), False)
             elif char == 'a':
-                tempCell = ss.Cell((y, x), 1, True) if isSequential else ucs.Cell2((y, x), 1, True, 5)
+                tempCell = shs.Cell2((y, x), 1, True, 5) if isSequential else ucs.Cell((y, x), 1, True)
             elif char == 'b':
-                tempCell = ss.Cell((y, x), 2, True) if isSequential else ucs.Cell2((y, x), 2, True, 5)
+                tempCell = shs.Cell2((y, x), 2, True, 5) if isSequential else ucs.Cell((y, x), 2, True)
             row.append(tempCell)
         grid.append(row)
 
@@ -101,10 +101,11 @@ if __name__ == "__main__":
     isSequential = True if search_type == "s" else False
     if isSequential:
         try:
-            w1 = int(sys.argv[3])
-            w2 = int(sys.argv[4])
+            w1 = float(sys.argv[3])
+            w2 = float(sys.argv[4])
+            heuristic_type = "5" # to bypass heuristic check
         except ValueError:
-            print "Need integer weights, format for sequential search: search.py [file] s w1 w2"
+            print "Need float weights, format for sequential search: search.py [file] s w1 w2"
             sys.exit()
     else:
         w1 = -1
