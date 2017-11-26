@@ -8,13 +8,14 @@ import copy
 BLOCKED = 0
 UNBLOCKED = 1
 ROUGH = 2  # aka hard-to-traverse
+INFINITY = 20000 # infinity value
 
 class SequentialHeuristicSearch:
     """
     Class that performs sequential heuristic search on a 160x120 grid.
     Use search to find a path of coordinates to follow from start to finish.
-    OPEN_i = fringe for heuristic i
-    CLOSED_i = closed list/dictionary for heuristic i
+    OPEN_i = fringe for search i
+    CLOSED_i = closed list/dictionary for search i
 
     Attributes:
     grid = 160x120 grid of cells that represent the map
@@ -22,9 +23,10 @@ class SequentialHeuristicSearch:
     w2 = weight used to prioritize inadmissible search processes over the admissible one (the anchor)
     heuristics = list of heuristic functions
     num_heuristics = number of heuristics in h
-    fringes = list of fringes (OPEN lists) where fringe i is for heuristic i
-    closed = list of closed lists (dictionaries) where closed list i is for heuristic i
+    fringes = list of fringes (OPEN lists) where fringe i is for search i
+    closed = list of closed lists (dictionaries) where closed list i is for search i
     visited = list of dictionaries (like the closed lists) that keeps tracks of nodes that were visited
+    num_nodes_expanded = list of nodes expanded for search i
     """
 
     def __init__(self, grid, w1, w2):
@@ -44,12 +46,14 @@ class SequentialHeuristicSearch:
         self.fringes = []
         self.closed = []
         self.visited = []
+        self.num_nodes_expanded = []
 
         temp_dict = {}
         for i in range(self.num_heuristics):
             self.fringes.append(PriorityQueue())
             self.closed.append(copy.deepcopy(temp_dict))
             self.visited.append(copy.deepcopy(temp_dict))
+            self.num_nodes_expanded.append(0)
 
     # Methods from UCS -------------------------------------------------------------------------------------------------
     def get_neighbors(self, cell):
@@ -151,13 +155,14 @@ class SequentialHeuristicSearch:
                 return True
         return False
 
-    def retrieve_path(self, start, goal):
+    def retrieve_path(self, start, goal, i):
         """
-        Find the path leading from start to goal by working backwards from the goal
+        Find the path leading from start to goal by working backwards from the goal based on parents from search i
 
         Parameters:
         start: (x, y) coordinates of the start position
         goal: (x, y) coordinates of goal position
+        i: index of which search to base path on
 
         Returns:
         1D array of (x, y) coordinates to follow from start to goal
@@ -166,13 +171,32 @@ class SequentialHeuristicSearch:
         path = [curr_cell.pos]  # Start at goal
 
         while curr_cell.pos != start:
-            parent = curr_cell.parent
+            parent = curr_cell.parent[i]
             path.append(parent.pos)
             curr_cell = parent
 
         path.reverse()  # Reverse path so it starts at start and ends at goal
         return path
     #-------------------------------------------------------------------------------------------------------------------
+
+    def insert_in_dict(self, cell, dict):
+        """
+        Insert the given cell into the given dictionary, if it does not exist in the dictionary already
+
+        :param cell: cell to place in dictionary
+        :param closed: dictionary of hash keys to a list of cells with that hash key
+        :return: None
+        """
+        # If cell is already in closed, do not insert
+        if self.contained_in_dict(cell.pos, closed):
+            return
+
+        # If cell is not in closed, add to existing bucket or create a new bucket
+        hash_key = self.get_hash_key(cell.pos)
+        if hash_key in closed:  # Uses hash to determine if key is in closed, still O(1)
+            closed[hash_key].append(cell.pos)
+        else:
+            closed[hash_key] = [cell.pos]
 
     def get_key(self, s, i, goal):
         """
@@ -197,8 +221,10 @@ class SequentialHeuristicSearch:
         self.fringes[i].removed_cell(s)
         neighbors = self.get_neighbors(cell)
         for neighbor in neighbors:
+            self.insert_in_dict(neighbor, self.visited[i]) # Mark neighbor as visited
+
             if not self.contained_in_dict(neighbor.pos, self.visited[i]): # if s' was never generated (visited) in the ith search
-                neighbor.g[i] = 20000
+                neighbor.g[i] = INFINITY
                 neighbor.parent[i] = None
 
             cost = get_cost(s, neighbor)
@@ -209,19 +235,32 @@ class SequentialHeuristicSearch:
                 if not self.contained_in_dict(neighbor.pos, self.closed[i]): # if neighbor has not been expanded in CLOSED_i yet
                     self.fringes[i].add_cell(neighbor, get_key(neighbor, i, goal)) # Insert/Update s' in OPEN_i with Key(s', i)
 
-    def insert_in_closed(self, cell, closed):
+    def expand_search(self, goal, i):
         """
-        Insert the given cell into the given closed dictionary
+        If sequential search is not done, expand one of the searches
 
-        :param cell: cell to place in closed
-        :param closed: dictionary of hash keys to
+        :param goal: coodinates of goal cell
+        :param i: index of which search to use
         :return: None
         """
-        hash_key = self.get_hash_key(cell.pos)
-        if hash_key in closed:  # Uses hash to determine if key is in closed, still O(1)
-            closed[hash_key].append(s.pos)
-        else:
-            closed[hash_key] = [s.pos]
+        s = self.fringes[i].pop_cell()  # OPEN_i.TOP()?
+        self.num_nodes_expanded[i] += 1
+        self.expand_state(s, i, goal)
+        self.insert_in_dict(s, self.closed[i])  # Insert s in CLOSED_i
+
+    def terminate_search(self, start, goal, i):
+        """
+        Done with search, find resulting path and its length
+
+        :param start: coordinates of start cell
+        :param goal: coordinates of goal cell
+        :param i: index of which search to base path on
+        :param num_nodes_expanded: how many nodes have been expanded (across all searches)
+        :return: path and path length
+        """
+        path = self.retrieve_path(start, goal, i)  # terminate and return path pointed by bp_i(s_goal)
+        path_length = grid[goal[0]][goal[1]].g[i]
+        return path, path_length
 
     def search(self, start, goal):
         """
@@ -233,42 +272,40 @@ class SequentialHeuristicSearch:
 
         Returns: path, a 1D array of coordinates ((x, y) tuples), None if path does not exist
         """
-
-        """
-        Things to do:
-        - Keep track of visited nodes for search i
-        - terminate and return path pointed by bp_i(s_goal)
-        """
         start_cell = self.grid[start[0]][start[1]]
         goal_cell = self.grid[goal[0]][goal[1]]
+        num_nodes_expanded = 0 # how many nodes have been expanded (across all searches)
+
         for i in range(self.num_heuristics):
             start_cell.g[i] = 0
-            goal_cell.g[i] = 20000
+            goal_cell.g[i] = INFINITY
             start_cell.parent[i] = None
             goal_cell.parent[i] = None
             start_cell.h[i] = self.heuristics[i](start_cell.pos, goal)
+            self.insert_in_dict(start_cell, self.visited[i]) # Mark start cell as visited
             self.fringes[i].add_cell(start_cell, self.get_key(start_cell, i, goal))
 
         min_key_0 = self.fringes[0].min_key
-        while min_key_0 < 20000:
+        while min_key_0 < INFINITY:
             for i in range(1, self.num_heuristics):
                 min_key_i = self.fringes[i].min_key
                 if min_key_i <= self.w2 * min_key_0:
                     if goal_cell.g[i] <= min_key_i:
-                        if goal_cell.g[i] < 20000:
-                            # terminate and return path pointed by bp_i(s_goal)
+                        if goal_cell.g[i] < INFINITY:
+                            path, path_length = self.terminate_search(start, goal, i)
+                            nodes_expanded = self.num_nodes_expanded[i] # Nodes expanded for search i
+                            return path, path_length, nodes_expanded
                         else:
-                            s = self.fringes[i].pop_cell() # OPEN_i.TOP()?
-                            self.expand_state(s, i, goal)
-                            insert_in_closed(s, self.closed[i]) # Insert s in CLOSED_i
+                            self.expand_search(goal, i)
+
                 else:
                     goal_g_0 = goal_cell.g[0]
                     if goal_g_0 <= self.fringes[0].min_key():
-                        if goal_g_0 < 20000:
-                            # terminate and return path pointed by bp_0(s_goal)
+                        if goal_g_0 < INFINITY:
+                            path, path_length = self.terminate_search(start, goal, 0) # terminate and return path pointed by bp_0(s_goal)
+                            nodes_expanded = self.num_nodes_expanded[0] # Nodes expanded for search 0
+                            return path, path_length, nodes_expanded
                     else:
-                        s = self.fringes[0].pop()
-                        self.expand_state(s, 0, goal)
-                        insert_in_closed(s, self.closed[0])
+                        self.expand_search(goal, 0)
 
         return None, -1, -1  # No path found, no nodes expanded

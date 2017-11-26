@@ -1,3 +1,5 @@
+INFINITY = 20000
+
 class Cell2:
     """
     Represents a cell in the 160x120 grid for sequential search
@@ -29,7 +31,7 @@ class Cell2:
         self.f = []
         for i in range(num_heuristics):
             parent = None
-            g = 20000
+            g = INFINITY
             h = 0
             self.parent.append(parent)
             self.g.append(g)  # 20000 represents infinity
