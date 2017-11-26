@@ -67,9 +67,9 @@ if __name__ == "__main__":
     # # For testing
     # (start, goal, grid) = read_from_file("map1.txt", isSequential=True)
     # w1 = 1.5
-    # w2 = 1.5
+    # w2 = 5
     # sequential_heuristic_search = shs.SequentialHeuristicSearch(grid, 1.5, 1.5)
-    # path, path_length, num_nodes_expanded = sequential_heuristic_search.search(start, goal)
+    # path, path_length, num_nodes_expanded, memory_requirement = sequential_heuristic_search.search(start, goal)
     #
     # # Output result
     # if path is None:
@@ -79,6 +79,7 @@ if __name__ == "__main__":
     # print 'Path: {}'.format(path)
     # print 'Path length: {}'.format(path_length)
     # print 'Time (# nodes expanded): {}'.format(num_nodes_expanded)
+    # print 'Memory Requirement (max # nodes in fringe at the same time): {}'.format(memory_requirement)
 
     # Make sure there are enough arguments given
     if (len(sys.argv) < 3):

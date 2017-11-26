@@ -261,7 +261,8 @@ class SequentialHeuristicSearch:
         path = self.retrieve_path(start, goal, i)  # terminate and return path pointed by bp_i(s_goal)
         path_length = self.grid[goal[0]][goal[1]].g[i]
         nodes_expanded = sum(self.num_nodes_expanded)  # Total nodes expanded across all searches
-        memory_requirement = sum([fringe.maxsize for fringe in self.fringes])  # sum of all max sizes
+        fringe_max_sizes = [fringe.maxsize for fringe in self.fringes]
+        memory_requirement = sum(fringe_max_sizes)  # sum of all max sizes
         return path, path_length, nodes_expanded, memory_requirement
 
     def search(self, start, goal):
