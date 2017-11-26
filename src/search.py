@@ -172,7 +172,7 @@ if __name__ == "__main__":
     f = open('path.txt','w')
     f.write("["+','.join(map(flat,path))+"]")
     f.close()
-    
+
     # # Write path to a file,toggle this off when doing the demo
     # f = open('experimental.csv','a+')
     # output = file_name+","+search_type+","+heuristic_type+","+str(weight)+","+str(path_length)+","+str(num_nodes_expanded)+","+str(delta.total_seconds())+"\n"
