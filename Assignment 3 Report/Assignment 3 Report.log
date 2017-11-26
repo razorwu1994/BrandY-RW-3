@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9.6210 64-bit) (preloaded format=pdflatex 2017.2.16)  26 NOV 2017 11:10
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9.6210 64-bit) (preloaded format=pdflatex 2017.2.16)  26 NOV 2017 12:19
 entering extended mode
 **"./Assignment 3 Report.tex"
 ("Assignment 3 Report.tex"
@@ -250,10 +250,10 @@ Underfull \hbox (badness 10000) in paragraph at lines 58--62
 File: Images/"avg-nodeexpanded".png Graphic file (type png)
 
 <use Images/"avg-nodeexpanded".png>
-Package pdftex.def Info: Images/"avg-nodeexpanded".png used on input line 128.
+Package pdftex.def Info: Images/"avg-nodeexpanded".png used on input line 132.
 (pdftex.def)             Requested size: 421.20865pt x 161.67209pt.
 
-Overfull \hbox (31.20865pt too wide) in paragraph at lines 128--129
+Overfull \hbox (31.20865pt too wide) in paragraph at lines 132--133
 [] 
  []
 
@@ -261,10 +261,10 @@ Overfull \hbox (31.20865pt too wide) in paragraph at lines 128--129
 File: Images/"avg-pathlength".png Graphic file (type png)
 
 <use Images/"avg-pathlength".png>
-Package pdftex.def Info: Images/"avg-pathlength".png used on input line 132.
+Package pdftex.def Info: Images/"avg-pathlength".png used on input line 136.
 (pdftex.def)             Requested size: 421.20865pt x 157.36606pt.
 
-Overfull \hbox (31.20865pt too wide) in paragraph at lines 132--133
+Overfull \hbox (31.20865pt too wide) in paragraph at lines 136--137
 [] 
  []
 
@@ -272,26 +272,26 @@ Overfull \hbox (31.20865pt too wide) in paragraph at lines 132--133
 File: Images/"avg-runtime".png Graphic file (type png)
 
 <use Images/"avg-runtime".png>
-Package pdftex.def Info: Images/"avg-runtime".png used on input line 136.
+Package pdftex.def Info: Images/"avg-runtime".png used on input line 144.
 (pdftex.def)             Requested size: 421.20865pt x 158.54042pt.
 
-Overfull \hbox (31.20865pt too wide) in paragraph at lines 136--137
+Overfull \hbox (31.20865pt too wide) in paragraph at lines 144--145
 [] 
  []
 
-[9 <./Images/avg-nodeexpanded.png> <./Images/avg-pathlength.png> <./Images/avg-
-runtime.png>]
-Overfull \hbox (7.17644pt too wide) in paragraph at lines 146--147
+[9 <./Images/avg-nodeexpanded.png> <./Images/avg-pathlength.png>] [10 <./Images
+/avg-runtime.png>]
+Overfull \hbox (7.17644pt too wide) in paragraph at lines 154--155
 \OT1/cmr/m/n/12 quickly and ex-panded very few nodes (like with heuris-tic 4, E
 u-clidean squared),
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 148--149
+Underfull \hbox (badness 10000) in paragraph at lines 156--157
 
  []
 
-[10] [11] [12] [13] [14] ("Assignment 3 Report.aux") ) 
+[11] [12] [13] [14] [15] ("Assignment 3 Report.aux") ) 
 Here is how much of TeX's memory you used:
  1533 strings out of 493333
  22366 string characters out of 3139188
@@ -307,9 +307,9 @@ public/amsfonts/cm/cmmi12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/a
 msfonts/cm/cmr12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/c
 m/cmr8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.p
 fb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
-Output written on "Assignment 3 Report.pdf" (14 pages, 7525714 bytes).
+Output written on "Assignment 3 Report.pdf" (15 pages, 7526490 bytes).
 PDF statistics:
- 90 PDF objects out of 1000 (max. 8388607)
+ 93 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  51 words of extra memory for PDF output out of 10000 (max. 10000000)
 
