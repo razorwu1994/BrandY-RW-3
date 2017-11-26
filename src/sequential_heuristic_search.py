@@ -236,7 +236,6 @@ class SequentialHeuristicSearch:
 
         """
         Things to do:
-        - Find out where heuristics are applied
         - Keep track of visited nodes for search i
         - terminate and return path pointed by bp_i(s_goal)
         """
