@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6350 64-bit) (preloaded format=pdflatex 2017.6.27)  26 NOV 2017 15:04
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6350 64-bit) (preloaded format=pdflatex 2017.6.27)  26 NOV 2017 16:49
 entering extended mode
 **"./Assignment 3 Report.tex"
 ("Assignment 3 Report.tex"
@@ -359,26 +359,43 @@ Overfull \hbox (55.819pt too wide) in paragraph at lines 212--213
 [] 
  []
 
-[15 <./Images/s-runtime.png> <./Images/s-mem.png>] [16] [17]
-("Assignment 3 Report.aux") ) 
+[15 <./Images/s-runtime.png> <./Images/s-mem.png>] [16]
+Overfull \hbox (8.85905pt too wide) in paragraph at lines 246--248
+[]\OT1/cmr/m/n/12 Then we as-sume a least path from $\OML/cmm/m/it/12 S[]$ \OT1
+/cmr/m/n/12 to $\OML/cmm/m/it/12 S[]$ \OT1/cmr/m/n/12 as P = $\OML/cmm/m/it/12 
+\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 s[] \OT1/cmr/m/n/12 = \OML/cmm/m/it/12 s[]; 
+:::; s[] \OT1/cmr/m/n/12 =
+ []
+
+[17]
+Overfull \hbox (35.47743pt too wide) in paragraph at lines 295--296
+\OML/cmm/m/it/12 OPEN[]:Minkey\OT1/cmr/m/n/12 () \OMS/cmsy/m/n/12  \OML/cmm/m/
+it/12 w[] \OMS/cmsy/m/n/12  \OML/cmm/m/it/12 g[]\OT1/cmr/m/n/12 (\OML/cmm/m/it
+/12 s[]oal\OT1/cmr/m/n/12 )$. $\OML/cmm/m/it/12 OPEN[] \OT1/cmr/m/n/12 = \OMS/c
+msy/m/n/12 ;$ \OT1/cmr/m/n/12 if and only if $\OML/cmm/m/it/12 OPEN[]:Minkey\OT
+1/cmr/m/n/12 () =
+ []
+
+[18] ("Assignment 3 Report.aux") ) 
 Here is how much of TeX's memory you used:
  1563 strings out of 493323
  23151 string characters out of 3139066
- 81871 words of memory out of 3000000
+ 82871 words of memory out of 3000000
  5097 multiletter control sequences out of 15000+200000
  6990 words of font info for 25 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  39i,5n,25p,910b,117s stack positions out of 5000i,500n,10000p,200000b,50000s
-<C:/Program Files/MiKTeX 2.9/fonts/type1/public/am
-sfonts/cm/cmbx12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/c
-m/cmex10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi12
-.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/
-Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Program Fi
-les/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files/MiKT
-eX 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
-Output written on "Assignment 3 Report.pdf" (17 pages, 9516755 bytes).
+<C:/Program Files/MiKTeX 2.9/fonts/type1/publ
+ic/amsfonts/cm/cmbx12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfo
+nts/cm/cmex10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/c
+mmi12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi8.pfb
+><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Prog
+ram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Program Files/
+MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files/MiKTeX 2
+.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
+Output written on "Assignment 3 Report.pdf" (18 pages, 9537337 bytes).
 PDF statistics:
- 110 PDF objects out of 1000 (max. 8388607)
+ 117 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  81 words of extra memory for PDF output out of 10000 (max. 10000000)
 
