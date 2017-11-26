@@ -65,7 +65,7 @@ def flat(tuple):
 
 if __name__ == "__main__":
     # For testing
-    (start, goal, grid) = read_from_file("map1.txt")
+    (start, goal, grid) = read_from_file("map1.txt", isSequential=True)
     w1 = 1.5
     w2 = 1.5
     sequential_heuristic_search = shs.SequentialHeuristicSearch(grid, 1.5, 1.5)
