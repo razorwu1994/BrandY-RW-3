@@ -144,7 +144,7 @@ class UniformCostSearch:
         if total_cost < neighbor.g:
             neighbor.g = total_cost
             neighbor.parent = s
-            if (neighbor.f, neighbor) in fringe:
+            if neighbor in fringe:
                 fringe.remove_cell(neighbor)
 
             self.apply_heuristic(neighbor, goal)
