@@ -2,10 +2,11 @@ import sys
 import uniform_cost_search as ucs
 import heuristic_search as hs
 import weighted_heuristic_search as whs
+import sequential_heuristic_search as ss
 import heuristics as hrsts
 from datetime import datetime
 
-def read_from_file(file_name):
+def read_from_file(file_name, isSequential=False):
     """
     Extract grid data from given file.
     File follows format given in Assignment 3 Instructions.
@@ -49,12 +50,20 @@ def read_from_file(file_name):
             x +=1
             tempCell = None
             if char=='0' or char=='1' or char=='2':
-                tempCell = ucs.Cell((y, x), int(char), False)
+                if isSequential:
+                    tempCell = ss.Cell((y, x), int(char), False)
+                else:
+                    tempCell = ucs.Cell((y, x), int(char), False)
             elif char == 'a':
-                tempCell = ucs.Cell((y, x), 1, True)
+                if isSequential:
+                    tempCell = ss.Cell((y, x), 1, True)
+                else:
+                    tempCell = ucs.Cell((y, x), 1, True)
             elif char == 'b':
-                tempCell = ucs.Cell((y, x), 2, True)
-
+                if isSequential:
+                    tempCell = ss.Cell((y, x), 2, True)
+                else:
+                    tempCell = ucs.Cell((y, x), 2, True)
             row.append(tempCell)
         grid.append(row)
 
@@ -86,7 +95,7 @@ if __name__ == "__main__":
 
     # Get file name, search type (also heuristic type and weight, if given)
     file_name = sys.argv[1]
-    search_type = sys.argv[2]  # u = uniform-cost search, a = A* search, w = weighted A* search
+    search_type = sys.argv[2]  # u = uniform-cost search, a = A* search, w = weighted A* search, s = sequential A* search
     heuristic_type = -1
     if len(sys.argv) > 3:
         heuristic_type = sys.argv[3]  # 1:linear, 2:manhatan,3:diagonal,4:eucliden,5:sample in instruction
@@ -97,8 +106,21 @@ if __name__ == "__main__":
     if len(sys.argv) > 4:
         weight = sys.argv[4] # Weight to be used in weighted A* search
 
+    # Sequential search specifics
+    isSequential = True if search_type == "s" else False
+    if isSequential:
+        try:
+            w1 = int(sys.argv[3])
+            w2 = int(sys.argv[4])
+        except ValueError:
+            print "Need integer weights, format for sequential search: search.py [file] s w1 w2"
+            sys.exit()
+    else:
+        w1 = -1
+        w2 = -1
+
     # Read from file
-    (start, goal, grid) = read_from_file(file_name)
+    (start, goal, grid) = read_from_file(file_name, isSequential)
 
     # Select heuristic function
     heuristic = None
@@ -117,6 +139,7 @@ if __name__ == "__main__":
 
     # Use chosen search to find path
     path = None
+    path_length = -1
     num_nodes_expanded = -1
 
     if search_type == "u":
@@ -128,6 +151,8 @@ if __name__ == "__main__":
     elif search_type == "w":
         weighted_heuristic_search = whs.WeightedHeuristicSearch(grid, heuristic, weight)
         path, path_length, num_nodes_expanded = weighted_heuristic_search.search(start, goal)
+    elif search_type == "s":
+        sequential_heuristic_search = ss.SequentialHeuristicSearch(grid, heuristic, w1, w2)
     else:
         raise ValueError('Please use a valid search type: u = uniform-cost search, a = A* search, w = weighted A* search')
 
