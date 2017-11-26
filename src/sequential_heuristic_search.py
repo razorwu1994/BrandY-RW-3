@@ -275,7 +275,6 @@ class SequentialHeuristicSearch:
         """
         start_cell = self.grid[start[0]][start[1]]
         goal_cell = self.grid[goal[0]][goal[1]]
-        num_nodes_expanded = 0 # how many nodes have been expanded (across all searches)
 
         for i in range(self.num_heuristics):
             start_cell.g[i] = 0
