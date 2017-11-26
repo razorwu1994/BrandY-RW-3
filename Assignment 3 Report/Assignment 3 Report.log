@@ -1,9 +1,13 @@
+<<<<<<< HEAD
 This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6350 64-bit) (preloaded format=pdflatex 2017.6.27)  25 NOV 2017 19:43
+=======
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9.6210 64-bit) (preloaded format=pdflatex 2017.2.16)  25 NOV 2017 19:35
+>>>>>>> origin/master
 entering extended mode
 **"./Assignment 3 Report.tex"
 ("Assignment 3 Report.tex"
-LaTeX2e <2017-04-15>
-Babel <3.10> and hyphenation patterns for 75 language(s) loaded.
+LaTeX2e <2017/01/01> patch level 1
+Babel <3.9r> and hyphenation patterns for 75 language(s) loaded.
 ("C:\Program Files\MiKTeX 2.9\tex\latex\base\article.cls"
 Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
 ("C:\Program Files\MiKTeX 2.9\tex\latex\base\size12.clo"
@@ -29,7 +33,7 @@ Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
 \KV@toks@=\toks14
 )
 ("C:\Program Files\MiKTeX 2.9\tex\latex\graphics\graphics.sty"
-Package: graphics 2017/04/14 v1.1b Standard LaTeX Graphics (DPC,SPQR)
+Package: graphics 2016/10/09 v1.0u Standard LaTeX Graphics (DPC,SPQR)
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\graphics\trig.sty"
 Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
@@ -69,7 +73,7 @@ LaTeX Font Info:    ... okay on input line 5.
 LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 5.
 LaTeX Font Info:    ... okay on input line 5.
 
-(C:\Users\Razor\AppData\Roaming\MiKTeX\2.9\tex\context\base\supp-pdf.mkii
+("C:\Program Files\MiKTeX 2.9\tex\context\base\supp-pdf.mkii"
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count88
 \scratchdimen=\dimen105
@@ -83,7 +87,7 @@ LaTeX Font Info:    ... okay on input line 5.
 \makeMPintoPDFobject=\count93
 \everyMPtoPDFconversion=\toks16
 ) ("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\pdftexcmds.sty"
-Package: pdftexcmds 2017/03/19 v0.25 Utility functions of pdfTeX for LuaTeX (HO
+Package: pdftexcmds 2016/05/21 v0.22 Utility functions of pdfTeX for LuaTeX (HO
 )
 
 ("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\ifluatex.sty"
@@ -91,7 +95,7 @@ Package: ifluatex 2016/05/16 v1.4 Provides the ifluatex switch (HO)
 Package ifluatex Info: LuaTeX not detected.
 )
 ("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\ifpdf.sty"
-Package: ifpdf 2017/03/15 v3.2 Provides the ifpdf switch
+Package: ifpdf 2016/05/14 v3.1 Provides the ifpdf switch
 )
 Package pdftexcmds Info: LuaTeX not detected.
 Package pdftexcmds Info: \pdf@primitive is available.
@@ -138,57 +142,58 @@ Overfull \hbox (54.17168pt too wide) in paragraph at lines 17--18
 [][] 
  []
 
-<Images/"a-map1-4".jpg, id=2, 1053.9375pt x 1381.16pt>
+<Images/"control-panel".jpg, id=2, 1041.8925pt x 156.585pt>
+File: Images/"control-panel".jpg Graphic file (type jpg)
+
+<use Images/"control-panel".jpg>
+Package pdftex.def Info: Images/"control-panel".jpg used on input line 25.
+(pdftex.def)             Requested size: 416.74962pt x 62.63287pt.
+
+Overfull \hbox (44.37444pt too wide) in paragraph at lines 25--26
+[][] 
+ []
+
+<Images/"a-map1-4".jpg, id=3, 1053.9375pt x 1381.16pt>
 File: Images/"a-map1-4".jpg Graphic file (type jpg)
 
 <use Images/"a-map1-4".jpg>
-Package pdftex.def Info: Images/"a-map1-4".jpg used on input line 25.
+Package pdftex.def Info: Images/"a-map1-4".jpg used on input line 33.
 (pdftex.def)             Requested size: 421.56754pt x 552.45421pt.
 
-Overfull \hbox (49.19235pt too wide) in paragraph at lines 25--26
+Overfull \hbox (49.19235pt too wide) in paragraph at lines 33--34
 [][] 
  []
 
 [1
 
-{C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map} <./Images/a-map1-0.jpg>]
+{C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map} <./Images/a-map1-0.jpg> <.
+/Images/control-panel.jpg>]
 Overfull \vbox (3.95421pt too high) has occurred while \output is active []
 
 
 [2 <./Images/a-map1-4.jpg>]
-<Images/"control-panel".jpg, id=12, 1041.8925pt x 156.585pt>
-File: Images/"control-panel".jpg Graphic file (type jpg)
-
-<use Images/"control-panel".jpg>
-Package pdftex.def Info: Images/"control-panel".jpg used on input line 31.
-(pdftex.def)             Requested size: 416.74962pt x 62.63287pt.
-
-Overfull \hbox (44.37444pt too wide) in paragraph at lines 31--32
-[][] 
- []
-
-[3 <./Images/control-panel.jpg>]
-Overfull \hbox (6.42366pt too wide) in paragraph at lines 37--38
+Overfull \hbox (6.42366pt too wide) in paragraph at lines 41--42
 []\OT1/cmr/m/n/12 There are three ex-am-ples shown be-low, run-ning uniform-cos
 t search (UCS),
  []
 
-<Images/"b-map5-1-u".jpg, id=16, 2212.265pt x 1017.8025pt>
+<Images/"b-map5-1-u".jpg, id=13, 2212.265pt x 1017.8025pt>
 File: Images/"b-map5-1-u".jpg Graphic file (type jpg)
 
 <use Images/"b-map5-1-u".jpg>
-Package pdftex.def Info: Images/"b-map5-1-u".jpg used on input line 42.
+Package pdftex.def Info: Images/"b-map5-1-u".jpg used on input line 46.
 (pdftex.def)             Requested size: 442.44516pt x 203.5569pt.
 
-Overfull \hbox (52.44516pt too wide) in paragraph at lines 39--43
+Overfull \hbox (52.44516pt too wide) in paragraph at lines 43--47
 [] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 39--43
+Underfull \hbox (badness 10000) in paragraph at lines 43--47
 
  []
 
+<<<<<<< HEAD
 <Images/"b-map5-1-a-real".jpg, id=17, 1744.5175pt x 1011.78pt>
 File: Images/"b-map5-1-a-real".jpg Graphic file (type jpg)
 
@@ -209,10 +214,21 @@ Package pdftex.def Info: Images/"b-map5-1-a".jpg used on input line 52.
 (pdftex.def)             Requested size: 418.35559pt x 199.14047pt.
 
 Overfull \hbox (28.35559pt too wide) in paragraph at lines 49--53
+=======
+<Images/"b-map5-1-a".jpg, id=14, 2091.815pt x 995.72pt>
+File: Images/"b-map5-1-a".jpg Graphic file (type jpg)
+
+<use Images/"b-map5-1-a".jpg>
+Package pdftex.def Info: Images/"b-map5-1-a".jpg used on input line 51.
+(pdftex.def)             Requested size: 418.35559pt x 199.14047pt.
+
+Overfull \hbox (28.35559pt too wide) in paragraph at lines 48--52
+>>>>>>> origin/master
 [] 
  []
 
 
+<<<<<<< HEAD
 Underfull \hbox (badness 10000) in paragraph at lines 49--53
 
  []
@@ -225,10 +241,25 @@ Package pdftex.def Info: Images/"b-map5-1-w-2".jpg used on input line 57.
 (pdftex.def)             Requested size: 472.95863pt x 195.12553pt.
 
 Overfull \hbox (82.95863pt too wide) in paragraph at lines 54--58
+=======
+Underfull \hbox (badness 10000) in paragraph at lines 48--52
+
+ []
+
+<Images/"b-map5-1-w-2".jpg, id=15, 2364.835pt x 975.645pt>
+File: Images/"b-map5-1-w-2".jpg Graphic file (type jpg)
+
+<use Images/"b-map5-1-w-2".jpg>
+Package pdftex.def Info: Images/"b-map5-1-w-2".jpg used on input line 56.
+(pdftex.def)             Requested size: 472.95863pt x 195.12553pt.
+
+Overfull \hbox (82.95863pt too wide) in paragraph at lines 53--57
+>>>>>>> origin/master
 [] 
  []
 
 
+<<<<<<< HEAD
 Underfull \hbox (badness 10000) in paragraph at lines 54--58
 
  []
@@ -271,11 +302,57 @@ Package pdftex.def Info: Images/"avg-runtime".png used on input line 132.
 (pdftex.def)             Requested size: 411.41103pt x 168.25317pt.
 
 Overfull \hbox (21.41103pt too wide) in paragraph at lines 132--133
+=======
+Underfull \hbox (badness 10000) in paragraph at lines 53--57
+
+ []
+
+[3 <./Images/b-map5-1-u.jpg> <./Images/b-map5-1-a.jpg>] [4 <./Images/b-map5-1-w
+-2.jpg>] [5]
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <12> on input line 77.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 77.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 77.
+ [6] [7]
+<Images/"avg-nodeexpanded".png, id=37, 648.021pt x 248.72925pt>
+File: Images/"avg-nodeexpanded".png Graphic file (type png)
+
+<use Images/"avg-nodeexpanded".png>
+Package pdftex.def Info: Images/"avg-nodeexpanded".png used on input line 123.
+(pdftex.def)             Requested size: 421.20865pt x 161.67209pt.
+
+Overfull \hbox (31.20865pt too wide) in paragraph at lines 123--124
 [] 
  []
 
-[9 <./Images/avg-nodeexpanded.png> <./Images/avg-pathlength.png> <./Images/avg-
+<Images/"avg-pathlength".png, id=39, 648.021pt x 242.1045pt>
+File: Images/"avg-pathlength".png Graphic file (type png)
+
+<use Images/"avg-pathlength".png>
+Package pdftex.def Info: Images/"avg-pathlength".png used on input line 127.
+(pdftex.def)             Requested size: 421.20865pt x 157.36606pt.
+
+Overfull \hbox (31.20865pt too wide) in paragraph at lines 127--128
+[] 
+ []
+
+<Images/"avg-runtime".png, id=40, 648.021pt x 243.91125pt>
+File: Images/"avg-runtime".png Graphic file (type png)
+
+<use Images/"avg-runtime".png>
+Package pdftex.def Info: Images/"avg-runtime".png used on input line 131.
+(pdftex.def)             Requested size: 421.20865pt x 158.54042pt.
+
+Overfull \hbox (31.20865pt too wide) in paragraph at lines 131--132
+>>>>>>> origin/master
+[] 
+ []
+
+[8 <./Images/avg-nodeexpanded.png> <./Images/avg-pathlength.png> <./Images/avg-
 runtime.png>]
+<<<<<<< HEAD
 Underfull \hbox (badness 10000) in paragraph at lines 142--143
 
  []
@@ -288,6 +365,11 @@ Underfull \hbox (badness 10000) in paragraph at lines 144--145
 
 Underfull \hbox (badness 10000) in paragraph at lines 146--147
 
+=======
+Overfull \hbox (7.17644pt too wide) in paragraph at lines 141--142
+\OT1/cmr/m/n/12 quickly and ex-panded very few nodes (like with heuris-tic 4, E
+u-clidean squared),
+>>>>>>> origin/master
  []
 
 
@@ -295,8 +377,9 @@ Underfull \hbox (badness 10000) in paragraph at lines 148--149
 
  []
 
-[10] ("Assignment 3 Report.aux") ) 
+[9] [10] [11] [12] [13] ("Assignment 3 Report.aux") ) 
 Here is how much of TeX's memory you used:
+<<<<<<< HEAD
  1533 strings out of 493323
  22406 string characters out of 3139066
  81871 words of memory out of 3000000
@@ -314,6 +397,25 @@ am Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files
 Output written on "Assignment 3 Report.pdf" (10 pages, 7523035 bytes).
 PDF statistics:
  77 PDF objects out of 1000 (max. 8388607)
+=======
+ 1528 strings out of 493333
+ 22216 string characters out of 3139188
+ 81461 words of memory out of 3000000
+ 5060 multiletter control sequences out of 15000+200000
+ 6990 words of font info for 25 fonts, out of 3000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 39i,5n,25p,910b,117s stack positions out of 5000i,500n,10000p,200000b,50000s
+<C:/Program Files/MiKTeX 2
+.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Program Files/MiKTeX 2.9/fonts
+/type1/public/amsfonts/cm/cmex10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/p
+ublic/amsfonts/cm/cmmi12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/am
+sfonts/cm/cmr12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm
+/cmr8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pf
+b><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
+Output written on "Assignment 3 Report.pdf" (13 pages, 6558269 bytes).
+PDF statistics:
+ 86 PDF objects out of 1000 (max. 8388607)
+>>>>>>> origin/master
  0 named destinations out of 1000 (max. 500000)
  51 words of extra memory for PDF output out of 10000 (max. 10000000)
 
