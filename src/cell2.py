@@ -19,17 +19,19 @@ class Cell2:
         By default, set all f's = 0, g's = 20000, h's = 0
         """
         self.pos = pos
-        self.parent = None
         self.terrain_type = terrain_type
         self.has_highway = has_highway
 
-        # For sequential search, have list of g's, h's and f's
+        # For sequential search, have list of parents, g's, h's and (maybe) f's
+        self.parent = []
         self.g = []
         self.h = []
         self.f = []
         for i in range(num_heuristics):
+            parent = None
             g = 20000
             h = 0
+            self.parent.append(parent)
             self.g.append(g)  # 20000 represents infinity
             self.h.append(h)
             self.f.append(g + h)
