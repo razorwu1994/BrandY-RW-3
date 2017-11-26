@@ -1,9 +1,9 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9.6210 64-bit) (preloaded format=pdflatex 2017.2.16)  26 NOV 2017 12:19
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6350 64-bit) (preloaded format=pdflatex 2017.6.27)  26 NOV 2017 12:35
 entering extended mode
 **"./Assignment 3 Report.tex"
 ("Assignment 3 Report.tex"
-LaTeX2e <2017/01/01> patch level 1
-Babel <3.9r> and hyphenation patterns for 75 language(s) loaded.
+LaTeX2e <2017-04-15>
+Babel <3.10> and hyphenation patterns for 75 language(s) loaded.
 ("C:\Program Files\MiKTeX 2.9\tex\latex\base\article.cls"
 Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
 ("C:\Program Files\MiKTeX 2.9\tex\latex\base\size12.clo"
@@ -29,7 +29,7 @@ Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
 \KV@toks@=\toks14
 )
 ("C:\Program Files\MiKTeX 2.9\tex\latex\graphics\graphics.sty"
-Package: graphics 2016/10/09 v1.0u Standard LaTeX Graphics (DPC,SPQR)
+Package: graphics 2017/04/14 v1.1b Standard LaTeX Graphics (DPC,SPQR)
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\graphics\trig.sty"
 Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
@@ -69,7 +69,7 @@ LaTeX Font Info:    ... okay on input line 5.
 LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 5.
 LaTeX Font Info:    ... okay on input line 5.
 
-("C:\Program Files\MiKTeX 2.9\tex\context\base\supp-pdf.mkii"
+(C:\Users\Razor\AppData\Roaming\MiKTeX\2.9\tex\context\base\supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count88
 \scratchdimen=\dimen105
@@ -83,7 +83,7 @@ LaTeX Font Info:    ... okay on input line 5.
 \makeMPintoPDFobject=\count93
 \everyMPtoPDFconversion=\toks16
 ) ("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\pdftexcmds.sty"
-Package: pdftexcmds 2016/05/21 v0.22 Utility functions of pdfTeX for LuaTeX (HO
+Package: pdftexcmds 2017/03/19 v0.25 Utility functions of pdfTeX for LuaTeX (HO
 )
 
 ("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\ifluatex.sty"
@@ -91,7 +91,7 @@ Package: ifluatex 2016/05/16 v1.4 Provides the ifluatex switch (HO)
 Package ifluatex Info: LuaTeX not detected.
 )
 ("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\ifpdf.sty"
-Package: ifpdf 2016/05/14 v3.1 Provides the ifpdf switch
+Package: ifpdf 2017/03/15 v3.2 Provides the ifpdf switch
 )
 Package pdftexcmds Info: LuaTeX not detected.
 Package pdftexcmds Info: \pdf@primitive is available.
@@ -291,25 +291,59 @@ Underfull \hbox (badness 10000) in paragraph at lines 156--157
 
  []
 
-[11] [12] [13] [14] [15] ("Assignment 3 Report.aux") ) 
+[11] [12] [13] <Images/"s-nodeexpanded".png, id=64, 810.02625pt x 397.485pt>
+File: Images/"s-nodeexpanded".png Graphic file (type png)
+
+<use Images/"s-nodeexpanded".png>
+Package pdftex.def Info: Images/"s-nodeexpanded".png used on input line 179.
+(pdftex.def)             Requested size: 405.01213pt x 198.742pt.
+
+Overfull \hbox (15.01213pt too wide) in paragraph at lines 179--180
+[] 
+ []
+
+<Images/"s-pathlength".png, id=65, 815.045pt x 403.5075pt>
+File: Images/"s-pathlength".png Graphic file (type png)
+
+<use Images/"s-pathlength".png>
+Package pdftex.def Info: Images/"s-pathlength".png used on input line 183.
+(pdftex.def)             Requested size: 407.5215pt x 201.75325pt.
+
+Overfull \hbox (17.5215pt too wide) in paragraph at lines 183--184
+[] 
+ []
+
+<Images/"s-runtime".png, id=66, 807.015pt x 404.51125pt>
+File: Images/"s-runtime".png Graphic file (type png)
+
+<use Images/"s-runtime".png>
+Package pdftex.def Info: Images/"s-runtime".png used on input line 187.
+(pdftex.def)             Requested size: 403.50652pt x 202.25513pt.
+
+Overfull \hbox (13.50652pt too wide) in paragraph at lines 187--188
+[] 
+ []
+
+[14 <./Images/s-nodeexpanded.png> <./Images/s-pathlength.png>] [15 <./Images/s-
+runtime.png>] [16] ("Assignment 3 Report.aux") ) 
 Here is how much of TeX's memory you used:
- 1533 strings out of 493333
- 22366 string characters out of 3139188
- 81461 words of memory out of 3000000
- 5064 multiletter control sequences out of 15000+200000
+ 1548 strings out of 493323
+ 22806 string characters out of 3139066
+ 81871 words of memory out of 3000000
+ 5085 multiletter control sequences out of 15000+200000
  6990 words of font info for 25 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  39i,5n,25p,910b,117s stack positions out of 5000i,500n,10000p,200000b,50000s
-<C:/Program Files/MiKTeX 
-2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Program Files/MiKTeX 2.9/font
-s/type1/public/amsfonts/cm/cmex10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/
-public/amsfonts/cm/cmmi12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/a
-msfonts/cm/cmr12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/c
-m/cmr8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.p
-fb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
-Output written on "Assignment 3 Report.pdf" (15 pages, 7526490 bytes).
+<C:/Program Files/MiKTeX 2.9/fo
+nts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type
+1/public/amsfonts/cm/cmex10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public
+/amsfonts/cm/cmmi12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfont
+s/cm/cmr12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8
+.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:
+/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
+Output written on "Assignment 3 Report.pdf" (16 pages, 7552168 bytes).
 PDF statistics:
- 93 PDF objects out of 1000 (max. 8388607)
+ 99 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 51 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 66 words of extra memory for PDF output out of 10000 (max. 10000000)
 
