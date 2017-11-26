@@ -1,4 +1,4 @@
-class Cell:
+class Cell2:
     """
     Represents a cell in the 160x120 grid for sequential search
 
