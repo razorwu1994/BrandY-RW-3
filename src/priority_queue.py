@@ -66,7 +66,7 @@ class PriorityQueue:
                 return cell
         raise KeyError('pop from an empty priority queue')
 
-    def min_key(self):
+    def get_min_key(self):
         """
         Peek at the priority (KEY) of the lowest priority cell
 

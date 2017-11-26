@@ -218,8 +218,7 @@ class SequentialHeuristicSearch:
         :param i: index for which fringe (OPEN) to expand s from
         :return: None
         """
-        self.fringes[i].removed_cell(s)
-        neighbors = self.get_neighbors(cell)
+        neighbors = self.get_neighbors(s)
         for neighbor in neighbors:
             self.insert_in_dict(neighbor, self.visited[i]) # Mark neighbor as visited
 
@@ -285,10 +284,10 @@ class SequentialHeuristicSearch:
             self.insert_in_dict(start_cell, self.visited[i]) # Mark start cell as visited
             self.fringes[i].add_cell(start_cell, self.get_key(start_cell, i, goal))
 
-        min_key_0 = self.fringes[0].min_key
+        min_key_0 = self.fringes[0].get_min_key()
         while min_key_0 < INFINITY:
             for i in range(1, self.num_heuristics):
-                min_key_i = self.fringes[i].min_key
+                min_key_i = self.fringes[i].get_min_key()
                 if min_key_i <= self.w2 * min_key_0:
                     if goal_cell.g[i] <= min_key_i:
                         if goal_cell.g[i] < INFINITY:
@@ -300,7 +299,7 @@ class SequentialHeuristicSearch:
 
                 else:
                     goal_g_0 = goal_cell.g[0]
-                    if goal_g_0 <= self.fringes[0].min_key():
+                    if goal_g_0 <= self.fringes[0].get_min_key():
                         if goal_g_0 < INFINITY:
                             path, path_length = self.terminate_search(start, goal, 0) # terminate and return path pointed by bp_0(s_goal)
                             nodes_expanded = self.num_nodes_expanded[0] # Nodes expanded for search 0
