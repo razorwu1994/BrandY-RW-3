@@ -116,15 +116,15 @@ where $dx = |x_2 - x_1|$ and $dy = |y_2 - y_1|$.
 
 \noindent \textbf{E. UCS, A*, Weighted A* Statistics}
 
-\noindent \includegraphics[scale=0.5]{"avg-nodeexpanded"}
+\noindent \includegraphics[scale=0.65]{"avg-nodeexpanded"}
 
 \medskip
 
-\noindent \includegraphics[scale=0.5]{"avg-pathlength"}
+\noindent \includegraphics[scale=0.65]{"avg-pathlength"}
 
 \medskip
 
-\noindent \includegraphics[scale=0.5]{"avg-runtime"}
+\noindent \includegraphics[scale=0.65]{"avg-runtime"}
 
 \medskip
 
@@ -132,17 +132,39 @@ where $dx = |x_2 - x_1|$ and $dy = |y_2 - y_1|$.
 
 \noindent \textbf{F. Analysis of UCS, A* \& Weighted A*}
 
-Between the heuristics, heuristic 3 (diagonal distance) performed the best in terms of path length and heuristic 4 (Euclidean squared) performed the best in terms of time. Heuristic 1 (H1) also performed better than H3 in terms of nodes expanded and slightly better in terms of time. 
+At first glance, uniform-cost search (UCS) finds the shortest path, but it has the highest number of nodes expanded and time taken by far, compared to the other methods. This provides evidence how UCS sacrifices speed and memory for the guarantee of finding an optimal path.
 
---Richard---(delete this line after Brandon confirmed and combined below statements)\newline
+In comparison, A* (heuristic search using the diagonal distance or euclidean distance heuristics),  tended to run much quicker than UCS, while still finding the shortest path. A* also expanded roughly a third less nodes than UCS. When using inadmissible heuristics, the heuristic search ran very quickly and expanded very few nodes (like with heuristic 4, Euclidean squared), but at the expense of longer paths.
 
-UCS : it has the largest node to expand and highest running time, this proves its optimality based on sacrifice of speed and memory. But it guarantees an optimal path will be generated.\newline
+Weighted A* search is similar to heuristic search with the Euclidean squared heuristic in that its runtime was quicker than A*, as expected, but the path length suffers slightly. With the additional weight factor bias the search, the heuristic can search more greedily with a good heuristic, but may return a sub-optimal path. Just a slightly higher weight like 1.5 (weight = 1 is the same as A*) reduces the time and number of nodes expanded significantly, while the average path length increases slightly. With a larger weight, like 2.5, the effects of weighted A* search are even more noticeable. A higher weight leads to even fewer nodes expanded and an even shorter run time with only a slight increase from the optimal path. In general, for the "good" heuristics (heuristics 1, 2 and 3), the sacrifice is not as severe as for other heuristics (heuristics 4 and 5). \newline
 
-A* search: method depends on different type of heuristics.There are inadmissible ones, and so some A* family search used that heuristic (like h=4) expand much less nodes and run time than others because of this.Hence,the result path length is certainly worst sub-optimal among all heuristics.\newline
+Between the heuristics themselves, heuristics 1 (Euclidean distance), 2 (Manhattan distance) and 3 (diagonal distance) performed the best in terms of path length. Heuristic 4 (Euclidean squared) and heuristic 5 (sample heuristic) performed the best in terms of time and nodes expanded.
 
-Weighted A* search: now we have one more factor to add bias on the heuristic(pure A* treat this weight as 1).So clearly we can see, larger weight will have less node expansion and run time but for those "good" heuristics, the sacrifice for sub-optimality isn't that expensive. Like h=1,h=3,the weighted A* search with 2.5 weight saves a lot of time and memory to search but nearly get the exact same path length!\newline
+The heuristic results were mostly expected, with diagonal distance performing slightly better than Euclidean distance. In heuristic search with no weights, diagonal distance and Euclidean distance both found the optimal path. Surprisingly, Manhattan distance's average path length comes really close to the optimal path length and, at the same time, it performs better in terms of nodes expanded and time in comparison to diagonal and Euclidean distance. With higher weights, Manhattan distance resulted in a noticeably worse path than the admissible heuristics with the same weights. 
 
-certainly ,h1 and h3 are best two heuristics to use among all 5 proposed ones. But h3 has better performance in every aspect except (finding optimal path length,h3 has slightly higher path length than h1)
+Euclidean squared and the sample heuristic perform the worst in terms of path length by almost a factor of 2. It should be noted that the sample heuristic did not consider highways, which resulted in its inadmissibility. Moreover, with normal heuristic search, the sample heuristic's path comes fairly close to the optimal one. On the other hand, the Euclidean squared heuristic's path is consistently much longer than the optimal path, with or without weights. While these heuristic find longer paths, they also have huge saves in time and expand practically zero nodes relative to other searches.
 
+Out of all of the heuristics, the sample heuristic is the only one whose average path length is significantly affected with weights 1.5 and 2.5. Other heuristics only have a slight change in average path length with the same weights.
+
+
+In conclusion, Euclidean distance and diagonal distance are the best two heuristics to use among all of the five proposed ones. Diagonal distance outperforms Euclidean distance in nearly every aspect, except with weights involved, Euclidean distance's average path length fairs a bit better. To save on time, either use a slight weight (like 2.5) or use the Euclidean squared or sample heuristics. 
+
+\pagebreak %---------------------------------------------------------------
+
+\noindent \textbf{G. Sequential A* Implementation}
+
+examples here
+
+\pagebreak %---------------------------------------------------------------
+
+\noindent \textbf{H. Sequential A* Analysis}
+
+analysis here
+
+\pagebreak %---------------------------------------------------------------
+
+\noindent \textbf{I. Sequential A* Proof}
+
+proof here
 
 \end{document}

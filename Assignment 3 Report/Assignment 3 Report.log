@@ -1,9 +1,9 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6350 64-bit) (preloaded format=pdflatex 2017.6.27)  25 NOV 2017 18:34
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9.6210 64-bit) (preloaded format=pdflatex 2017.2.16)  25 NOV 2017 19:29
 entering extended mode
 **"./Assignment 3 Report.tex"
 ("Assignment 3 Report.tex"
-LaTeX2e <2017-04-15>
-Babel <3.10> and hyphenation patterns for 75 language(s) loaded.
+LaTeX2e <2017/01/01> patch level 1
+Babel <3.9r> and hyphenation patterns for 75 language(s) loaded.
 ("C:\Program Files\MiKTeX 2.9\tex\latex\base\article.cls"
 Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
 ("C:\Program Files\MiKTeX 2.9\tex\latex\base\size12.clo"
@@ -29,7 +29,7 @@ Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
 \KV@toks@=\toks14
 )
 ("C:\Program Files\MiKTeX 2.9\tex\latex\graphics\graphics.sty"
-Package: graphics 2017/04/14 v1.1b Standard LaTeX Graphics (DPC,SPQR)
+Package: graphics 2016/10/09 v1.0u Standard LaTeX Graphics (DPC,SPQR)
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\graphics\trig.sty"
 Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
@@ -69,7 +69,7 @@ LaTeX Font Info:    ... okay on input line 5.
 LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 5.
 LaTeX Font Info:    ... okay on input line 5.
 
-(C:\Users\Razor\AppData\Roaming\MiKTeX\2.9\tex\context\base\supp-pdf.mkii
+("C:\Program Files\MiKTeX 2.9\tex\context\base\supp-pdf.mkii"
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count88
 \scratchdimen=\dimen105
@@ -83,7 +83,7 @@ LaTeX Font Info:    ... okay on input line 5.
 \makeMPintoPDFobject=\count93
 \everyMPtoPDFconversion=\toks16
 ) ("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\pdftexcmds.sty"
-Package: pdftexcmds 2017/03/19 v0.25 Utility functions of pdfTeX for LuaTeX (HO
+Package: pdftexcmds 2016/05/21 v0.22 Utility functions of pdfTeX for LuaTeX (HO
 )
 
 ("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\ifluatex.sty"
@@ -91,7 +91,7 @@ Package: ifluatex 2016/05/16 v1.4 Provides the ifluatex switch (HO)
 Package ifluatex Info: LuaTeX not detected.
 )
 ("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\ifpdf.sty"
-Package: ifpdf 2017/03/15 v3.2 Provides the ifpdf switch
+Package: ifpdf 2016/05/14 v3.1 Provides the ifpdf switch
 )
 Package pdftexcmds Info: LuaTeX not detected.
 Package pdftexcmds Info: \pdf@primitive is available.
@@ -230,43 +230,44 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <6> on input line 73.
  [7] [8]
-<Images/"avg-nodeexpanded".png, id=40, 825.0825pt x 337.26pt>
+<Images/"avg-nodeexpanded".png, id=40, 648.021pt x 248.72925pt>
 File: Images/"avg-nodeexpanded".png Graphic file (type png)
 
 <use Images/"avg-nodeexpanded".png>
 Package pdftex.def Info: Images/"avg-nodeexpanded".png used on input line 119.
-(pdftex.def)             Requested size: 412.54024pt x 168.62958pt.
+(pdftex.def)             Requested size: 421.20865pt x 161.67209pt.
 
-Overfull \hbox (22.54024pt too wide) in paragraph at lines 119--120
+Overfull \hbox (31.20865pt too wide) in paragraph at lines 119--120
 [] 
  []
 
-<Images/"avg-pathlength".png, id=42, 825.0825pt x 339.51843pt>
+<Images/"avg-pathlength".png, id=42, 648.021pt x 242.1045pt>
 File: Images/"avg-pathlength".png Graphic file (type png)
 
 <use Images/"avg-pathlength".png>
 Package pdftex.def Info: Images/"avg-pathlength".png used on input line 123.
-(pdftex.def)             Requested size: 412.54024pt x 169.75879pt.
+(pdftex.def)             Requested size: 421.20865pt x 157.36606pt.
 
-Overfull \hbox (22.54024pt too wide) in paragraph at lines 123--124
+Overfull \hbox (31.20865pt too wide) in paragraph at lines 123--124
 [] 
  []
 
-<Images/"avg-runtime".png, id=43, 822.82407pt x 336.50719pt>
+<Images/"avg-runtime".png, id=43, 648.021pt x 243.91125pt>
 File: Images/"avg-runtime".png Graphic file (type png)
 
 <use Images/"avg-runtime".png>
 Package pdftex.def Info: Images/"avg-runtime".png used on input line 127.
-(pdftex.def)             Requested size: 411.41103pt x 168.25317pt.
+(pdftex.def)             Requested size: 421.20865pt x 158.54042pt.
 
-Overfull \hbox (21.41103pt too wide) in paragraph at lines 127--128
+Overfull \hbox (31.20865pt too wide) in paragraph at lines 127--128
 [] 
  []
 
 [9 <./Images/avg-nodeexpanded.png> <./Images/avg-pathlength.png> <./Images/avg-
 runtime.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 137--138
-
+Overfull \hbox (7.17644pt too wide) in paragraph at lines 137--138
+\OT1/cmr/m/n/12 quickly and ex-panded very few nodes (like with heuris-tic 4, E
+u-clidean squared),
  []
 
 
@@ -274,35 +275,25 @@ Underfull \hbox (badness 10000) in paragraph at lines 139--140
 
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 141--142
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 143--144
-
- []
-
-[10] ("Assignment 3 Report.aux") ) 
+[10] [11] [12] [13] [14] ("Assignment 3 Report.aux") ) 
 Here is how much of TeX's memory you used:
- 1528 strings out of 493323
- 22256 string characters out of 3139066
- 81871 words of memory out of 3000000
- 5069 multiletter control sequences out of 15000+200000
+ 1528 strings out of 493333
+ 22216 string characters out of 3139188
+ 81461 words of memory out of 3000000
+ 5060 multiletter control sequences out of 15000+200000
  6990 words of font info for 25 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 39i,5n,25p,518b,117s stack positions out of 5000i,500n,10000p,200000b,50000s
-<C:/Program Files/MiKTeX 2.9/fonts/type1/publ
-ic/amsfonts/cm/cmbx12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfo
-nts/cm/cmex10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/c
-mmi12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb
-><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Progr
-am Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files
-/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
-Output written on "Assignment 3 Report.pdf" (10 pages, 6558052 bytes).
+ 39i,5n,25p,910b,117s stack positions out of 5000i,500n,10000p,200000b,50000s
+<C:/Program Files/MiKTeX 
+2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Program Files/MiKTeX 2.9/font
+s/type1/public/amsfonts/cm/cmex10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/
+public/amsfonts/cm/cmmi12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/a
+msfonts/cm/cmr12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/c
+m/cmr8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.p
+fb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
+Output written on "Assignment 3 Report.pdf" (14 pages, 6559857 bytes).
 PDF statistics:
- 76 PDF objects out of 1000 (max. 8388607)
+ 89 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  46 words of extra memory for PDF output out of 10000 (max. 10000000)
 
