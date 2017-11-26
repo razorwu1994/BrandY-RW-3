@@ -9,18 +9,32 @@ filePath = ["\map1\map1-0.txt","\map1\map1-1.txt","\map1\map1-2.txt","\map1\map1
 			,"\map3\map3-9.txt","\map4\map4-5.txt","\map4\map4-6.txt","\map4\map4-7.txt","\map4\map4-8.txt","\map4\map4-9.txt","\map5\map5-5.txt"
 			,"\map5\map5-6.txt","\map5\map5-7.txt","\map5\map5-8.txt","\map5\map5-9.txt"]
 
-# commands= [["py","search.py","map_benchmarks","u"],["py","search.py","map_benchmarks","a","1"]
-# 			,["py","search.py","map_benchmarks","a","2"],["py","search.py","map_benchmarks","a","3"]
-# 			,["py","search.py","map_benchmarks","a","4"],["py","search.py","map_benchmarks","a","5"]
-# 			,["py","search.py","map_benchmarks","w","1","1.5"],["py","search.py","map_benchmarks","w","2","1.5"]
-# 			,["py","search.py","map_benchmarks","w","3","1.5"],["py","search.py","map_benchmarks","w","4","1.5"]
-# 			,["py","search.py","map_benchmarks","w","5","1.5"],["py","search.py","map_benchmarks","w","1","2.5"]
-# 			,["py","search.py","map_benchmarks","w","2","2.5"],["py","search.py","map_benchmarks","w","3","2.5"]
-# 			,["py","search.py","map_benchmarks","w","4","2.5"],["py","search.py","map_benchmarks","w","5","2.5"]]
-commands= [["py","search.py","map_benchmarks","s","3","1.25"],["py","search.py","map_benchmarks","s","1.25","3"]
-			,["py","search.py","map_benchmarks","s","1.5","3"],["py","search.py","map_benchmarks","s","3","1.5"]]
+regcommands= [["py","search.py","map_benchmarks","u"],["py","search.py","map_benchmarks","a","1"]
+			,["py","search.py","map_benchmarks","a","2"],["py","search.py","map_benchmarks","a","3"]
+			,["py","search.py","map_benchmarks","a","4"],["py","search.py","map_benchmarks","a","5"]
+			,["py","search.py","map_benchmarks","w","1","1.5"],["py","search.py","map_benchmarks","w","2","1.5"]
+			,["py","search.py","map_benchmarks","w","3","1.5"],["py","search.py","map_benchmarks","w","4","1.5"]
+			,["py","search.py","map_benchmarks","w","5","1.5"],["py","search.py","map_benchmarks","w","1","2.5"]
+			,["py","search.py","map_benchmarks","w","2","2.5"],["py","search.py","map_benchmarks","w","3","2.5"]
+			,["py","search.py","map_benchmarks","w","4","2.5"],["py","search.py","map_benchmarks","w","5","2.5"]]
+
+commands= [["py","search.py","map_benchmarks","s","1.25","1.25"],["py","search.py","map_benchmarks","s","1.25","2"]
+			,["py","search.py","map_benchmarks","s","2","1.25"],["py","search.py","map_benchmarks","s","2","2"]
+			,["py","search.py","map_benchmarks","s","2.5","1.5"],["py","search.py","map_benchmarks","s","1.5","2.5"]
+			,["py","search.py","map_benchmarks","s","1.5","1.5"],["py","search.py","map_benchmarks","s","2.5","2.5"]
+		   	,["py","search.py","map_benchmarks","s","3","1.25"],["py","search.py","map_benchmarks","s","1.25","3"]
+			,["py","search.py","map_benchmarks","s","1.5","3"],["py","search.py","map_benchmarks","s","3","1.5"]
+			,["py", "search.py", "map_benchmarks", "s", "2.5", "3"], ["py", "search.py", "map_benchmarks", "s", "2.5", "10"]
+			,["py", "search.py", "map_benchmarks", "s", "1.25", "10"]]
+
 for file in filePath:
 	for comand in commands:
+		TempComand=[]
+		for c in comand:
+			TempComand.append(c)
+		TempComand[2]=str(TempComand[2])+str(file)
+		subprocess.call(TempComand)
+	for comand in regcommands:
 		TempComand=[]
 		for c in comand:
 			TempComand.append(c)

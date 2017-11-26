@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6350 64-bit) (preloaded format=pdflatex 2017.6.27)  26 NOV 2017 13:09
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6350 64-bit) (preloaded format=pdflatex 2017.6.27)  26 NOV 2017 13:23
 entering extended mode
 **"./Assignment 3 Report.tex"
 ("Assignment 3 Report.tex"
@@ -303,28 +303,28 @@ Overfull \hbox (58.46756pt too wide) in paragraph at lines 181--182
  []
 
 [13 <./Images/g-sns-map3-1.jpg>]
-<Images/"s-nodeexpanded".png, id=65, 609.02531pt x 301.8778pt>
+<Images/"s-nodeexpanded".png, id=65, 607.51968pt x 287.57437pt>
 File: Images/"s-nodeexpanded".png Graphic file (type png)
 
 <use Images/"s-nodeexpanded".png>
 Package pdftex.def Info: Images/"s-nodeexpanded".png used on input line 188.
-(pdftex.def)             Requested size: 365.418pt x 181.12807pt.
+(pdftex.def)             Requested size: 364.51462pt x 172.54594pt.
 
-<Images/"s-pathlength".png, id=66, 606.01407pt x 300.3722pt>
+<Images/"s-pathlength".png, id=66, 609.02531pt x 287.57437pt>
 File: Images/"s-pathlength".png Graphic file (type png)
 
 <use Images/"s-pathlength".png>
 Package pdftex.def Info: Images/"s-pathlength".png used on input line 192.
-(pdftex.def)             Requested size: 363.61125pt x 180.22469pt.
+(pdftex.def)             Requested size: 365.418pt x 172.54594pt.
 
-<Images/"s-runtime".png, id=67, 606.76688pt x 300.3722pt>
+<Images/"s-runtime".png, id=67, 607.51968pt x 283.0575pt>
 File: Images/"s-runtime".png Graphic file (type png)
 
 <use Images/"s-runtime".png>
 Package pdftex.def Info: Images/"s-runtime".png used on input line 196.
-(pdftex.def)             Requested size: 364.06293pt x 180.22469pt.
- [14 <./Images/s-nodeexpanded.png> <./Images/s-pathlength.png>] [15 <./Images/s
--runtime.png>] [16] ("Assignment 3 Report.aux") ) 
+(pdftex.def)             Requested size: 364.51462pt x 169.8358pt.
+ [14 <./Images/s-nodeexpanded.png> <./Images/s-pathlength.png> <./Images/s-runt
+ime.png>] [15] [16] ("Assignment 3 Report.aux") ) 
 Here is how much of TeX's memory you used:
  1553 strings out of 493323
  22941 string characters out of 3139066
@@ -332,7 +332,7 @@ Here is how much of TeX's memory you used:
  5089 multiletter control sequences out of 15000+200000
  6990 words of font info for 25 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 39i,5n,25p,910b,117s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 39i,5n,25p,1052b,117s stack positions out of 5000i,500n,10000p,200000b,50000s
 <C:/Program Files/MiKTeX 2.9/f
 onts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Program Files/MiKTeX 2.9/fonts/typ
 e1/public/amsfonts/cm/cmex10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/publi
@@ -340,7 +340,7 @@ c/amsfonts/cm/cmmi12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfon
 ts/cm/cmr12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr
 8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C
 :/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
-Output written on "Assignment 3 Report.pdf" (16 pages, 9472906 bytes).
+Output written on "Assignment 3 Report.pdf" (16 pages, 9469034 bytes).
 PDF statistics:
  103 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
