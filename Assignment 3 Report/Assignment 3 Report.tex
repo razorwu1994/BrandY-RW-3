@@ -170,24 +170,35 @@ In conclusion, Euclidean distance and diagonal distance are the best two heurist
 
 \noindent \textbf{G. Sequential A* Implementation}
 
-examples here
+examples here(s,w1 = 1.5, w2 = 1.5)
 
+Path length: $ 95.0238636074 $
+
+Time (number of nodes expanded): $ 11095 $
+
+Time (In seconds):$ 0.653199 $
+
+\noindent \includegraphics[scale=0.2]{"g-sns-map3-1"}
+
+\medskip
 \pagebreak %---------------------------------------------------------------
 
 \noindent \textbf{H. Sequential A* Analysis}
 
-\noindent \includegraphics[scale=0.5]{"s-nodeexpanded"}
+\noindent \includegraphics[scale=0.6]{"s-nodeexpanded"}
 
 \medskip
 
-\noindent \includegraphics[scale=0.5]{"s-pathlength"}
+\noindent \includegraphics[scale=0.6]{"s-pathlength"}
 
 \medskip
 
-\noindent \includegraphics[scale=0.5]{"s-runtime"}
+\noindent \includegraphics[scale=0.6]{"s-runtime"}
 
 \medskip
-analysis here
+analysis here(h3 is the one we chose to be anchor heuristic,h1 is the extra we add for more accurate comparison)
+
+We run 16 different w1,w2 pairs to collect data. Through our observation, $ w_1=1.25 $ has advantages of number of node expanded and very good suboptimal path length,but the run time is relative highest among all 16 pairs.  Through many testing cases, $ w_1=2 $ has an averagely good performance. Until here, we can make conclusion about, $ w_1 $ affects all these factors more than $w_2$,but with slightly twisting the value of $w_2$,we can have a slightly better run time performance while other stats are same,but this does not mean by infinite increasing $ w_2 $,we will get better run time performance. Checkout example with $ (w_1=1.25,w_2=1.25;w_1=1.25,w_2=2;w_1=1.25,w_2=3) $
 
 \pagebreak %---------------------------------------------------------------
 
