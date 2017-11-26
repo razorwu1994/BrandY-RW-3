@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9.6210 64-bit) (preloaded format=pdflatex 2017.2.16)  25 NOV 2017 20:48
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9.6210 64-bit) (preloaded format=pdflatex 2017.2.16)  25 NOV 2017 21:03
 entering extended mode
 **"./Assignment 3 Report.tex"
 ("Assignment 3 Report.tex"
@@ -189,26 +189,24 @@ Underfull \hbox (badness 10000) in paragraph at lines 43--47
 
  []
 
+<Images/"b-map5-1-a-real".jpg, id=14, 1744.5175pt x 1011.78pt>
+File: Images/"b-map5-1-a-real".jpg Graphic file (type jpg)
 
-! LaTeX Error: File `"b-map5-1-a-real"' not found.
+<use Images/"b-map5-1-a-real".jpg>
+Package pdftex.def Info: Images/"b-map5-1-a-real".jpg used on input line 51.
+(pdftex.def)             Requested size: 418.69276pt x 242.83215pt.
 
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.51 ...ludegraphics[scale=0.2]{"b-map5-1-a-real"}
-                                                  \newline
-I could not locate the file with any of these extensions:
-.png,.pdf,.jpg,.mps,.jpeg,.jbig2,.jb2,.PNG,.PDF,.JPG,.JPEG,.JBIG2,.JB2,.eps
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
+Overfull \hbox (28.69276pt too wide) in paragraph at lines 48--52
+[] 
+ []
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 48--52
 
  []
 
-<Images/"b-map5-1-a".jpg, id=14, 2091.815pt x 995.72pt>
+[3 <./Images/b-map5-1-u.jpg>]
+<Images/"b-map5-1-a".jpg, id=18, 2091.815pt x 995.72pt>
 File: Images/"b-map5-1-a".jpg Graphic file (type jpg)
 
 <use Images/"b-map5-1-a".jpg>
@@ -224,8 +222,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 53--57
 
  []
 
-[3 <./Images/b-map5-1-u.jpg>]
-<Images/"b-map5-1-w-2".jpg, id=18, 2364.835pt x 975.645pt>
+<Images/"b-map5-1-w-2".jpg, id=19, 2364.835pt x 975.645pt>
 File: Images/"b-map5-1-w-2".jpg Graphic file (type jpg)
 
 <use Images/"b-map5-1-w-2".jpg>
@@ -241,15 +238,16 @@ Underfull \hbox (badness 10000) in paragraph at lines 58--62
 
  []
 
-[4 <./Images/b-map5-1-a.jpg> <./Images/b-map5-1-w-2.jpg>] [5]
+[4 <./Images/b-map5-1-a-real.jpg> <./Images/b-map5-1-a.jpg>] [5 <./Images/b-map
+5-1-w-2.jpg>] [6]
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <12> on input line 82.
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <8> on input line 82.
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <6> on input line 82.
- [6] [7]
-<Images/"avg-nodeexpanded".png, id=37, 648.021pt x 248.72925pt>
+ [7] [8]
+<Images/"avg-nodeexpanded".png, id=41, 648.021pt x 248.72925pt>
 File: Images/"avg-nodeexpanded".png Graphic file (type png)
 
 <use Images/"avg-nodeexpanded".png>
@@ -260,7 +258,7 @@ Overfull \hbox (31.20865pt too wide) in paragraph at lines 128--129
 [] 
  []
 
-<Images/"avg-pathlength".png, id=39, 648.021pt x 242.1045pt>
+<Images/"avg-pathlength".png, id=43, 648.021pt x 242.1045pt>
 File: Images/"avg-pathlength".png Graphic file (type png)
 
 <use Images/"avg-pathlength".png>
@@ -271,7 +269,7 @@ Overfull \hbox (31.20865pt too wide) in paragraph at lines 132--133
 [] 
  []
 
-<Images/"avg-runtime".png, id=40, 648.021pt x 243.91125pt>
+<Images/"avg-runtime".png, id=44, 648.021pt x 243.91125pt>
 File: Images/"avg-runtime".png Graphic file (type png)
 
 <use Images/"avg-runtime".png>
@@ -282,7 +280,7 @@ Overfull \hbox (31.20865pt too wide) in paragraph at lines 136--137
 [] 
  []
 
-[8 <./Images/avg-nodeexpanded.png> <./Images/avg-pathlength.png> <./Images/avg-
+[9 <./Images/avg-nodeexpanded.png> <./Images/avg-pathlength.png> <./Images/avg-
 runtime.png>]
 Overfull \hbox (7.17644pt too wide) in paragraph at lines 146--147
 \OT1/cmr/m/n/12 quickly and ex-panded very few nodes (like with heuris-tic 4, E
@@ -294,25 +292,25 @@ Underfull \hbox (badness 10000) in paragraph at lines 148--149
 
  []
 
-[9] [10] [11] [12] [13] ("Assignment 3 Report.aux") ) 
+[10] [11] [12] [13] [14] ("Assignment 3 Report.aux") ) 
 Here is how much of TeX's memory you used:
- 1540 strings out of 493333
- 22281 string characters out of 3139188
+ 1533 strings out of 493333
+ 22366 string characters out of 3139188
  81461 words of memory out of 3000000
- 5060 multiletter control sequences out of 15000+200000
+ 5064 multiletter control sequences out of 15000+200000
  6990 words of font info for 25 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  39i,5n,25p,910b,117s stack positions out of 5000i,500n,10000p,200000b,50000s
-<C:/Program Files/MiKTeX 2
-.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Program Files/MiKTeX 2.9/fonts
-/type1/public/amsfonts/cm/cmex10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/p
-ublic/amsfonts/cm/cmmi12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/am
-sfonts/cm/cmr12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm
-/cmr8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pf
-b><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
-Output written on "Assignment 3 Report.pdf" (13 pages, 6557319 bytes).
+<C:/Program Files/MiKTeX 
+2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Program Files/MiKTeX 2.9/font
+s/type1/public/amsfonts/cm/cmex10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/
+public/amsfonts/cm/cmmi12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/a
+msfonts/cm/cmr12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/c
+m/cmr8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.p
+fb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
+Output written on "Assignment 3 Report.pdf" (14 pages, 7525005 bytes).
 PDF statistics:
- 86 PDF objects out of 1000 (max. 8388607)
+ 90 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 46 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 51 words of extra memory for PDF output out of 10000 (max. 10000000)
 
