@@ -207,6 +207,20 @@ class SequentialHeuristicSearch:
                 if not self.contained_in_dict(neighbor.pos, self.closed[i]): # if neighbor has not been expanded in CLOSED_i yet
                     self.fringes[i].add_cell(neighbor, get_key(neighbor, i)) # Insert/Update s' in OPEN_i with Key(s', i)
 
+    def insert_in_closed(self, cell, closed):
+        """
+        Insert the given cell into the given closed dictionary
+
+        :param cell: cell to place in closed
+        :param closed: dictionary of hash keys to
+        :return: None
+        """
+        hash_key = self.get_hash_key(cell.pos)
+        if hash_key in closed:  # Uses hash to determine if key is in closed, still O(1)
+            closed[hash_key].append(s.pos)
+        else:
+            closed[hash_key] = [s.pos]
+
     def search(self, start, goal):
         """
         Do sequential heuristic search on the grid, find a path from start to goal
@@ -242,6 +256,17 @@ class SequentialHeuristicSearch:
                         if goal_cell.g[i] < 20000:
                             # terminate and return path pointed by bp_i(s_goal)
                         else:
-                            s = self.fringes[i]
+                            s = self.fringes[i].pop_cell() # OPEN_i.TOP()?
+                            self.expand_state(s, i)
+                            insert_in_closed(s, self.closed[i]) # Insert s in CLOSED_i
+                else:
+                    goal_g_0 = goal_cell.g[0]
+                    if goal_g_0 <= self.fringes[0].min_key():
+                        if goal_g_0 < 20000:
+                            # terminate and return path pointed by bp_0(s_goal)
+                    else:
+                        s = self.fringes[0].pop()
+                        self.expand_state(s, 0)
+                        insert_in_closed(s, self.closed[0])
 
         return None, -1, -1  # No path found, no nodes expanded
