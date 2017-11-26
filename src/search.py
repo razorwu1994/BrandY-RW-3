@@ -168,15 +168,30 @@ if __name__ == "__main__":
     f.close()
 
     # # Write path to a file,toggle this off when doing the demo
-    # f = open('experimental.csv','a+')
-    # output = file_name+","+search_type+","+heuristic_type+","+str(weight)+","+str(path_length)+","+str(num_nodes_expanded)+","+str(delta.total_seconds())+"\n"
-    # f.write(output)
-    # f.close()
+    f = open('experimental.csv','a+')
+    if isSequential:
+        output = file_name+","+search_type+","+str(w1)+","+str(w2)+","+str(path_length)+","+str(num_nodes_expanded)+","+str(delta.total_seconds())+"\n"
+        f.write(output)
+    else:
+        output = file_name+","+search_type+","+heuristic_type+","+str(weight)+","+str(path_length)+","+str(num_nodes_expanded)+","+str(delta.total_seconds())+"\n"
+        f.write(output)
+    f.close()
 
     # Write f,g,h data to a file in format[(f, g, h), (f, g, h), ..., (f, g, h)]
     if isSequential:
         f = open('extra2.txt', 'w')
-        f.write('test')
+        f.write("[")
+        outputArray = []
+        for i in range(len(grid)):
+            for j in range(len(grid[0])):
+                g_value = grid[i][j].g
+                h_value = grid[i][j].h
+                outputArray.append([g_value, h_value])
+            f.write("[" + ','.join(map(flat, outputArray)) + "]")
+            if i != len(grid) - 1:
+                f.write(",")
+            outputArray = []
+        f.write("]")
         # OUTPUT DATA HERE--------------------------------------------------------------
         f.close()
     else:

@@ -35,11 +35,12 @@ var fileConfig = []
                    this.props.startANDgoal[1]===r+","+c?dotsConfig[2]:
                    this.props.path.indexOf(storedval)!==-1?dotsConfig[0]:
                    ""
+      const cellInfo = cellFGH.indexOf("[")!=-1?storedval+",g:[],f:[]"+cellFGH:storedval+",[f,g,h]:"+cellFGH
       return (
-          <Button key={storedval} value={storedval+",[f,g,h]:"+cellFGH} className="square" cursor="pointer" onClick={handleClick}
+          <Button key={storedval} value={cellInfo} className="square" cursor="pointer" onClick={handleClick}
           style={{background:colorGroup[cellType]}}>
 
-          <span id={storedval+",[f,g,h]:"+cellFGH} value={storedval+",[f,g,h]:"+cellFGH} style={{color:dot.color,width:'10px',fontSize:'15px'}}
+          <span id={cellInfo} value={cellInfo} style={{color:dot.color,width:'10px',fontSize:'15px'}}
             className={hwydots}>
           {dot.text}
           </span>
@@ -310,15 +311,15 @@ var fileConfig = []
         <div>
         <div style={{display:'flex'}}>
         <ReactFileReader handleFiles={this.runScript} fileTypes={'.txt'} >
-            <Button bsStyle="info" cursor="pointer" style={{width:"100px"}}>Cell Info</Button>
+        <Button bsStyle="info" cursor="pointer" style={{width:"100px"}}>Cell Info</Button>
         </ReactFileReader>
           <DropdownButton
-          bsStyle="success" title={"select heuristic"} id={`heuristic`} onSelect={this.changeHeuristic}>
-          <MenuItem eventKey="1">heu_linear</MenuItem>
-          <MenuItem eventKey="2">heu_manhatan</MenuItem>
-          <MenuItem eventKey="3">heu_diagonal</MenuItem>
-          <MenuItem eventKey="4">heu_eucliden</MenuItem>
-          <MenuItem eventKey="5">heu_sample</MenuItem>
+          bsStyle="success" title={"Show heuristic"} id={`heuristic`} onSelect={this.changeHeuristic}>
+          <MenuItem eventKey="1">h1 heu_euclidean</MenuItem>
+          <MenuItem eventKey="2">h2 heu_manhatan</MenuItem>
+          <MenuItem eventKey="3">h3(h1 in sequential,everything order going downwards) heu_diagonal</MenuItem>
+          <MenuItem eventKey="4">h4 heu_euclidean_squared</MenuItem>
+          <MenuItem eventKey="5">h5 heu_sample</MenuItem>
           </DropdownButton>
           <ReactFileReader handleFiles={this.runScript} fileTypes={'.txt'} >
               <Button bsStyle="danger" cursor="pointer" style={{width:"100px"}}>Show Path</Button>
@@ -329,10 +330,6 @@ var fileConfig = []
                 <Button bsStyle="primary" cursor="pointer" style={{width:"100%"}}>Upload</Button>
             </ReactFileReader>
             </div>
-          <div style={{display:'flex',marginLeft:'10px'}}>
-          Start cell :   <span className="separator_start"></span>
-          Goal cell :    <span className="separator_goal"></span>
-          </div>
         </div>
 
         <Board
