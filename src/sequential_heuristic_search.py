@@ -220,8 +220,7 @@ class SequentialHeuristicSearch:
         """
         neighbors = self.get_neighbors(s)
         for neighbor in neighbors:
-            self.insert_in_dict(neighbor, self.visited[i]) # Mark neighbor as visited
-
+            self.insert_in_dict(neighbor, self.visited[i])  # Mark neighbor as visited
             if not self.contained_in_dict(neighbor.pos, self.visited[i]): # if s' was never generated (visited) in the ith search
                 neighbor.g[i] = INFINITY
                 neighbor.parent[i] = None
