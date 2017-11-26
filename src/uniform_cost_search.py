@@ -223,7 +223,8 @@ class UniformCostSearch:
             if s.pos == goal:
                 path = self.retrieve_path(start, goal)  # Get path from start to goal
                 path_length = round(self.grid[goal[0]][goal[1]].g, 2)
-                return path, path_length, num_nodes_expanded
+                memory_requirement = fringe.maxsize
+                return path, path_length, num_nodes_expanded, memory_requirement
 
             # Store in closed list
             key = self.get_hash_key(s.pos)

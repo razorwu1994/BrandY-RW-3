@@ -138,16 +138,16 @@ if __name__ == "__main__":
 
     if search_type == "u":
         uniform_cost_search = ucs.UniformCostSearch(grid)
-        path, path_length, num_nodes_expanded = uniform_cost_search.search(start, goal)
+        path, path_length, num_nodes_expanded, memory_requirement = uniform_cost_search.search(start, goal)
     elif search_type == "a":
         heuristic_search = hs.HeuristicSearch(grid, heuristic)
-        path, path_length, num_nodes_expanded = heuristic_search.search(start, goal)
+        path, path_length, num_nodes_expanded, memory_requirement = heuristic_search.search(start, goal)
     elif search_type == "w":
         weighted_heuristic_search = whs.WeightedHeuristicSearch(grid, heuristic, weight)
-        path, path_length, num_nodes_expanded = weighted_heuristic_search.search(start, goal)
+        path, path_length, num_nodes_expanded, memory_requirement = weighted_heuristic_search.search(start, goal)
     elif search_type == "s":
         sequential_heuristic_search = shs.SequentialHeuristicSearch(grid, w1, w2)
-        path, path_length, num_nodes_expanded = sequential_heuristic_search.search(start, goal)
+        path, path_length, num_nodes_expanded, memory_requirement = sequential_heuristic_search.search(start, goal)
     else:
         raise ValueError('Please use a valid search type: u = uniform-cost search, a = A* search, w = weighted A* search')
 
@@ -162,6 +162,7 @@ if __name__ == "__main__":
     t2 = datetime.now()
     delta = t2 - t1
     print 'Time (In seconds):{}'.format(delta.total_seconds())
+    print 'Memory (max # nodes in fringe): {}'.format(memory_requirement)
 
     f = open('path.txt','w')
     f.write("["+','.join(map(flat,path))+"]")
