@@ -38,26 +38,26 @@ This third image shows a closer look at the actual grid. Red squares represent b
 
 \noindent \textbf{B. UCS, A* and Weighted A* Implementations}
 
-There are three examples shown below, running uniform-cost search (UCS), A* and weighted A* respectively on the same map.
+There are four examples shown below show the path from running uniform-cost search (UCS), A* and weighted A* respectively on the same map.
 
 1. Uniform-cost search:\newline
 \medskip
-\textbf{Path length:81.08, Node Expanded:11595,	Run Time: 0.384272}\newline
-\noindent \includegraphics[scale=0.2]{"b-map5-1-u"}\newline
+\textbf{Path length: 81.08, Nodes Expanded: 11595,	Run Time: 0.384272}\newline
+\noindent \includegraphics[scale=0.21]{"b-map5-1-u"}\newline
 
-2. A * search(h=1): \newline
+2. A * search ($h=1$, Euclidean distance): \newline
 \medskip
-\textbf{Path length:81.08, Node Expanded:8155,	Run Time: 0.287288}\newline
-\noindent \includegraphics[scale=0.24]{"b-map5-1-a-real"}\newline
+\textbf{Path length: 81.08, Nodes Expanded: 8155,	Run Time: 0.287288s}\newline
+\noindent \includegraphics[scale=0.25]{"b-map5-1-a-real"}\newline
 
-3. A * search(h=4): \newline
+3. A* search ($h=4$, Euclidean squared): \newline
 \medskip
-\textbf{Path length:137.33, Node Expanded:234,	Run Time: 0.056771}\newline
-\noindent \includegraphics[scale=0.2]{"b-map5-1-a"}\newline
+\textbf{Path length: 137.33, Nodes Expanded: 234,	Run Time: 0.056771s}\newline
+\noindent \includegraphics[scale=0.21]{"b-map5-1-a"}\newline
 
-4. Weighted A * search search:\newline
+4. Weighted A * search ($h=4$, $w=2.0$):\newline
 \medskip
-\textbf{Path length:144.03, Node Expanded:107,	Run Time: 0.05289}\newline
+\textbf{Path length: 144.03, Nodes Expanded: 107,	Run Time: 0.05289s}\newline
 \noindent \includegraphics[scale=0.2]{"b-map5-1-w-2"}\newline
 
 
@@ -67,7 +67,7 @@ There are three examples shown below, running uniform-cost search (UCS), A* and 
 
 To optimize the search algorithms, we used a Python dictionary as a heap, rather than a Python list (array), to implement the closed list more efficiently. Since we just needed to insert or check if a pair of coordinates existed inside the close list, a heap would speed up the check and may help the insertion. Overall, checking if a element exists takes O(n) for an array and O(1) for a heap.
 
-For the heap, we initially used the sum of coordinate values to use as the key. However, this meant for every (x, y) there is a matching pair (y, x) with the same key. In addition, as the sums increased, there were a greater number of pairs that summed to the same value. As a result, we decided to distinguish (x, y) by multiplying x with a hash code value. With some testing, higher hash codes lowered the average size of a list for each key so we ended up using 91 as the hash code. 
+For the heap, we initially used the sum of coordinate values to use as the key. However, this meant for every (x, y) there is a matching pair (y, x) with the same key. In addition, as the sums increased, there were a greater number of pairs that summed to the same value. As a result, we decided to distinguish (x, y) by multiplying x with a hash code value. With some testing, higher hash codes lowered the average size of a list for each key so we ended up using 91 as the hash code to speed up search checks.
 
 We also optimized the way the heuristic was applied to the grid. At first we applied the heuristic over the entire graph before running the search algorithm. However, this wasted resources when only a portion of the overall grid was searched. Instead, we compute the heuristic during the search, to ensure only relevant cells in the grid have the heuristic applied to them.
 
@@ -77,7 +77,7 @@ We also optimized the way the heuristic was applied to the grid. At first we app
 
 \noindent 1. Euclidean Distance
 
-Euclidean distance is also a admissible/consistent heuristic as it works on a subproblem of the grid problem where any degree of movement is allowed. We also cut the distance by 4 to mimic movement along a highway.
+Euclidean distance is also a admissible/consistent heuristic as it works on a subproblem of the grid problem where any degree of movement is allowed. We also cut the distance by 4 to mimic movement along a highway, since the best possible case is if a highway leads from start to finish.
 
 The formula for cell $(x_1, y_1)$ and goal $(x_2, y_2)$ is:
 $$h((x_1,y_1)) = \frac{\sqrt{(x_2-x_1)^2 + (y_2-y_1)^2}}{4}$$
@@ -91,7 +91,7 @@ The formula for cell $(x_1, y_1)$ and goal $(x_2, y_2)$ is:
 $$h((x_1, y_1)) = 0.25 * (dx + dy)$$
 where $dx = |x_2 - x_1|$ and $dy = |y_2 - y_1|$. The $0.25$ comes from the cost it takes to move horizontally or vertically in one step.
 
-The heuristic is inadmissible for the grid problem because diagonal movements are normally allowed. As a result, Manhattan distance tends to overestimate the actual cost to the goal. Nevertheless, this metric can come in handy for sequential A* search because it overestimates the optimal distance slightly.
+The heuristic is inadmissible for the grid problem because diagonal movements are normally allowed. As a result, Manhattan distance slightly overestimates the actual cost to the goal. Nevertheless, this metric can come in handy for sequential A* search because of that pessimism.
 
 \bigskip
 \noindent3. Diagonal Distance Heuristic
@@ -100,7 +100,7 @@ The best admissible/consistent heuristic we used was the diagonal distance heuri
 
 The formula for cell $(x1,y1)$ and goal $(x2, y2)$ is:
 $$h((x1, y1)) = 0.25 * (dx + dy) +  (\frac{\sqrt{2}}{4} - 2(0.25)) * min(dx, dy)$$
-where $dx = |x2 - x1|$ and $dy = |y2 - y1|$. The 0.25 comes from the cost to move horizontally and vertically between highway cells and $\frac{\sqrt{2}}{4}$ is the cost from moving diagonally between highway cells
+where $dx = |x2 - x1|$ and $dy = |y2 - y1|$. The 0.25 comes from the cost to move horizontally and vertically between highway cells and $\frac{\sqrt{2}}{4}$ is the cost from moving diagonally between highway cells.
 
 Diagonal distance is better than Manhattan distance because it is admissible and Manhattan is not. Diagonal distance was preferred over Euclidean distance because the movements it allows is closer to the movements allowed on the actual grid. Therefore, the heuristic value will come closer to the actual optimal distance than the value from Euclidean distance.
 
@@ -115,7 +115,7 @@ This heuristic is similar to Euclidean distance, except it squares the output fr
 \bigskip
 \noindent 5. Sample Heuristic
 
-The heuristic given in the assignment instructions. May not be admissible or consistent for the grid problem. 
+The heuristic given in the assignment instructions. Not admissible because it does not consider highway movement.
 
 The formula for cell $(x_1, y_1)$ and goal $(x_2, y_2)$ is:
 $$h((x_1,y_1)) = \sqrt{2} * min(dx, dy) + max(dx, dy) - min(dx, dy)$$

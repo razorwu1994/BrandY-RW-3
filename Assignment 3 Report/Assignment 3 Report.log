@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9.6210 64-bit) (preloaded format=pdflatex 2017.2.16)  25 NOV 2017 21:03
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9.6210 64-bit) (preloaded format=pdflatex 2017.2.16)  26 NOV 2017 11:10
 entering extended mode
 **"./Assignment 3 Report.tex"
 ("Assignment 3 Report.tex"
@@ -168,9 +168,9 @@ Overfull \vbox (3.95421pt too high) has occurred while \output is active []
 
 
 [2 <./Images/a-map1-4.jpg>]
-Overfull \hbox (6.42366pt too wide) in paragraph at lines 41--42
-[]\OT1/cmr/m/n/12 There are three ex-am-ples shown be-low, run-ning uniform-cos
-t search (UCS),
+Overfull \hbox (3.16397pt too wide) in paragraph at lines 41--42
+[]\OT1/cmr/m/n/12 There are four ex-am-ples shown be-low show the path from run
+-ning uniform-
  []
 
 <Images/"b-map5-1-u".jpg, id=13, 2212.265pt x 1017.8025pt>
@@ -178,9 +178,9 @@ File: Images/"b-map5-1-u".jpg Graphic file (type jpg)
 
 <use Images/"b-map5-1-u".jpg>
 Package pdftex.def Info: Images/"b-map5-1-u".jpg used on input line 46.
-(pdftex.def)             Requested size: 442.44516pt x 203.5569pt.
+(pdftex.def)             Requested size: 464.58937pt x 213.74483pt.
 
-Overfull \hbox (52.44516pt too wide) in paragraph at lines 43--47
+Overfull \hbox (74.58937pt too wide) in paragraph at lines 43--47
 [] 
  []
 
@@ -189,14 +189,20 @@ Underfull \hbox (badness 10000) in paragraph at lines 43--47
 
  []
 
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <12> on input line 48.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 48.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 48.
 <Images/"b-map5-1-a-real".jpg, id=14, 1744.5175pt x 1011.78pt>
 File: Images/"b-map5-1-a-real".jpg Graphic file (type jpg)
 
 <use Images/"b-map5-1-a-real".jpg>
 Package pdftex.def Info: Images/"b-map5-1-a-real".jpg used on input line 51.
-(pdftex.def)             Requested size: 418.69276pt x 242.83215pt.
+(pdftex.def)             Requested size: 436.12831pt x 252.94438pt.
 
-Overfull \hbox (28.69276pt too wide) in paragraph at lines 48--52
+Overfull \hbox (46.12831pt too wide) in paragraph at lines 48--52
 [] 
  []
 
@@ -206,14 +212,14 @@ Underfull \hbox (badness 10000) in paragraph at lines 48--52
  []
 
 [3 <./Images/b-map5-1-u.jpg>]
-<Images/"b-map5-1-a".jpg, id=18, 2091.815pt x 995.72pt>
+<Images/"b-map5-1-a".jpg, id=19, 2091.815pt x 995.72pt>
 File: Images/"b-map5-1-a".jpg Graphic file (type jpg)
 
 <use Images/"b-map5-1-a".jpg>
 Package pdftex.def Info: Images/"b-map5-1-a".jpg used on input line 56.
-(pdftex.def)             Requested size: 418.35559pt x 199.14047pt.
+(pdftex.def)             Requested size: 439.29411pt x 209.10736pt.
 
-Overfull \hbox (28.35559pt too wide) in paragraph at lines 53--57
+Overfull \hbox (49.29411pt too wide) in paragraph at lines 53--57
 [] 
  []
 
@@ -222,7 +228,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 53--57
 
  []
 
-<Images/"b-map5-1-w-2".jpg, id=19, 2364.835pt x 975.645pt>
+<Images/"b-map5-1-w-2".jpg, id=20, 2364.835pt x 975.645pt>
 File: Images/"b-map5-1-w-2".jpg Graphic file (type jpg)
 
 <use Images/"b-map5-1-w-2".jpg>
@@ -239,14 +245,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 58--62
  []
 
 [4 <./Images/b-map5-1-a-real.jpg> <./Images/b-map5-1-a.jpg>] [5 <./Images/b-map
-5-1-w-2.jpg>] [6]
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <12> on input line 82.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 82.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 82.
- [7] [8]
+5-1-w-2.jpg>] [6] [7] [8]
 <Images/"avg-nodeexpanded".png, id=41, 648.021pt x 248.72925pt>
 File: Images/"avg-nodeexpanded".png Graphic file (type png)
 
@@ -308,7 +307,7 @@ public/amsfonts/cm/cmmi12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/a
 msfonts/cm/cmr12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/c
 m/cmr8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.p
 fb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
-Output written on "Assignment 3 Report.pdf" (14 pages, 7525005 bytes).
+Output written on "Assignment 3 Report.pdf" (14 pages, 7525714 bytes).
 PDF statistics:
  90 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
