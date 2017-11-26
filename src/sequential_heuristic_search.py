@@ -174,18 +174,20 @@ class SequentialHeuristicSearch:
         return path
     #-------------------------------------------------------------------------------------------------------------------
 
-    def get_key(self, s, i):
+    def get_key(self, s, i, goal):
         """
         Calculate the f-value, the key, for cell s using heuristic i and weight w1
 
         :param s: target cell
         :param i: index of heuristic-value to pick
-        :return: f-value of s for heuristic i
+        :param goal: coordinates of goal cell
+        :return: f-value of s for search i
         """
+        s.h[i] = self.heuristics[i](s.pos, goal)
         f = s.g[i] + self.w1 * s.h[i]
         return f
 
-    def expand_state(self, s, i):
+    def expand_state(self, s, i, goal):
         """
         Expand
         :param s: cell to expand
@@ -205,7 +207,7 @@ class SequentialHeuristicSearch:
                 neighbor.g[i] = new_g
                 neighbor.parent[i] = s
                 if not self.contained_in_dict(neighbor.pos, self.closed[i]): # if neighbor has not been expanded in CLOSED_i yet
-                    self.fringes[i].add_cell(neighbor, get_key(neighbor, i)) # Insert/Update s' in OPEN_i with Key(s', i)
+                    self.fringes[i].add_cell(neighbor, get_key(neighbor, i, goal)) # Insert/Update s' in OPEN_i with Key(s', i)
 
     def insert_in_closed(self, cell, closed):
         """
@@ -245,7 +247,8 @@ class SequentialHeuristicSearch:
             goal_cell.g[i] = 20000
             start_cell.parent[i] = None
             goal_cell.parent[i] = None
-            self.fringes[i].add_cell(start_cell, self.get_key(start_cell, i))
+            start_cell.h[i] = self.heuristics[i](start_cell.pos, goal)
+            self.fringes[i].add_cell(start_cell, self.get_key(start_cell, i, goal))
 
         min_key_0 = self.fringes[0].min_key
         while min_key_0 < 20000:
@@ -257,7 +260,7 @@ class SequentialHeuristicSearch:
                             # terminate and return path pointed by bp_i(s_goal)
                         else:
                             s = self.fringes[i].pop_cell() # OPEN_i.TOP()?
-                            self.expand_state(s, i)
+                            self.expand_state(s, i, goal)
                             insert_in_closed(s, self.closed[i]) # Insert s in CLOSED_i
                 else:
                     goal_g_0 = goal_cell.g[0]
@@ -266,7 +269,7 @@ class SequentialHeuristicSearch:
                             # terminate and return path pointed by bp_0(s_goal)
                     else:
                         s = self.fringes[0].pop()
-                        self.expand_state(s, 0)
+                        self.expand_state(s, 0, goal)
                         insert_in_closed(s, self.closed[0])
 
         return None, -1, -1  # No path found, no nodes expanded
