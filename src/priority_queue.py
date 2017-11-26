@@ -19,6 +19,7 @@ class PriorityQueue:
         self.pq = []
         self.entry_finder = {}
         self.size = 0
+        self.maxsize = self.size
         self.counter = itertools.count()
 
     def add_cell(self, cell, priority=0):
@@ -36,6 +37,9 @@ class PriorityQueue:
         self.entry_finder[cell] = entry
         hq.heappush(self.pq, entry)
         self.size += 1
+
+        if self.size > self.maxsize:
+            self.maxsize = self.size
 
     def remove_cell(self, cell):
         """
