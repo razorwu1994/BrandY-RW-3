@@ -2,7 +2,7 @@ import sys
 import uniform_cost_search as ucs
 import heuristic_search as hs
 import weighted_heuristic_search as whs
-import sequential_heuristic_search as ss
+import sequential_heuristic_search as shs
 import heuristics as hrsts
 from datetime import datetime
 
@@ -152,7 +152,8 @@ if __name__ == "__main__":
         weighted_heuristic_search = whs.WeightedHeuristicSearch(grid, heuristic, weight)
         path, path_length, num_nodes_expanded = weighted_heuristic_search.search(start, goal)
     elif search_type == "s":
-        sequential_heuristic_search = ss.SequentialHeuristicSearch(grid, heuristic, w1, w2)
+        sequential_heuristic_search = shs.SequentialHeuristicSearch(grid, w1, w2)
+        path, path_length, num_nodes_expanded = sequential_heuristic_search.search(start, goal)
     else:
         raise ValueError('Please use a valid search type: u = uniform-cost search, a = A* search, w = weighted A* search')
 
