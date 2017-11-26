@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6350 64-bit) (preloaded format=pdflatex 2017.6.27)  26 NOV 2017 13:23
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6350 64-bit) (preloaded format=pdflatex 2017.6.27)  26 NOV 2017 15:04
 entering extended mode
 **"./Assignment 3 Report.tex"
 ("Assignment 3 Report.tex"
@@ -246,103 +246,139 @@ Underfull \hbox (badness 10000) in paragraph at lines 58--62
 
 [4 <./Images/b-map5-1-a-real.jpg> <./Images/b-map5-1-a.jpg>] [5 <./Images/b-map
 5-1-w-2.jpg>] [6] [7] [8]
-<Images/"avg-nodeexpanded".png, id=41, 648.021pt x 248.72925pt>
+<Images/"avg-nodeexpanded".png, id=41, 685.05937pt x 326.72063pt>
 File: Images/"avg-nodeexpanded".png Graphic file (type png)
 
 <use Images/"avg-nodeexpanded".png>
 Package pdftex.def Info: Images/"avg-nodeexpanded".png used on input line 132.
-(pdftex.def)             Requested size: 421.20865pt x 161.67209pt.
+(pdftex.def)             Requested size: 445.28331pt x 212.36588pt.
 
-Overfull \hbox (31.20865pt too wide) in paragraph at lines 132--133
+Overfull \hbox (55.28331pt too wide) in paragraph at lines 132--133
 [] 
  []
 
-<Images/"avg-pathlength".png, id=43, 648.021pt x 242.1045pt>
+<Images/"avg-pathlength".png, id=43, 684.30656pt x 322.20375pt>
 File: Images/"avg-pathlength".png Graphic file (type png)
 
 <use Images/"avg-pathlength".png>
 Package pdftex.def Info: Images/"avg-pathlength".png used on input line 136.
-(pdftex.def)             Requested size: 421.20865pt x 157.36606pt.
+(pdftex.def)             Requested size: 444.79399pt x 209.42995pt.
 
-Overfull \hbox (31.20865pt too wide) in paragraph at lines 136--137
+Overfull \hbox (54.79399pt too wide) in paragraph at lines 136--137
 [] 
  []
 
-<Images/"avg-runtime".png, id=44, 648.021pt x 243.91125pt>
+<Images/"avg-runtime".png, id=44, 682.80093pt x 325.96782pt>
 File: Images/"avg-runtime".png Graphic file (type png)
 
 <use Images/"avg-runtime".png>
 Package pdftex.def Info: Images/"avg-runtime".png used on input line 144.
-(pdftex.def)             Requested size: 421.20865pt x 158.54042pt.
+(pdftex.def)             Requested size: 443.81534pt x 211.87656pt.
 
-Overfull \hbox (31.20865pt too wide) in paragraph at lines 144--145
+Overfull \hbox (53.81534pt too wide) in paragraph at lines 144--145
 [] 
  []
 
-[9 <./Images/avg-nodeexpanded.png> <./Images/avg-pathlength.png>] [10 <./Images
-/avg-runtime.png>]
-Overfull \hbox (7.17644pt too wide) in paragraph at lines 154--155
+[9 <./Images/avg-nodeexpanded.png> <./Images/avg-pathlength.png>]
+<Images/"avg-mem".png, id=50, 685.8122pt x 328.22626pt>
+File: Images/"avg-mem".png Graphic file (type png)
+
+<use Images/"avg-mem".png>
+Package pdftex.def Info: Images/"avg-mem".png used on input line 152.
+(pdftex.def)             Requested size: 445.77266pt x 213.34453pt.
+
+Overfull \hbox (55.77266pt too wide) in paragraph at lines 152--153
+[] 
+ []
+
+[10 <./Images/avg-runtime.png> <./Images/avg-mem.png>]
+Overfull \hbox (7.17644pt too wide) in paragraph at lines 162--163
 \OT1/cmr/m/n/12 quickly and ex-panded very few nodes (like with heuris-tic 4, E
 u-clidean squared),
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 156--157
+Underfull \hbox (badness 10000) in paragraph at lines 164--165
 
  []
 
-[11] [12] <Images/"g-sns-map3-1".jpg, id=60, 2242.3775pt x 1411.2725pt>
+[11] [12] <Images/"g-sns-map3-1".jpg, id=62, 2242.3775pt x 1411.2725pt>
 File: Images/"g-sns-map3-1".jpg Graphic file (type jpg)
 
 <use Images/"g-sns-map3-1".jpg>
-Package pdftex.def Info: Images/"g-sns-map3-1".jpg used on input line 181.
+Package pdftex.def Info: Images/"g-sns-map3-1".jpg used on input line 189.
 (pdftex.def)             Requested size: 448.46756pt x 282.2495pt.
 
-Overfull \hbox (58.46756pt too wide) in paragraph at lines 181--182
+Overfull \hbox (58.46756pt too wide) in paragraph at lines 189--190
 [] 
  []
 
 [13 <./Images/g-sns-map3-1.jpg>]
-<Images/"s-nodeexpanded".png, id=65, 607.51968pt x 287.57437pt>
+<Images/"s-nodeexpanded".png, id=67, 749.04843pt x 325.215pt>
 File: Images/"s-nodeexpanded".png Graphic file (type png)
 
 <use Images/"s-nodeexpanded".png>
-Package pdftex.def Info: Images/"s-nodeexpanded".png used on input line 188.
-(pdftex.def)             Requested size: 364.51462pt x 172.54594pt.
+Package pdftex.def Info: Images/"s-nodeexpanded".png used on input line 196.
+(pdftex.def)             Requested size: 449.43253pt x 195.1305pt.
 
-<Images/"s-pathlength".png, id=66, 609.02531pt x 287.57437pt>
+Overfull \hbox (59.43253pt too wide) in paragraph at lines 196--197
+[] 
+ []
+
+<Images/"s-pathlength".png, id=68, 749.80125pt x 323.70938pt>
 File: Images/"s-pathlength".png Graphic file (type png)
 
 <use Images/"s-pathlength".png>
-Package pdftex.def Info: Images/"s-pathlength".png used on input line 192.
-(pdftex.def)             Requested size: 365.418pt x 172.54594pt.
+Package pdftex.def Info: Images/"s-pathlength".png used on input line 200.
+(pdftex.def)             Requested size: 449.88422pt x 194.22713pt.
 
-<Images/"s-runtime".png, id=67, 607.51968pt x 283.0575pt>
+Overfull \hbox (59.88422pt too wide) in paragraph at lines 200--201
+[] 
+ []
+
+<Images/"s-runtime".png, id=69, 753.5653pt x 326.72063pt>
 File: Images/"s-runtime".png Graphic file (type png)
 
 <use Images/"s-runtime".png>
-Package pdftex.def Info: Images/"s-runtime".png used on input line 196.
-(pdftex.def)             Requested size: 364.51462pt x 169.8358pt.
- [14 <./Images/s-nodeexpanded.png> <./Images/s-pathlength.png> <./Images/s-runt
-ime.png>] [15] [16] ("Assignment 3 Report.aux") ) 
+Package pdftex.def Info: Images/"s-runtime".png used on input line 204.
+(pdftex.def)             Requested size: 452.14267pt x 196.03387pt.
+
+Overfull \hbox (62.14267pt too wide) in paragraph at lines 204--205
+[] 
+ []
+
+[14 <./Images/s-nodeexpanded.png> <./Images/s-pathlength.png>]
+<Images/"s-mem".png, id=75, 743.02594pt x 324.46219pt>
+File: Images/"s-mem".png Graphic file (type png)
+
+<use Images/"s-mem".png>
+Package pdftex.def Info: Images/"s-mem".png used on input line 212.
+(pdftex.def)             Requested size: 445.819pt x 194.6788pt.
+
+Overfull \hbox (55.819pt too wide) in paragraph at lines 212--213
+[] 
+ []
+
+[15 <./Images/s-runtime.png> <./Images/s-mem.png>] [16] [17]
+("Assignment 3 Report.aux") ) 
 Here is how much of TeX's memory you used:
- 1553 strings out of 493323
- 22941 string characters out of 3139066
+ 1563 strings out of 493323
+ 23151 string characters out of 3139066
  81871 words of memory out of 3000000
- 5089 multiletter control sequences out of 15000+200000
+ 5097 multiletter control sequences out of 15000+200000
  6990 words of font info for 25 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 39i,5n,25p,1052b,117s stack positions out of 5000i,500n,10000p,200000b,50000s
-<C:/Program Files/MiKTeX 2.9/f
-onts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Program Files/MiKTeX 2.9/fonts/typ
-e1/public/amsfonts/cm/cmex10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/publi
-c/amsfonts/cm/cmmi12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfon
-ts/cm/cmr12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr
-8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C
-:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
-Output written on "Assignment 3 Report.pdf" (16 pages, 9469034 bytes).
+ 39i,5n,25p,910b,117s stack positions out of 5000i,500n,10000p,200000b,50000s
+<C:/Program Files/MiKTeX 2.9/fonts/type1/public/am
+sfonts/cm/cmbx12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/c
+m/cmex10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi12
+.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/
+Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Program Fi
+les/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files/MiKT
+eX 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
+Output written on "Assignment 3 Report.pdf" (17 pages, 9516755 bytes).
 PDF statistics:
- 103 PDF objects out of 1000 (max. 8388607)
+ 110 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 71 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 81 words of extra memory for PDF output out of 10000 (max. 10000000)
 
