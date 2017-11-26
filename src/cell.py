@@ -53,7 +53,11 @@ class Cell:
         Prints out the Cell in format ((x, y), f, g, h)
         """
         t_type = self.convert_to_char()
-        return "(({0}, {1}), {2}, f={3}, g={4}, h={5})".format(self.pos[0], self.pos[1], t_type, self.f, self.g, self.h)
+        f_temp = round(self.f, 2)
+        g_temp = round(self.g, 2)
+        h_temp = round(self.h, 2)
+
+        return "(({0}, {1}), {2}, f={3}, g={4}, h={5})".format(self.pos[0], self.pos[1], t_type, f_temp, g_temp, h_temp)
 
     def __hash__(self):
         """
