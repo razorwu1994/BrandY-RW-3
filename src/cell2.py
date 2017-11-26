@@ -1,6 +1,6 @@
 class Cell:
     """
-    Represents a cell in the 160x120 grid
+    Represents a cell in the 160x120 grid for sequential search
 
     Attr:
         pos: coordinates for this cell in the form of 2-tuple: (x, y)
