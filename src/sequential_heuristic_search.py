@@ -260,10 +260,16 @@ class SequentialHeuristicSearch:
         path = self.retrieve_path(start, goal, i)  # terminate and return path pointed by bp_i(s_goal)
         path_length = self.grid[goal[0]][goal[1]].g[i]
         nodes_expanded = sum(self.num_nodes_expanded)  # Total nodes expanded across all searches
-        print self.num_nodes_expanded
-        fringe_max_sizes = [fringe.maxsize for fringe in self.fringes]
-        memory_requirement = sum(fringe_max_sizes)  # sum of all max sizes
-        return path, path_length, nodes_expanded, memory_requirement
+        return path, path_length, nodes_expanded
+
+    def get_total_fringes_size(self):
+        """
+        Find the current sum of elements in all fringes at the moment
+
+        :return: count of # of elements across all fringes
+        """
+        fringe_sizes = [fringe.size for fringe in self.fringes]
+        return sum(fringe_sizes)
 
     def search(self, start, goal):
         """
@@ -288,13 +294,21 @@ class SequentialHeuristicSearch:
             self.fringes[i].add_cell(start_cell, self.get_key(start_cell, i, goal))
 
         min_key_0 = self.fringes[0].get_min_key()
+        max_fringe_total = self.get_total_fringes_size()
+
         while min_key_0 < INFINITY:
             for i in range(1, self.num_heuristics):
+                # Update maximum total size across all ringes
+                fringe_total = self.get_total_fringes_size()
+                if fringe_total > max_fringe_total:
+                    max_fringe_total = fringe_total
+
                 min_key_i = self.fringes[i].get_min_key()
                 if min_key_i <= self.w2 * min_key_0:
                     if goal_cell.g[i] <= min_key_i:
                         if goal_cell.g[i] < INFINITY:
-                            path, path_length, nodes_expanded, memory_requirement = self.terminate_search(start, goal, i)
+                            path, path_length, nodes_expanded = self.terminate_search(start, goal, i)
+                            memory_requirement = max_fringe_total
                             return path, path_length, nodes_expanded, memory_requirement
                     else:
                         self.expand_search(goal, i)
@@ -302,7 +316,8 @@ class SequentialHeuristicSearch:
                     goal_g_0 = goal_cell.g[0]
                     if goal_g_0 <= self.fringes[0].get_min_key():
                         if goal_g_0 < INFINITY:
-                            path, path_length, nodes_expanded, memory_requirement = self.terminate_search(start, goal, 0) # terminate and return path pointed by bp_0(s_goal)
+                            path, path_length, nodes_expanded = self.terminate_search(start, goal, 0) # terminate and return path pointed by bp_0(s_goal)
+                            memory_requirement = max_fringe_total
                             return path, path_length, nodes_expanded, memory_requirement
                     else:
                         self.expand_search(goal, 0)
