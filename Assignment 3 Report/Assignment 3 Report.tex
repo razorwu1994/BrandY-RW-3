@@ -270,7 +270,7 @@ With higher $w_2$ values, sequential search relies less on its anchor and acts m
 Then we assume a least path from $s_{start} $ to $s_{goal} $ as P = $ \pi(s_0=s_{start},...,s_k=s_{goal}) $. Then we pick a state $ s_i $ that is not unexpanded by the anchor search.It should also be in the open set at index 0,which means $ s_i \subset OPENSET_0 $.
 It is always possible to find such state since $ s_{start} $ is inserted at the initialization.Once any consecutive state $ s_j $ is expanded doing the anchor search, $ s_{j+1} $ is guaranteed to be inserted in the $ OPEN_0 $ set. 
 
-In the meantime, $ s_k=s_{goal} $ won't be expanded in the anchor search.The pseudocode states that whenever $ s_{goal} $ have the MinKey in the $ OPEN_0 $, it will terminate and return the path.
+In the meantime, $ s_k=s_{goal} $ won't be expanded in the anchor search.The pseudocode states that whenever $ s_{goal} $ have the least key than any key in  $ OPEN_0 $, it will terminate and return the path.
 
 Concerning of $ g_0(s_i) $. When i = 0,
 $$ g_0(s_i) = g_0(s_{start})=0 \leq w_1 * g*(s_i)$$
@@ -278,12 +278,12 @@ because $g*(s_{start})=g_0(s_{start})=0$.
 
 If $i \neq 0$, we can certainly know $ s_{i-1} $ has already been expanded in the anchor search. When chose the $ s_{i-1} $ to expand, we would have $g_0(s_{i-1}) \leq w_1 * g^*(s_{i-1})$ from the given property.
 
-We can conclude(s` as successor of s)
+We can conclude(s' as successor of s)
 
 $$g_0(s_i) \leq g_0(s_{i-1})+ c(s_{i-1},s_i)$$
 $$\leq w_1 * (g^*(s_{i-1})+ c(s_{i-1},s_i))$$
 $$=w_1*g^*(s_i)$$
-because $ s_{i-1},s_i \subset optimal path$
+because $ s_{i-1},s_i $  belongs to optimal path
 
 So we now have $g_0(s_i) \leq w_1*g^*(s_i)$. We apply this equation,
 
@@ -304,21 +304,23 @@ Since $ s_i \subset OPEN_0$ and $key(s_i,0) \leq w_1*g^*(s_{goal}) < key(s,0)$, 
  
 \medskip
 
-\noindent If it is terminated with anchor search finding the path, with the given property, we will obtain,
+\noindent If it is terminated with anchor search finding the path, with the given property, we will obtain, since both $ w_1 $ and $ w_2 $ are greater than 1.
 
 $$g_0(s_{goal}) \leq w_1 * g^*(s_{goal})$$
-$$\leq w_1 * w_2 * g^*(s_{goal})$$ since both $ w_1 $ and $ w_2 $ are greater than 1.
+$$\leq w_1 * w_2 * g^*(s_{goal})$$ 
 
 \medskip
 
-\noindent if it is terminated with other search, then
+\noindent If it is terminated with other search, then
 
 $$g_i(s_{goal}) \leq w_2 * OPEN_0.Minkey()$$
 $$\leq w_2*w_1*g^*(s_{goal})$$
 
 So we have the final path cost to be within $ w_1*w_2 $ factor of the optimal cost.
 
-If we encountered the 3rd case, from part A we just proved, we know $ OPEN_0.Minkey() \leq w_1 * g^*(s_{goal}) $. $OPEN_0=\emptyset$ if and only if $OPEN_0.Minkey() = \infty ==> g*(s_{goal}) \geq \infty$,and we could still say it is bound within $ w_1*w_2 $ although there is no finite solution. 
+\medskip 
+
+\noindent If we encountered the 3rd case, from part A we just proved, we know $ OPEN_0.Minkey() \leq w_1 * g^*(s_{goal}) $. $OPEN_0=\emptyset$ if and only if $OPEN_0.Minkey() = \infty ==> g*(s_{goal}) \geq \infty$,and we could still say it is bound within $ w_1*w_2 $ although there is no finite solution. 
 
 
 
