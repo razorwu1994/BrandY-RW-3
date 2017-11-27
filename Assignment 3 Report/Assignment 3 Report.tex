@@ -222,13 +222,13 @@ We ran 16 different $w_1,w_2$ pairs to collect the data. Originally, we predicte
 
 Surprisingly, a higher w1 value does not increase the path length much. This is likely because of multiple heuristics balancing out and finding a better path than one that would be found by weighted A* search with weight $w = w_1$.
 
-Sequential A* search's path length suffers the most from increases in $w_2$. There is a jump in path length when using the same $w_1$, but going from $w_2 = 1.5$ to $w_2 = 2.5$. With some $w_1$ values, like $w1 = 2.5$, changes in $w_2$ did not impact the path length as much. 
+Sequential A* search's path length suffers the most from increases in $w_2$. There is a jump in path length when using the same $w_1$, but going from $w_2 = 1.5$ to $w_2 = 2.5$. With some $w_1$ values, like $w_1 = 2.5$, changes in $w_2$ did not impact the path length as much. 
 
 \bigskip
 
 Depending on the values of $w_1$ and $w_2$, sequential search can run slower (and expand more nodes) or faster (and expand fewer nodes) than A*. In general, increasing $w_1$ appears to decrease the nodes expanded as well as the runtime. Increasing $w_2$ also causes a drop in nodes expanded and runtime, but to a greater effect than with $w_1$.  
 
-It seems as though $w_1$ has more control on the runtime than $w_2$. We also observed that $w_1=2.5$ about the best average performance in nearly every aspect, when compared to other runs of sequential search. Both $w_1$ and $w_2$ can affect the performance, but by adjusting the value of $w_2$, we can improve on runtime performance while impacting path length very little. This does not mean $w_2$ should be too high, as shown by examples where $w_2 = 10$, which result in significant increases in path length. So this means there is a trade-off between increasing $w_2$ and maintaining a decent path length.
+We also observed that $w_1=2.5$ about the best average performance in nearly every aspect, when compared to other runs of sequential search. Both $w_1$ and $w_2$ can affect the performance, but by adjusting the value of $w_2$, we can improve on runtime performance while impacting path length very little. This does not mean $w_2$ should be too high, as shown by examples where $w_2 = 10$, which result in significant increases in path length. So this means there is a trade-off between increasing $w_2$ and maintaining a decent path length.
 
 \bigskip
 
@@ -243,6 +243,18 @@ In conclusion, we found that the best weight paring to be $w_1=2.5$ and $w_2=2.5
 \pagebreak %---------------------------------------------------------------
 
 \noindent \textbf{H. Sequential A* Optimization}
+
+Similar to UCS, A* and weighted A*, a dictionary was used for each closed list and a min heap was used as a priority queue for each fringe. Dictionaries allowed for quick insertions and checks for whether an element is contained in the dictionary. Min heaps improved performance of insertions, removals and searches for the cell with the lowest priority. 
+
+A list of closed lists and a separate list of fringes were maintained to provide quick access to either the ith closed list or the ith fringe. Lists for each cell were created to store g's and h's that provide quick access and modifications to the contents.
+
+For a more general comparison between different $w_1$ and $w_2$ values used during sequential search, see part G above. For the statements below, we assume that $w_1 = 2.5$ and $w_2 = 2.5$ were used for sequential search. Compared to A* and UCS, sequential A* search is not optimal, but it does provide a very short path nevertheless. While sequential search does take up more memory and slightly more time than the two methods, the path length it finds is more resilient than weighted A*. As weights in weighted A* increase somewhat, the path length increases dramatically. In comparison, as $w_1$ or $w_2$ increase, unless they have a huge jump in value (like with $w_2 = 10$), the path length increases, but not as much as in weighted A* and usually staying below 140. Weighted A* with higher weights and inadmissible heuristics had path lengths that hovered around 160.
+
+$w_1$ is similar to the weight used in weighted A*, so increasing that should increase path length and decrease runtime. However, we observed that $w_1$ does not have the same impact as the weight in weighted A*. This is likely because with lower $w_2$ values, sequential search relies more on its anchor and, because weights did not impact diagonal distance heuristic as much, the path length does not change.
+
+With higher $w_2$ values, sequential search relies less on its anchor and acts more like weighted A* with an inadmissible heuristic. As a result, sequential search runs in less time, uses less memory, but finds poorer paths.
+
+
 
 
 \pagebreak %---------------------------------------------------------------
