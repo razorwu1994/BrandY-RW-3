@@ -178,7 +178,7 @@ In conclusion, Euclidean distance and diagonal distance are the best two heurist
 
 \noindent \textbf{G. Sequential A* Implementation}
 
- The path below was found using sequential A* using w1 = 1.5 and w2 = 1.5.
+The path below was found using sequential A* with $w1 = 1.5$ and $w2 = 1.5$.
 
 Path length: $ 95.024 $
 
@@ -186,12 +186,13 @@ Time (number of nodes expanded): $ 11095 $
 
 Time (In seconds):$ 0.653 $
 
+\medskip
+
 \noindent \includegraphics[scale=0.2]{"g-sns-map3-1"}
 
 \medskip
-\pagebreak %---------------------------------------------------------------
 
-\noindent \textbf{H. Sequential A* Analysis}
+The experimental results are provided below, with S representing searches using sequential A*, the first value after the S representing w1 and the 2nd value after the S representing w2. For example, S,1.25,3 indicates the data for sequential search using $w1 = 1.25$ and $w2 = 3$.
 
 \noindent \includegraphics[scale=0.6]{"s-nodeexpanded"}
 
@@ -201,11 +202,15 @@ Time (In seconds):$ 0.653 $
 
 \medskip
 
+The time graph below was recorded in seconds.
+
+\medskip
+
 \noindent \includegraphics[scale=0.6]{"s-runtime"}
 
 \medskip
 
-The memory graph below was recording the sum of maximum size of the fringe running each heuristic search algorithm
+The memory graph below was recording the maximum count of cells stored over all fringes at any point in time.
 
 \medskip
 
@@ -213,12 +218,7 @@ The memory graph below was recording the sum of maximum size of the fringe runni
 
 \medskip
 
-
-analysis here(h3 is the one we chose to be anchor heuristic)
-
-\medskip
-
-\noindent We run 16 different w1,w2 pairs to collect data. Through our observation, Sequential A* search should be generally slower than regular A* search since it runs multiple heuristic search.But after we increased $w_1$ to 2.5 and keep $w_2$ as low as possible, the run time becomes shorter than A* search. 
+\noindent We run 16 different w1,w2 pairs to collect data. Originally, we predicted that sequential A* would generally be slower than regular A* search since it runs multiple heuristics, instead of just one. However, after we increased $w_1$ to 2.5 and kept $w_2$ as low as possible, the run time becomes shorter than A* search, while maintaining a relative short path.
 \medskip
 
 \noindent The number of node expanded is directly related to both $w_1,w_2$. Since A* is optimal, so it uses the least memory to store data in fringe while sequential A* search need several fringes for each heuristic search. Hence, normally the memory required is larger than A* search. 
@@ -228,9 +228,10 @@ analysis here(h3 is the one we chose to be anchor heuristic)
 \medskip
 
 \noindent The best weight variable is $ w_1=2.5,w_2=2.5 $
-
 \medskip
+\pagebreak %---------------------------------------------------------------
 
+\noindent \textbf{H. Sequential A* Analysis}
 
 
 \pagebreak %---------------------------------------------------------------

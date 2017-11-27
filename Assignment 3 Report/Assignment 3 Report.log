@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9.6210 64-bit) (preloaded format=pdflatex 2017.2.16)  26 NOV 2017 18:49
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9.6210 64-bit) (preloaded format=pdflatex 2017.2.16)  26 NOV 2017 19:04
 entering extended mode
 **"./Assignment 3 Report.tex"
 ("Assignment 3 Report.tex"
@@ -306,33 +306,33 @@ Underfull \hbox (badness 10000) in paragraph at lines 164--165
 File: Images/"g-sns-map3-1".jpg Graphic file (type jpg)
 
 <use Images/"g-sns-map3-1".jpg>
-Package pdftex.def Info: Images/"g-sns-map3-1".jpg used on input line 189.
+Package pdftex.def Info: Images/"g-sns-map3-1".jpg used on input line 191.
 (pdftex.def)             Requested size: 448.46756pt x 282.2495pt.
 
-Overfull \hbox (58.46756pt too wide) in paragraph at lines 189--190
+Overfull \hbox (58.46756pt too wide) in paragraph at lines 191--192
+[] 
+ []
+
+<Images/"s-nodeexpanded".png, id=63, 749.04843pt x 325.215pt>
+File: Images/"s-nodeexpanded".png Graphic file (type png)
+
+<use Images/"s-nodeexpanded".png>
+Package pdftex.def Info: Images/"s-nodeexpanded".png used on input line 197.
+(pdftex.def)             Requested size: 449.43253pt x 195.1305pt.
+
+Overfull \hbox (59.43253pt too wide) in paragraph at lines 197--198
 [] 
  []
 
 [13 <./Images/g-sns-map3-1.jpg>]
-<Images/"s-nodeexpanded".png, id=67, 749.04843pt x 325.215pt>
-File: Images/"s-nodeexpanded".png Graphic file (type png)
-
-<use Images/"s-nodeexpanded".png>
-Package pdftex.def Info: Images/"s-nodeexpanded".png used on input line 196.
-(pdftex.def)             Requested size: 449.43253pt x 195.1305pt.
-
-Overfull \hbox (59.43253pt too wide) in paragraph at lines 196--197
-[] 
- []
-
 <Images/"s-pathlength".png, id=68, 749.80125pt x 323.70938pt>
 File: Images/"s-pathlength".png Graphic file (type png)
 
 <use Images/"s-pathlength".png>
-Package pdftex.def Info: Images/"s-pathlength".png used on input line 200.
+Package pdftex.def Info: Images/"s-pathlength".png used on input line 201.
 (pdftex.def)             Requested size: 449.88422pt x 194.22713pt.
 
-Overfull \hbox (59.88422pt too wide) in paragraph at lines 200--201
+Overfull \hbox (59.88422pt too wide) in paragraph at lines 201--202
 [] 
  []
 
@@ -340,10 +340,10 @@ Overfull \hbox (59.88422pt too wide) in paragraph at lines 200--201
 File: Images/"s-runtime".png Graphic file (type png)
 
 <use Images/"s-runtime".png>
-Package pdftex.def Info: Images/"s-runtime".png used on input line 204.
+Package pdftex.def Info: Images/"s-runtime".png used on input line 209.
 (pdftex.def)             Requested size: 452.14267pt x 196.03387pt.
 
-Overfull \hbox (62.14267pt too wide) in paragraph at lines 204--205
+Overfull \hbox (62.14267pt too wide) in paragraph at lines 209--210
 [] 
  []
 
@@ -352,23 +352,23 @@ Overfull \hbox (62.14267pt too wide) in paragraph at lines 204--205
 File: Images/"s-mem".png Graphic file (type png)
 
 <use Images/"s-mem".png>
-Package pdftex.def Info: Images/"s-mem".png used on input line 212.
+Package pdftex.def Info: Images/"s-mem".png used on input line 217.
 (pdftex.def)             Requested size: 445.819pt x 194.6788pt.
 
-Overfull \hbox (55.819pt too wide) in paragraph at lines 212--213
+Overfull \hbox (55.819pt too wide) in paragraph at lines 217--218
 [] 
  []
 
-[15 <./Images/s-runtime.png> <./Images/s-mem.png>] [16]
-Overfull \hbox (5.47575pt too wide) in paragraph at lines 246--248
+[15 <./Images/s-runtime.png> <./Images/s-mem.png>] [16] [17]
+Overfull \hbox (5.47575pt too wide) in paragraph at lines 247--249
 []\OT1/cmr/m/n/12 Then we as-sume a least path from $\OML/cmm/m/it/12 s[]$ \OT1
 /cmr/m/n/12 to $\OML/cmm/m/it/12 s[]$ \OT1/cmr/m/n/12 as P = $\OML/cmm/m/it/12 
 \OT1/cmr/m/n/12 (\OML/cmm/m/it/12 s[] \OT1/cmr/m/n/12 = \OML/cmm/m/it/12 s[]; 
 :::; s[] \OT1/cmr/m/n/12 =
  []
 
-[17]
-Overfull \hbox (31.15228pt too wide) in paragraph at lines 297--298
+[18]
+Overfull \hbox (31.15228pt too wide) in paragraph at lines 298--299
 \OML/cmm/m/it/12 OPEN[]:Minkey\OT1/cmr/m/n/12 () \OMS/cmsy/m/n/12  \OML/cmm/m/
 it/12 w[] \OMS/cmsy/m/n/12  \OML/cmm/m/it/12 g[]\OT1/cmr/m/n/12 (\OML/cmm/m/it
 /12 s[]\OT1/cmr/m/n/12 )$. $\OML/cmm/m/it/12 OPEN[] \OT1/cmr/m/n/12 = \OMS/cmsy
@@ -376,7 +376,7 @@ it/12 w[] \OMS/cmsy/m/n/12  \OML/cmm/m/it/12 g[]\OT1/cmr/m/n/12 (\OML/cmm/m/it
 mr/m/n/12 () =
  []
 
-[18] ("Assignment 3 Report.aux") ) 
+[19] ("Assignment 3 Report.aux") ) 
 Here is how much of TeX's memory you used:
  1563 strings out of 493333
  23111 string characters out of 3139188
@@ -393,9 +393,9 @@ mmi12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi8.pfb
 ram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Program Files/
 MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files/MiKTeX 2
 .9/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
-Output written on "Assignment 3 Report.pdf" (18 pages, 9540808 bytes).
+Output written on "Assignment 3 Report.pdf" (19 pages, 9577502 bytes).
 PDF statistics:
- 117 PDF objects out of 1000 (max. 8388607)
+ 121 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  81 words of extra memory for PDF output out of 10000 (max. 10000000)
 
