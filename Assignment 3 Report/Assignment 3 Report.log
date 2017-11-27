@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9.6210 64-bit) (preloaded format=pdflatex 2017.2.16)  26 NOV 2017 20:24
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9.6210 64-bit) (preloaded format=pdflatex 2017.2.16)  26 NOV 2017 20:34
 entering extended mode
 **"./Assignment 3 Report.tex"
 ("Assignment 3 Report.tex"
@@ -306,10 +306,10 @@ Underfull \hbox (badness 10000) in paragraph at lines 164--165
 File: Images/"g-sns-map3-1".jpg Graphic file (type jpg)
 
 <use Images/"g-sns-map3-1".jpg>
-Package pdftex.def Info: Images/"g-sns-map3-1".jpg used on input line 191.
+Package pdftex.def Info: Images/"g-sns-map3-1".jpg used on input line 190.
 (pdftex.def)             Requested size: 448.46756pt x 282.2495pt.
 
-Overfull \hbox (58.46756pt too wide) in paragraph at lines 191--192
+Overfull \hbox (58.46756pt too wide) in paragraph at lines 190--191
 [] 
  []
 
@@ -317,10 +317,10 @@ Overfull \hbox (58.46756pt too wide) in paragraph at lines 191--192
 File: Images/"s-nodeexpanded".png Graphic file (type png)
 
 <use Images/"s-nodeexpanded".png>
-Package pdftex.def Info: Images/"s-nodeexpanded".png used on input line 197.
+Package pdftex.def Info: Images/"s-nodeexpanded".png used on input line 196.
 (pdftex.def)             Requested size: 439.94255pt x 184.73973pt.
 
-Overfull \hbox (49.94255pt too wide) in paragraph at lines 197--198
+Overfull \hbox (49.94255pt too wide) in paragraph at lines 196--197
 [] 
  []
 
@@ -329,10 +329,10 @@ Overfull \hbox (49.94255pt too wide) in paragraph at lines 197--198
 File: Images/"s-pathlength".png Graphic file (type png)
 
 <use Images/"s-pathlength".png>
-Package pdftex.def Info: Images/"s-pathlength".png used on input line 201.
+Package pdftex.def Info: Images/"s-pathlength".png used on input line 200.
 (pdftex.def)             Requested size: 441.74928pt x 188.8049pt.
 
-Overfull \hbox (51.74928pt too wide) in paragraph at lines 201--202
+Overfull \hbox (51.74928pt too wide) in paragraph at lines 200--201
 [] 
  []
 
@@ -340,10 +340,10 @@ Overfull \hbox (51.74928pt too wide) in paragraph at lines 201--202
 File: Images/"s-runtime".png Graphic file (type png)
 
 <use Images/"s-runtime".png>
-Package pdftex.def Info: Images/"s-runtime".png used on input line 209.
+Package pdftex.def Info: Images/"s-runtime".png used on input line 208.
 (pdftex.def)             Requested size: 442.65266pt x 183.83635pt.
 
-Overfull \hbox (52.65266pt too wide) in paragraph at lines 209--210
+Overfull \hbox (52.65266pt too wide) in paragraph at lines 208--209
 [] 
  []
 
@@ -351,15 +351,15 @@ Overfull \hbox (52.65266pt too wide) in paragraph at lines 209--210
 <Images/"s-mem".png, id=75, 587.796pt x 246.32025pt>
 File: Images/"s-mem".png Graphic file (type png)
  <use Images/"s-mem".png>
-Package pdftex.def Info: Images/"s-mem".png used on input line 217.
+Package pdftex.def Info: Images/"s-mem".png used on input line 216.
 (pdftex.def)             Requested size: 440.84592pt x 184.73973pt.
 
-Overfull \hbox (50.84592pt too wide) in paragraph at lines 217--218
+Overfull \hbox (50.84592pt too wide) in paragraph at lines 216--217
 [] 
  []
 
 [15 <./Images/s-runtime.png> <./Images/s-mem.png>] [16] [17]
-Overfull \hbox (5.47575pt too wide) in paragraph at lines 270--272
+Overfull \hbox (5.47575pt too wide) in paragraph at lines 269--271
 []\OT1/cmr/m/n/12 Then we as-sume a least path from $\OML/cmm/m/it/12 s[]$ \OT1
 /cmr/m/n/12 to $\OML/cmm/m/it/12 s[]$ \OT1/cmr/m/n/12 as P = $\OML/cmm/m/it/12 
 \OT1/cmr/m/n/12 (\OML/cmm/m/it/12 s[] \OT1/cmr/m/n/12 = \OML/cmm/m/it/12 s[]; 
@@ -367,7 +367,7 @@ Overfull \hbox (5.47575pt too wide) in paragraph at lines 270--272
  []
 
 [18]
-Overfull \hbox (31.15228pt too wide) in paragraph at lines 321--322
+Overfull \hbox (31.15228pt too wide) in paragraph at lines 320--321
 \OML/cmm/m/it/12 OPEN[]:Minkey\OT1/cmr/m/n/12 () \OMS/cmsy/m/n/12  \OML/cmm/m/
 it/12 w[] \OMS/cmsy/m/n/12  \OML/cmm/m/it/12 g[]\OT1/cmr/m/n/12 (\OML/cmm/m/it
 /12 s[]\OT1/cmr/m/n/12 )$. $\OML/cmm/m/it/12 OPEN[] \OT1/cmr/m/n/12 = \OMS/cmsy
@@ -392,7 +392,7 @@ mmi12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi8.pfb
 ram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Program Files/
 MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files/MiKTeX 2
 .9/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
-Output written on "Assignment 3 Report.pdf" (19 pages, 9537607 bytes).
+Output written on "Assignment 3 Report.pdf" (19 pages, 9596180 bytes).
 PDF statistics:
  121 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)

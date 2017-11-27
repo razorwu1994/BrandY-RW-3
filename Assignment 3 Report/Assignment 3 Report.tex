@@ -157,7 +157,7 @@ The memory graph below was recording the maximum size of the fringe running the 
 
 \noindent \textbf{F. Analysis of UCS, A* \& Weighted A*}
 
-At first glance, uniform-cost search (UCS) finds the shortest path, but it has the highest number of nodes expanded and time taken by far, compared to the other methods. This provides evidence how UCS sacrifices speed and memory for the guarantee of finding an optimal path.
+At first glance, uniform-cost search (UCS) finds the shortest path, but it has the highest number of nodes expanded and time taken by far, compared to the other methods. This provides evidence how UCS sacrifices speed and some memory for the guarantee of finding an optimal path.
 
 In comparison, A* (heuristic search using the diagonal distance or euclidean distance heuristics),  tended to run much quicker than UCS, while still finding the shortest path. A* also expanded roughly a third less nodes than UCS. When using inadmissible heuristics, the heuristic search ran very quickly and expanded very few nodes (like with heuristic 4, Euclidean squared), but at the expense of longer paths.
 
@@ -171,8 +171,7 @@ Euclidean squared and the sample heuristic perform the worst in terms of path le
 
 Out of all of the heuristics, the sample heuristic is the only one whose average path length is significantly affected with weights 1.5 and 2.5. Other heuristics only have a slight change in average path length with the same weights.
 
-
-In conclusion, Euclidean distance and diagonal distance are the best two heuristics to use among all of the five proposed ones. Diagonal distance outperforms Euclidean distance in nearly every aspect, except with weights involved, Euclidean distance's average path length fairs a bit better. To save on time, either weight the heuristic slightly (w = 2.5) or use the Euclidean squared or sample heuristics. 
+In conclusion, Euclidean distance and diagonal distance are the best two heuristics to use among all of the five proposed ones. Diagonal distance outperforms Euclidean distance in nearly every aspect, except with weights involved, Euclidean distance's average path length fairs a bit better. To save on time or memory, either weight the heuristic slightly (w = 2.5) or use the Euclidean squared or sample heuristics.
 
 \pagebreak %---------------------------------------------------------------
 
