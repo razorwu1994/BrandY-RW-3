@@ -226,21 +226,23 @@ Sequential A* search's path length suffers the most from increases in $w_2$. The
 
 \bigskip
 
-Depending on the values of $w_1$ and $w_2$, sequential search can run slower or faster than A*. Both $w_1,w_2$ can effect the run time performance, but it is believed that $w_1$ has more control on it. Also we observe $ w_1=2.5 $ has an averagely best performance on every aspect. Although both $ w_1 $ and $w_2$ can affect the performance,but with twisting the value of $w_2$,we can have a better run time performance while other stats are same,but this does not mean by infinite increasing $ w_2 $,we will get better run time performance,less node expanded and keep the path length in a not so dramatic increasing. See the example with $(w_1=2.5,w_2=1.5;w_1=2.5,w_2=2.5;w_1=2.5,w_2=10)$, it has the worst suboptimal path. So this means there is a non-ignorable trade off between increasing $w_2$ and maintaining a decent path length.
+Depending on the values of $w_1$ and $w_2$, sequential search can run slower (and expand more nodes) or faster (and expand fewer nodes) than A*. In general, increasing $w_1$ appears to decrease the nodes expanded as well as the runtime. Increasing $w_2$ also causes a drop in nodes expanded and runtime, but to a greater effect than with $w_1$.  
+
+It seems as though $w_1$ has more control on the runtime than $w_2$. We also observed that $w_1=2.5$ about the best average performance in nearly every aspect, when compared to other runs of sequential search. Both $w_1$ and $w_2$ can affect the performance, but by adjusting the value of $w_2$, we can improve on runtime performance while impacting path length very little. This does not mean $w_2$ should be too high, as shown by examples where $w_2 = 10$, which result in significant increases in path length. So this means there is a trade-off between increasing $w_2$ and maintaining a decent path length.
 
 \bigskip
 
-We expected A* to use less memory than sequential search, since sequential search has to keep track of multiple fringes at a time. The evidence we found supports this, showing that A* uses the least memory while sequential A* search used more, no matter what the $w_1,w_2$ values were. Hence, normally the memory required is larger than A* search. 
+We expected A* to use less memory than sequential search, since sequential search has to keep track of multiple fringes at a time. The evidence we found supports this, showing that A* uses the least memory while sequential A* search used more, no matter what the $w_1,w_2$ values were.
 
-More specifically, 
+More specifically, increasing $w_1$ decreases the memory required somewhat, whereas increasing $w_2$ decreases the memory required significantly.
 
 \bigskip
 
-\noindent The best weight variable is $ w_1=2.5,w_2=2.5 $
-\medskip
+In conclusion, we found that the best weight paring to be $w_1=2.5$ and $w_2=2.5$.
+
 \pagebreak %---------------------------------------------------------------
 
-\noindent \textbf{H. Sequential A* Analysis}
+\noindent \textbf{H. Sequential A* Optimization}
 
 
 \pagebreak %---------------------------------------------------------------
