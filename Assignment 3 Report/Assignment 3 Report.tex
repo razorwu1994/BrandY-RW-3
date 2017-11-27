@@ -176,7 +176,7 @@ In conclusion, Euclidean distance and diagonal distance are the best two heurist
 
 \pagebreak %---------------------------------------------------------------
 
-\noindent \textbf{G. Sequential A* Implementation}
+\noindent \textbf{G. Sequential A* Implementation \& Comparison}
 
 The path below was found using sequential A* with $w1 = 1.5$ and $w2 = 1.5$.
 
@@ -192,13 +192,13 @@ Time (In seconds):$ 0.653 $
 
 \medskip
 
-The experimental results are provided below, with S representing searches using sequential A*, the first value after the S representing w1 and the 2nd value after the S representing w2. For example, S,1.25,3 indicates the data for sequential search using $w1 = 1.25$ and $w2 = 3$.
+The experimental results are provided below, with S representing searches using sequential A*, the first value after the S representing w1 and the 2nd value after the S representing w2. For example, S,1.25,3 indicates the data for sequential search using $w1 = 1.25$ and $w2 = 3$. We compared sequential search with A* using the diagonal distance heuristic.
 
-\noindent \includegraphics[scale=0.6]{"s-nodeexpanded"}
+\noindent \includegraphics[scale=0.75]{"s-nodeexpanded"}
 
 \medskip
 
-\noindent \includegraphics[scale=0.6]{"s-pathlength"}
+\noindent \includegraphics[scale=0.75]{"s-pathlength"}
 
 \medskip
 
@@ -206,7 +206,7 @@ The time graph below was recorded in seconds.
 
 \medskip
 
-\noindent \includegraphics[scale=0.6]{"s-runtime"}
+\noindent \includegraphics[scale=0.75]{"s-runtime"}
 
 \medskip
 
@@ -214,18 +214,27 @@ The memory graph below was recording the maximum count of cells stored over all 
 
 \medskip
 
-\noindent \includegraphics[scale=0.6]{"s-mem"}
+\noindent \includegraphics[scale=0.75]{"s-mem"}
 
 \medskip
 
-\noindent We run 16 different w1,w2 pairs to collect data. Originally, we predicted that sequential A* would generally be slower than regular A* search since it runs multiple heuristics, instead of just one. However, after we increased $w_1$ to 2.5 and kept $w_2$ as low as possible, the run time becomes shorter than A* search, while maintaining a relative short path.
-\medskip
+We ran 16 different $w_1,w_2$ pairs to collect the data. Originally, we predicted that sequential A* would generally be slower than regular A* search since it runs multiple heuristics, instead of just one. However, after we increased $w_1$ to 2.5 and kept $w_2$ as low as possible, the run time becomes shorter than A* search, while maintaining a relative short path.
 
-\noindent The number of node expanded is directly related to both $w_1,w_2$. Since A* is optimal, so it uses the least memory to store data in fringe while sequential A* search need several fringes for each heuristic search. Hence, normally the memory required is larger than A* search. 
-\medskip
+Surprisingly, a higher w1 value does not increase the path length much. This is likely because of multiple heuristics balancing out and finding a better path than one that would be found by weighted A* search with weight $w = w_1$.
 
-\noindent Both $w_1,w_2$ can effect the run time performance, but it is believed that $w_1$ has more control on it. Also we observe $ w_1=2.5 $ has an averagely best performance on every aspect. Although both $ w_1 $ and $w_2$ can affect the performance,but with twisting the value of $w_2$,we can have a better run time performance while other stats are same,but this does not mean by infinite increasing $ w_2 $,we will get better run time performance,less node expanded and keep the path length in a not so dramatic increasing. Checkout example with $ (w_1=2.5,w_2=1.5;w_1=2.5,w_2=2.5;w_1=2.5,w_2=10) $, it has the worst suboptimal path. So this means there is a non-ignorable trade off between increasing $w_2$ and maintaining a decent path length.
-\medskip
+Sequential A* search's path length suffers the most from increases in $w_2$. There is a jump in path length when using the same $w_1$, but going from $w_2 = 1.5$ to $w_2 = 2.5$. With some $w_1$ values, like $w1 = 2.5$, changes in $w_2$ did not impact the path length as much. 
+
+\bigskip
+
+Depending on the values of $w_1$ and $w_2$, sequential search can run slower or faster than A*. Both $w_1,w_2$ can effect the run time performance, but it is believed that $w_1$ has more control on it. Also we observe $ w_1=2.5 $ has an averagely best performance on every aspect. Although both $ w_1 $ and $w_2$ can affect the performance,but with twisting the value of $w_2$,we can have a better run time performance while other stats are same,but this does not mean by infinite increasing $ w_2 $,we will get better run time performance,less node expanded and keep the path length in a not so dramatic increasing. See the example with $(w_1=2.5,w_2=1.5;w_1=2.5,w_2=2.5;w_1=2.5,w_2=10)$, it has the worst suboptimal path. So this means there is a non-ignorable trade off between increasing $w_2$ and maintaining a decent path length.
+
+\bigskip
+
+We expected A* to use less memory than sequential search, since sequential search has to keep track of multiple fringes at a time. The evidence we found supports this, showing that A* uses the least memory while sequential A* search used more, no matter what the $w_1,w_2$ values were. Hence, normally the memory required is larger than A* search. 
+
+More specifically, 
+
+\bigskip
 
 \noindent The best weight variable is $ w_1=2.5,w_2=2.5 $
 \medskip

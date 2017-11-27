@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9.6210 64-bit) (preloaded format=pdflatex 2017.2.16)  26 NOV 2017 19:04
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9.6210 64-bit) (preloaded format=pdflatex 2017.2.16)  26 NOV 2017 19:26
 entering extended mode
 **"./Assignment 3 Report.tex"
 ("Assignment 3 Report.tex"
@@ -313,54 +313,53 @@ Overfull \hbox (58.46756pt too wide) in paragraph at lines 191--192
 [] 
  []
 
-<Images/"s-nodeexpanded".png, id=63, 749.04843pt x 325.215pt>
+<Images/"s-nodeexpanded".png, id=63, 586.5915pt x 246.32025pt>
 File: Images/"s-nodeexpanded".png Graphic file (type png)
 
 <use Images/"s-nodeexpanded".png>
 Package pdftex.def Info: Images/"s-nodeexpanded".png used on input line 197.
-(pdftex.def)             Requested size: 449.43253pt x 195.1305pt.
+(pdftex.def)             Requested size: 439.94255pt x 184.73973pt.
 
-Overfull \hbox (59.43253pt too wide) in paragraph at lines 197--198
+Overfull \hbox (49.94255pt too wide) in paragraph at lines 197--198
 [] 
  []
 
 [13 <./Images/g-sns-map3-1.jpg>]
-<Images/"s-pathlength".png, id=68, 749.80125pt x 323.70938pt>
+<Images/"s-pathlength".png, id=68, 589.0005pt x 251.7405pt>
 File: Images/"s-pathlength".png Graphic file (type png)
 
 <use Images/"s-pathlength".png>
 Package pdftex.def Info: Images/"s-pathlength".png used on input line 201.
-(pdftex.def)             Requested size: 449.88422pt x 194.22713pt.
+(pdftex.def)             Requested size: 441.74928pt x 188.8049pt.
 
-Overfull \hbox (59.88422pt too wide) in paragraph at lines 201--202
+Overfull \hbox (51.74928pt too wide) in paragraph at lines 201--202
 [] 
  []
 
-<Images/"s-runtime".png, id=69, 753.5653pt x 326.72063pt>
+<Images/"s-runtime".png, id=69, 590.205pt x 245.11575pt>
 File: Images/"s-runtime".png Graphic file (type png)
 
 <use Images/"s-runtime".png>
 Package pdftex.def Info: Images/"s-runtime".png used on input line 209.
-(pdftex.def)             Requested size: 452.14267pt x 196.03387pt.
+(pdftex.def)             Requested size: 442.65266pt x 183.83635pt.
 
-Overfull \hbox (62.14267pt too wide) in paragraph at lines 209--210
+Overfull \hbox (52.65266pt too wide) in paragraph at lines 209--210
 [] 
  []
 
 [14 <./Images/s-nodeexpanded.png> <./Images/s-pathlength.png>]
-<Images/"s-mem".png, id=75, 743.02594pt x 324.46219pt>
+<Images/"s-mem".png, id=75, 587.796pt x 246.32025pt>
 File: Images/"s-mem".png Graphic file (type png)
-
-<use Images/"s-mem".png>
+ <use Images/"s-mem".png>
 Package pdftex.def Info: Images/"s-mem".png used on input line 217.
-(pdftex.def)             Requested size: 445.819pt x 194.6788pt.
+(pdftex.def)             Requested size: 440.84592pt x 184.73973pt.
 
-Overfull \hbox (55.819pt too wide) in paragraph at lines 217--218
+Overfull \hbox (50.84592pt too wide) in paragraph at lines 217--218
 [] 
  []
 
 [15 <./Images/s-runtime.png> <./Images/s-mem.png>] [16] [17]
-Overfull \hbox (5.47575pt too wide) in paragraph at lines 247--249
+Overfull \hbox (5.47575pt too wide) in paragraph at lines 256--258
 []\OT1/cmr/m/n/12 Then we as-sume a least path from $\OML/cmm/m/it/12 s[]$ \OT1
 /cmr/m/n/12 to $\OML/cmm/m/it/12 s[]$ \OT1/cmr/m/n/12 as P = $\OML/cmm/m/it/12 
 \OT1/cmr/m/n/12 (\OML/cmm/m/it/12 s[] \OT1/cmr/m/n/12 = \OML/cmm/m/it/12 s[]; 
@@ -368,7 +367,7 @@ Overfull \hbox (5.47575pt too wide) in paragraph at lines 247--249
  []
 
 [18]
-Overfull \hbox (31.15228pt too wide) in paragraph at lines 298--299
+Overfull \hbox (31.15228pt too wide) in paragraph at lines 307--308
 \OML/cmm/m/it/12 OPEN[]:Minkey\OT1/cmr/m/n/12 () \OMS/cmsy/m/n/12  \OML/cmm/m/
 it/12 w[] \OMS/cmsy/m/n/12  \OML/cmm/m/it/12 g[]\OT1/cmr/m/n/12 (\OML/cmm/m/it
 /12 s[]\OT1/cmr/m/n/12 )$. $\OML/cmm/m/it/12 OPEN[] \OT1/cmr/m/n/12 = \OMS/cmsy
@@ -393,7 +392,7 @@ mmi12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi8.pfb
 ram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Program Files/
 MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files/MiKTeX 2
 .9/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
-Output written on "Assignment 3 Report.pdf" (19 pages, 9577502 bytes).
+Output written on "Assignment 3 Report.pdf" (19 pages, 9592025 bytes).
 PDF statistics:
  121 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
