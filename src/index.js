@@ -35,7 +35,7 @@ var fileConfig = []
                    this.props.startANDgoal[1]===r+","+c?dotsConfig[2]:
                    this.props.path.indexOf(storedval)!==-1?dotsConfig[0]:
                    ""
-      const cellInfo = cellFGH.indexOf("[")!=-1?storedval+",g:[],f:[]"+cellFGH:storedval+",[f,g,h]:"+cellFGH
+      const cellInfo = cellFGH.indexOf("[")!=-1?storedval+",g:[],h:[]"+cellFGH:storedval+",[f,g,h]:"+cellFGH
       return (
           <Button key={storedval} value={cellInfo} className="square" cursor="pointer" onClick={handleClick}
           style={{background:colorGroup[cellType]}}>
